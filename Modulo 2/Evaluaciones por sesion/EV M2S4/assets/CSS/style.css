@@ -1,0 +1,43 @@
+.gallery {
+    display: flex;                /* Establece un contenedor flexible */
+    flex-wrap: wrap;              /* Permite que los elementos flex se envuelvan a la siguiente línea si no caben */
+    justify-content: center;      /* Centra los elementos flex horizontalmente */
+    gap: 10px;                    /* Establece un espacio de 10px entre los elementos flex */
+    padding: 10px;                /* Añade un relleno de 10px alrededor del contenedor */
+}
+
+.gallery-item img {
+    width: 100%;                  /* Hace que la imagen ocupe todo el ancho de su contenedor */
+    height: auto;                 /* Mantiene la proporción de aspecto de la imagen */
+    object-fit: cover;            /* Asegura que la imagen cubra todo el contenedor, recortando si es necesario */
+}
+
+/* Pantallas extra pequeñas */
+@media (max-width: 575px) {
+    .gallery-item {
+        flex-basis: 100%;         /* Establece el ancho base del elemento flex al 100% */
+        max-width: 100%;          /* Limita el ancho máximo al 100% */
+    }
+}
+
+/* Pantallas pequeñas, medianas y grandes */
+@media (min-width: 576px) and (max-width: 1199px) {
+    .gallery-item {
+        flex-basis: calc(50% - 10px);  /* Establece el ancho base al 50% menos 10px para el gap */
+        max-width: calc(50% - 10px);   /* Limita el ancho máximo al 50% menos 10px */
+    }
+    
+    .gallery-item:last-child {
+        flex-basis: 50%;              /* El último elemento tiene un ancho base del 50% */
+        max-width: 50%;               /* Limita el ancho máximo al 50% */
+    }
+}
+
+/* Pantallas extra grandes */
+@media (min-width: 1200px) {
+    .gallery-item,
+    .gallery-item:last-child {
+        flex-basis: calc(33.333% - 10px);  /* Establece el ancho base a un tercio menos 10px para el gap */
+        max-width: calc(33.333% - 10px);   /* Limita el ancho máximo a un tercio menos 10px */
+    }
+}
