@@ -1,0 +1,18 @@
+h1 {
+    text-align: center;
+}
+#bold {
+    font-weight: bold;
+    text-align: left;
+}
+#italic_table {
+    font-style: italic;
+    text-align: right;
+}
+
+#italic {
+    font-style: italic;
+}
+#footnote {
+    text-align: center;
+}

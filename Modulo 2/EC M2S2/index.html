@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=".\assets\css\style.css">
+    <title>FORMULARIO</title>
+</head>
+<body>
+    <h1>FORMULARIO</h1>
+    <form action="./gracias.html" method="post">
+        <label for="nombre">nombre</label>
+        <input type="text" name="nombre" id="nombre" required>
+        <label for="direccion">DIRECCIÓN</label>
+        <input type="text" name="direccion" id="direccion" required>
+        <label for="especialidad">Especialidad Medica</label>
+        <select id="especialidad" name="especialidad" required>
+            <option value="med_int">Medicina Interna</option>
+            <option value="med_gen">Medicina General</option>
+            <option value="traumat">Traumatologia</option>
+            <option value="nutrici">Nutricionista</option>
+        </select>
+        <label for="fecha">FECHA</label>
+        <input type="date" name="fecha" id="fecha" required>
+        <label for="hora">Hora</label>
+        <input type="time" name="hora" id="hora" required>
+        <label for="correo">Correo Electronico</label>
+        <input type="email" name="correo" id="correo" pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}]" title="El correo electronico debe seguir el formato: 0zZ9U@example.com" required>
+        <br>
+        <button type="submit" class="center-button">CONFIRMAR</button>
+    </form>
+</body>
+</html>
