@@ -1,0 +1,39 @@
+body {
+    font-family: Verdana, sans-serif;
+}
+
+#nav-bar {
+    background-color: #051B54;
+}
+
+#nav-bar .navbar-nav .nav-link,
+#nav-bar .navbar-brand,
+#nav-bar .btn-outline-light {
+    color: white;
+}
+
+#nav-bar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.btn-custom-login {
+    background-color: #FFFFFF33;
+    border: 1px solid #FFFFFF33;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-custom-login:hover {
+    background-color: #FFFFFF33;
+    color: #051B54;
+}
+.jumbotron {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#cardViaje{
+    background-color: #7FFFD4;
+}
