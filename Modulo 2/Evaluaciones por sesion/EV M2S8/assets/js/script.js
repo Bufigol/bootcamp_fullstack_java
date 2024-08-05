@@ -9,14 +9,14 @@ const clientes = [
 ];
 var clienteActual = null;
 
-var check;
+var check =false;
 var usr;
 do {
   usr = prompt("Ingrese su usuario");
   check = checkIfUserExists(usr);
-} while (check);
+} while (!check);
+check = false;
 do {
-  check = false;
   var pwd = prompt("Ingrese su password");
   if (clienteActual.getPwd() == pwd) {
     check = true;
