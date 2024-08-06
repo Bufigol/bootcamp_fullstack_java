@@ -4,7 +4,7 @@ var tareas = [
     { tarea: "Pagar la tarjeta de crédito" }
 ]
 
-
+const tablaTareas = document.getElementById("tabla-tareas");
 
 
 
