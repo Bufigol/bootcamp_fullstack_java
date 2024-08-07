@@ -1,0 +1,217 @@
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion (dev)
+$ mkdir "EV M2S10"
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion (dev)
+$ CD "EV M2S10"
+bash: CD: command not found
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion (dev)
+$ cd EV\ M2S10/
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (dev)
+$ touch archivo.txt
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (dev)
+$ git init
+Initialized empty Git repository in C:/Users/felip/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10/.git/
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        archivo.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git add .
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git commit -m "first commit"
+[master (root-commit) 7e236b8] first commit
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 archivo.txt
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ nano archivo.txt
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   archivo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git diff
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+diff --git a/archivo.txt b/archivo.txt
+index e69de29..14dc29a 100644
+--- a/archivo.txt
++++ b/archivo.txt
+@@ -0,0 +1 @@
++esto es una prueba de cambio de archivo
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git diff archivo.txt
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+diff --git a/archivo.txt b/archivo.txt
+index e69de29..14dc29a 100644
+--- a/archivo.txt
++++ b/archivo.txt
+@@ -0,0 +1 @@
++esto es una prueba de cambio de archivo
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   archivo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git add archivo.txt
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git commit -m "segundo commit"
+[master 72019c8] segundo commit
+ 1 file changed, 1 insertion(+)
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git log
+commit 72019c8d9c60f44ea6c9f58b799cb57fe44d492e (HEAD -> master)
+Author: Felipe Andrés Vásquez Tort <Bufigol@users.noreply.github.com>
+Date:   Wed Aug 7 12:46:51 2024 -0400
+
+    segundo commit
+
+commit 7e236b862fcb35fbaefdb5ba1c36381a4503fd2c
+Author: Felipe Andrés Vásquez Tort <Bufigol@users.noreply.github.com>
+Date:   Wed Aug 7 12:29:20 2024 -0400
+
+    first commit
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git log
+commit 72019c8d9c60f44ea6c9f58b799cb57fe44d492e (HEAD -> master)
+Author: Felipe Andrés Vásquez Tort <Bufigol@users.noreply.github.com>
+Date:   Wed Aug 7 12:46:51 2024 -0400
+
+    segundo commit
+
+commit 7e236b862fcb35fbaefdb5ba1c36381a4503fd2c
+Author: Felipe Andrés Vásquez Tort <Bufigol@users.noreply.github.com>
+Date:   Wed Aug 7 12:29:20 2024 -0400
+
+    first commit
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git satus
+git: 'satus' is not a git command. See 'git --help'.
+
+The most similar command is
+        status
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ nano archivo.txt
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git dif archivo.txt
+git: 'dif' is not a git command. See 'git --help'.
+
+The most similar commands are
+        diff
+        config
+        difftool
+        init
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git diff archivo.txt
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+diff --git a/archivo.txt b/archivo.txt
+index 14dc29a..6fb7a6b 100644
+--- a/archivo.txt
++++ b/archivo.txt
+@@ -1 +1,2 @@
+ esto es una prueba de cambio de archivo
++este es el segundo cambio
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git restore archivo.txt
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ cat archivo.txt
+esto es una prueba de cambio de archivo
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ ^[[200~git log --stat
+bash: $'\E[200~git': command not found
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git log --stat
+commit 72019c8d9c60f44ea6c9f58b799cb57fe44d492e (HEAD -> master)
+Author: Felipe Andrés Vásquez Tort <Bufigol@users.noreply.github.com>
+Date:   Wed Aug 7 12:46:51 2024 -0400
+
+    segundo commit
+
+ archivo.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 7e236b862fcb35fbaefdb5ba1c36381a4503fd2c
+Author: Felipe Andrés Vásquez Tort <Bufigol@users.noreply.github.com>
+Date:   Wed Aug 7 12:29:20 2024 -0400
+
+    first commit
+
+ archivo.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git commit -m "segundo commit"
+On branch master
+nothing to commit, working tree clean
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ git log --stat
+commit 72019c8d9c60f44ea6c9f58b799cb57fe44d492e (HEAD -> master)
+Author: Felipe Andrés Vásquez Tort <Bufigol@users.noreply.github.com>
+Date:   Wed Aug 7 12:46:51 2024 -0400
+
+    segundo commit
+
+ archivo.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 7e236b862fcb35fbaefdb5ba1c36381a4503fd2c
+Author: Felipe Andrés Vásquez Tort <Bufigol@users.noreply.github.com>
+Date:   Wed Aug 7 12:29:20 2024 -0400
+
+    first commit
+
+ archivo.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$ ^C
+
+felip@Bufigol MINGW64 ~/Repos/bootcamp_fullstack_java/Modulo 2/Evaluaciones por sesion/EV M2S10 (master)
+$
+https://pastebin.com/2UvbqNwu
