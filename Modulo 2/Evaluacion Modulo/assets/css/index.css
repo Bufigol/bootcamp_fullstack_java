@@ -1,0 +1,154 @@
+h1 {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+}
+h2 {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  text-decoration: underline;
+}
+p{
+  text-align: justify;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.col-md-4 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%; /* para que cada columna ocupe el 100% del ancho disponible */
+}
+
+label {
+  width: 100px; /* Ajusta este ancho según lo que necesites */
+  margin-right: 10px;
+  text-align: right;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  flex: 1;
+  padding: 5px;
+}
+
+input[type="submit"] {
+  margin-top: 10px;
+  padding: 10px 20px;
+}
+
+#YoLo,
+#PullShark,
+#PairExtraordinaire {
+  width: 15%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#LogrosGithub {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+footer .row {
+  justify-content: center; /* Centrar horizontalmente las imágenes */
+  display: flex;
+  align-items: center; /* Asegurar que ambas imágenes estén alineadas verticalmente */
+}
+
+/* Hacer que ambas imágenes tengan el mismo ancho basado en la más grande */
+footer .footer-image {
+  width: 100%; /* Asegura que las imágenes ocupen todo el ancho disponible */
+  max-width: none; /* Permitir que las imágenes crezcan según el contenido */
+}
+
+footer .col-auto {
+  flex: 1 1 0; /* Permitir que las columnas se ajusten al tamaño de la imagen más grande */
+  display: flex;
+  justify-content: center; /* Centrar las imágenes dentro de sus columnas */
+}
+.certification-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.certification-grid img {
+  width: 100%;
+  height: auto;
+}
+.github-profile {
+  display: flex;
+  align-items: flex-start;
+}
+.profile-info {
+  display: flex;
+  width: 100%;
+}
+.profile-picture {
+  
+  margin-right: 20px;
+}
+.user-info {
+  flex: 1;
+}
+
+.user-info p {
+  margin-top: 0;
+}
+.form-label {
+  font-weight: bold;
+}
+@media (max-width: 767px) {
+  .profile-info {
+    flex-direction: column;
+  }
+
+  .profile-picture {
+    width: 100%;
+    max-width: 150px;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  #LogrosGithub {
+    display: block; /* Cambia el contenedor a bloque para apilar las imágenes verticalmente */
+    text-align: center; /* Centrar las imágenes verticalmente */
+    justify-content: center;
+  }
+  #YoLo,
+  #PullShark,
+  #PairExtraordinaire {
+    width: 25%; /* Ajustar el tamaño de las imágenes para pantallas pequeñas */
+    margin: 5%; /* Eliminar el margen derecho en la vista móvil */
+    margin-bottom: 10px; /* Añadir un margen inferior entre las imágenes */
+  }
+
+  footer .row {
+    flex-direction: column; /* Colocar las imágenes una sobre la otra */
+    align-items: center; /* Asegura que las imágenes estén centradas en pantallas pequeñas */
+  }
+
+  footer .col-auto {
+    margin-bottom: 10px; /* Agrega un margen inferior mínimo entre las imágenes en pantallas pequeñas */
+  }
+
+  footer .col-auto:last-child {
+    margin-bottom: 0; /* Elimina el margen inferior en la última imagen */
+  }
+  .certification-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
