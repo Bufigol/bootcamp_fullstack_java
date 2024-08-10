@@ -108,7 +108,9 @@ footer .col-auto {
 .user-info p {
   margin-top: 0;
 }
-
+.form-label {
+  font-weight: bold;
+}
 @media (max-width: 767px) {
   .profile-info {
     flex-direction: column;
