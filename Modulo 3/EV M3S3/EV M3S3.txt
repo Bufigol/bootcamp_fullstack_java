@@ -1,0 +1,34 @@
+https://pastebin.com/tiv0LVhQ
+
+Table Empleado {
+  ID_Empleado SERIAL [PRIMARY KEY]
+  Nombre_Empleado varchar
+  ID_Departamento int [NOT NULL ]
+}
+TABLE proyectos{
+  id_proyecto SERIAL [PRIMARY KEY]
+  departamento INT [NOT NULL]
+  nombre_proyecto VARCHIAR
+  fecha_inicio DATE
+}
+
+TABLE departamento{
+  id_departamento SERIAL [PRIMARY KEY]
+  Nombre VARCHAR [NOT NULL]
+  jefe INT [UNIQUE,NOT NULL]
+}
+
+TABLE asignacion_proyectos{
+  empleado INT [PRIMARY KEY]
+  proyecto INT [PRIMARY KEY] 
+}
+
+Ref: "departamento"."id_departamento" < "Empleado"."ID_Departamento"
+
+Ref: "departamento"."id_departamento" < "proyectos"."departamento"
+
+Ref: "Empleado"."ID_Empleado" < "asignacion_proyectos"."empleado"
+
+Ref: "proyectos"."id_proyecto" < "asignacion_proyectos"."proyecto"
+
+Ref: "Empleado"."ID_Empleado" < "departamento"."jefe"

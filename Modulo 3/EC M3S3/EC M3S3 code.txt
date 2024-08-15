@@ -1,0 +1,34 @@
+https://pastebin.com/W8h3naYt
+
+TABLE Cliente{
+  IdCliente SERIAL [PRIMARY KEY]
+  nombre VARCHAR [NOT NULL]
+  ciudad varchar
+
+}
+
+TABLE articulo{
+  Código SERIAl [PRIMARY KEY]
+  nombre VARCHAR [NOT NULL]
+  precio INT [NOT NULL] 
+}
+TABLE orden{
+  IdOrden SERIAL [PRIMARY KEY]
+  fecha DATE [NOT NULL]
+  cliente INT
+}
+
+TABLE detalle_orden{
+  id_orden INT [PRIMARY KEY]
+  id_articulo INT [PRIMARY KEY]
+  cantidad INT 
+
+}
+
+
+
+Ref: "articulo"."Código" < "detalle_orden"."id_articulo"
+
+Ref: "Cliente"."IdCliente" < "orden"."cliente"
+
+Ref: "orden"."IdOrden" < "detalle_orden"."id_orden"

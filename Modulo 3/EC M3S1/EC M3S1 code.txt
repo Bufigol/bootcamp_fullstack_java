@@ -1,0 +1,27 @@
+https://pastebin.com/j20ZNJmv
+
+Table automoviles{
+  patente VARCHAR [primary key]
+  marca VARCHAR [NOT NULL]
+  modelo VARCHAR [NOT NULL]
+  color VARCHAR [NOT NULL]
+  precio INT [NOT NULL]
+}
+
+TABLE clientes{
+  RUT VARCHAR [primary key]
+  nombre VARCHAR [NOT NULL]
+  email VARCHAR 
+  direccion VARCHAR [NOT NULL]
+  celular VARCHAR [NOT NULL]
+  activo TINYINT [default: 1]
+}
+TABLE mantencion{
+  patente VARCHAR [primary key]
+  cliente VARCHAR [primary key]
+  fecha_proxima_mantencion DATE [NOT NULL]
+}
+
+Ref: "automoviles"."patente" < "mantencion"."patente"
+
+Ref: "clientes"."RUT" < "mantencion"."cliente"

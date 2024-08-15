@@ -1,0 +1,56 @@
+https://pastebin.com/CL5KNYYz
+
+TABLE empresa{
+  RUT VARCHAR(12) [PRIMARY KEY]
+  nombre VARCHAR(25)
+  direccion VARCHAR(50) [NOT NULL]
+  telefono VARCHAR(12) [NOT NULL]
+  email VARCHAR(50)
+  web VARCHAR(50)
+}
+
+TABLE cliente{
+  RUT VARCHAR(12) [PRIMARY KEY]
+  nombre VARCHAR(25)
+  email VARCHAR(50)
+  direccion VARCHAR(50) [NOT NULL]
+  celular VARCHAR(12)
+}
+TABLE herramienta{
+  idHerramienta SERIAL [PRIMARY KEY]
+  nombre VARCHAR(25) [NOT NULL]
+  precio_Dia INT [NOT NULL]
+}
+
+TABLE arriendo{
+  folio SERIAL [PRIMARY KEY]
+  fecha DATE [NOT NULL]
+  dias INT [NOT NULL]
+  valorDia INT [NOT NULL]
+  garantia INT [NOT NULL]
+  rutCliente VARCHAR(12) [NOT NULL]
+}
+TABLE tipoGarantia{
+  idTipo SERIAL [PRIMARY KEY]
+  nombre VARCHAR [NOT NULL]
+}
+TABLE garantias{
+  idGarantia SERIAL [PRIMARY KEY]
+  tipoGarantia INT [NOT NULL]
+  cantidad INT [NOT NULL]
+}
+TABLE detalleArriendo{
+  folio INT [PRIMARY KEY]
+  idHerramienta INT [PRIMARY KEY]
+
+}
+
+Ref: "tipoGarantia"."idTipo" < "garantias"."tipoGarantia"
+
+Ref: "garantias"."idGarantia" < "arriendo"."garantia"
+
+Ref: "arriendo"."folio" < "detalleArriendo"."folio"
+
+Ref: "herramienta"."idHerramienta" < "detalleArriendo"."idHerramienta"
+
+Ref: "cliente"."RUT" < "arriendo"."rutCliente"
