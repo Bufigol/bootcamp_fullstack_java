@@ -1,0 +1,63 @@
+TABLE empresa{
+  RUT VARCHAR(12) [PRIMARY KEY]
+  nombre VARCHAR(25)
+  direccion VARCHAR(50) [NOT NULL]
+  telefono VARCHAR(12) [NOT NULL]
+  email VARCHAR(50)
+  web VARCHAR(50)
+}
+https://pastebin.com/myGEGQnN
+
+TABLE cliente{
+  RUT VARCHAR(12) [PRIMARY KEY]
+  nombre VARCHAR(25)
+  email VARCHAR(50)
+  direccion VARCHAR(50) [NOT NULL]
+  celular VARCHAR(12)
+  alta BOOLEAN [NOT NULL]
+}
+
+TABLE tipoVehiculo{
+  idTipoVehiculo SERIAL [PRIMARY KEY]
+  nombre VARCHAR(50) [NOT NULL]
+}
+
+TABLE mantencion{
+  idMantencion SERIAL [PRIMARY KEY]
+  fecha DATE [NOT NULL]
+  trabajosRealizados VARCHAR(500) [NOT NULL]
+  idVenta INT [NOT NULL]
+}
+TABLE venta{
+  folio INT [PRIMARY KEY]
+  rutCliente VARCHAR(12) [NOT NULL]
+  fecha DATE [NOT NULL]
+  monto INT [NOT NULL]
+}
+
+TABLE vehiculo{
+  idVehiculo SERIAL [PRIMARY KEY]
+  patente VARCHAR(8) [NOT NULL]
+  marca INT [NOT NULL]
+  modelo VARCHAR(20)
+  color  VARCHAR(20)
+  precio INT [NOT NULL]
+  frecuenciaMantencion INT [NOT NULL]
+  idVenta INT [NOT NULL]
+  tipoVehiculo INT [NOT NULL]
+}
+
+TABLE marca{
+  idMarca SERIAL [PRIMARY KEY]
+  Nombre VARCHAR(20) [NOT NULL]
+}
+
+Ref: "cliente"."RUT" < "venta"."rutCliente"
+
+Ref: "venta"."folio" < "mantencion"."idVenta"
+
+Ref: "venta"."folio" < "vehiculo"."idVenta"
+
+Ref: "marca"."idMarca" < "vehiculo"."marca"
+
+Ref: "tipoVehiculo"."idTipoVehiculo" < "vehiculo"."tipoVehiculo"
