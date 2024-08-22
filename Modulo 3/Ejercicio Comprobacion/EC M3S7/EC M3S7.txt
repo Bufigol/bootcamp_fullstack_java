@@ -1,0 +1,58 @@
+SELECT * FROM cliente
+WHERE rut NOT IN (SELECT DISTINCT rut FROM venta)
+
+SELECT ve.folio, ve.fecha, ve.monto, cl.nombre, cl.rut 
+FROM venta AS ve
+JOIN cliente as cl ON cl.rut = ve.cliente_rut
+
+
+WITH MarcaMasVendida AS (
+    SELECT ve.Marca
+    FROM Venta v
+    JOIN Vehiculo ve ON v.Vehiculo_IDVehiculo = ve.IDVehiculo
+    GROUP BY ve.Marca
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
+),
+VentasAnualesPorCliente AS (
+    SELECT 
+        c.RUT,
+        c.Nombre AS NombreCliente,
+        EXTRACT(YEAR FROM v.Fecha) AS Anio,
+        SUM(v.Monto) AS TotalVentasAnual
+    FROM 
+        Venta v
+    JOIN 
+        Cliente c ON v.Cliente_RUT = c.RUT
+    GROUP BY 
+        c.RUT, c.Nombre, EXTRACT(YEAR FROM v.Fecha)
+)
+
+SELECT 
+    v.Folio,
+    v.Fecha AS FechaVenta,
+    v.Monto AS MontoVenta,
+    c.Nombre AS NombreCliente,
+    c.RUT AS RutCliente,
+    ve.Patente,
+    m.Nombre AS NombreMarca,
+    ve.Modelo,
+    CASE 
+        WHEN vac.TotalVentasAnual <= 1000000 THEN 'Standar'
+        WHEN vac.TotalVentasAnual <= 3000000 THEN 'Gold'
+        ELSE 'Premium'
+    END AS ClasificacionCliente
+FROM 
+    Venta v
+JOIN 
+    Cliente c ON v.Cliente_RUT = c.RUT
+JOIN 
+    Vehiculo ve ON v.Vehiculo_IDVehiculo = ve.IDVehiculo
+JOIN 
+    Marca m ON ve.Marca = m.IDMarca
+JOIN 
+    VentasAnualesPorCliente vac ON c.RUT = vac.RUT AND EXTRACT(YEAR FROM v.Fecha) = vac.Anio
+WHERE 
+    ve.Marca = (SELECT Marca FROM MarcaMasVendida)
+ORDER BY 
+    v.Fecha, v.Folio;

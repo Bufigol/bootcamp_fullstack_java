@@ -1,0 +1,168 @@
+CREATE TABLE "empresa" (
+  "rut" VARCHAR(1) PRIMARY KEY,
+  "nombre" VARCHAR(25),
+  "direccion" VARCHAR(50) NOT NULL,
+  "telefono" VARCHAR(12) NOT NULL,
+  "correo" VARCHAR(50),
+  "web" VARCHAR(50)
+);
+
+CREATE TABLE "cliente" (
+  "rut" VARCHAR(10) PRIMARY KEY,
+  "nombre" VARCHAR(25),
+  "correo" VARCHAR(50),
+  "direccion" VARCHAR(50) NOT NULL,
+  "celular" VARCHAR(12),
+  "alta" BOOLEAN NOT NULL
+);
+
+CREATE TABLE "tipoVehiculo" (
+  "idtipovehiculo" NUMBER(12) PRIMARY KEY,
+  "nombre" VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE "mantencion" (
+  "idmantencion" SERIAL PRIMARY KEY,
+  "fecha" DATE NOT NULL,
+  "trabajosrealizados" VARCHAR(500) NOT NULL,
+  "idventa" INT NOT NULL
+);
+
+CREATE TABLE "venta" (
+  "folio" INT PRIMARY KEY,
+  "fecha" DATE NOT NULL,
+  "monto" INT NOT NULL,
+  "vehiculo_idvehiculo" NUMBER(12),
+  "rutcliente" VARCHAR(12) NOT NULL
+);
+
+CREATE TABLE "vehiculo" (
+  "idvehiculo" NUMBER(12) PRIMARY KEY,
+  "patente" VARCHAR(8) NOT NULL,
+  "marca" INT NOT NULL,
+  "modelo" VARCHAR(20),
+  "color" VARCHAR(20),
+  "precio" INT NOT NULL,
+  "frecuenciamantencion" INT NOT NULL,
+  "tipovehiculo" INT NOT NULL
+);
+
+CREATE TABLE "marca" (
+  "idmarca" SERIAL PRIMARY KEY,
+  "nombre" VARCHAR(20) NOT NULL
+);
+
+ALTER TABLE "venta" ADD FOREIGN KEY ("rutCliente") REFERENCES "cliente" ("rut") ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE "mantencion" ADD FOREIGN KEY ("idVenta") REFERENCES "venta" ("folio") ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE "vehiculo" ADD FOREIGN KEY ("marca") REFERENCES "marca" ("idMarca") ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE "vehiculo" ADD FOREIGN KEY ("tipoVehiculo") REFERENCES "tipoVehiculo" ("idtipovehiculo")  ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE "venta" ADD FOREIGN KEY ("vehiculo_IdVehiculo") REFERENCES "vehiculo" ("idVehiculo")  ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+-- Inserciones para la tabla "empresa"
+INSERT INTO empresa (rut, nombre, direccion, telefono, correo, web) VALUES
+('1', 'AutoMax', 'Av. Principal 123', '555-1234567', 'info@automax.com', 'www.automax.com'),
+('2', 'CarrosYa', 'Calle 45 #67-89', '555-2345678', 'ventas@carrosya.com', 'www.carrosya.com'),
+('3', 'MotorWorld', 'Carrera 78 #90-12', '555-3456789', 'contacto@motorworld.com', 'www.motorworld.com'),
+('4', 'AutoDreams', 'Av. Libertad 456', '555-4567890', 'info@autodreams.com', 'www.autodreams.com'),
+('5', 'VehiculosPro', 'Calle 23 #45-67', '555-5678901', 'ventas@vehiculospro.com', 'www.vehiculospro.com'),
+('6', 'CarCenter', 'Av. Revolución 789', '555-6789012', 'info@carcenter.com', 'www.carcenter.com'),
+('7', 'AutoExpress', 'Carrera 12 #34-56', '555-7890123', 'ventas@autoexpress.com', 'www.autoexpress.com'),
+('8', 'MotorMaster', 'Calle 89 #01-23', '555-8901234', 'info@motormaster.com', 'www.motormaster.com'),
+('9', 'CarroFacil', 'Av. Central 234', '555-9012345', 'contacto@carrofacil.com', 'www.carrofacil.com'),
+('0', 'AutoPlaza', 'Carrera 56 #78-90', '555-0123456', 'ventas@autoplaza.com', 'www.autoplaza.com');
+
+-- Inserciones para la tabla "cliente"
+INSERT INTO cliente (rut, nombre, correo, direccion, celular, alta) VALUES
+('1234567890', 'Juan Pérez', 'juan@email.com', 'Calle 1 #23-45', '300-1234567', TRUE),
+('2345678901', 'María López', 'maria@email.com', 'Av. 2 #34-56', '310-2345678', TRUE),
+('3456789012', 'Carlos Rodríguez', 'carlos@email.com', 'Carrera 3 #45-67', '320-3456789', FALSE),
+('4567890123', 'Ana Martínez', 'ana@email.com', 'Calle 4 #56-78', '330-4567890', TRUE),
+('5678901234', 'Pedro Gómez', 'pedro@email.com', 'Av. 5 #67-89', '340-5678901', TRUE),
+('6789012345', 'Laura Sánchez', 'laura@email.com', 'Carrera 6 #78-90', '350-6789012', FALSE),
+('7890123456', 'Diego Hernández', 'diego@email.com', 'Calle 7 #89-01', '360-7890123', TRUE),
+('8901234567', 'Sofía Díaz', 'sofia@email.com', 'Av. 8 #90-12', '370-8901234', TRUE),
+('9012345678', 'Andrés Castro', 'andres@email.com', 'Carrera 9 #01-23', '380-9012345', FALSE),
+('0123456789', 'Carmen Vargas', 'carmen@email.com', 'Calle 10 #12-34', '390-0123456', TRUE);
+
+-- Inserciones para la tabla "tipoVehiculo"
+INSERT INTO tipoVehiculo (idtipovehiculo, nombre) VALUES
+(1, 'Sedán'),
+(2, 'SUV'),
+(3, 'Hatchback'),
+(4, 'Pickup'),
+(5, 'Coupé'),
+(6, 'Minivan'),
+(7, 'Convertible'),
+(8, 'Crossover'),
+(9, 'Furgoneta'),
+(10, 'Deportivo');
+
+-- Inserciones para la tabla "marca"
+INSERT INTO marca (nombre) VALUES
+('Toyota'),
+('Honda'),
+('Ford'),
+('Chevrolet'),
+('Nissan'),
+('Volkswagen'),
+('Hyundai'),
+('Kia'),
+('Mazda'),
+('Subaru');
+
+-- Inserciones para la tabla "vehiculo"
+INSERT INTO vehiculo (idvehiculo, patente, marca, modelo, color, precio, frecuenciamantencion, tipovehiculo) VALUES
+(1, 'ABC123', 1, 'Corolla', 'Blanco', 25000, 6, 1),
+(2, 'DEF456', 2, 'CR-V', 'Rojo', 30000, 6, 2),
+(3, 'GHI789', 3, 'Fiesta', 'Azul', 18000, 6, 3),
+(4, 'JKL012', 4, 'Silverado', 'Negro', 35000, 6, 4),
+(5, 'MNO345', 5, '370Z', 'Amarillo', 40000, 6, 5),
+(6, 'PQR678', 6, 'Golf', 'Gris', 22000, 6, 3),
+(7, 'STU901', 7, 'Tucson', 'Verde', 28000, 6, 2),
+(8, 'VWX234', 8, 'Sportage', 'Naranja', 27000, 6, 2),
+(9, 'YZA567', 9, 'CX-5', 'Marrón', 29000, 6, 2),
+(10, 'BCD890', 10, 'Impreza', 'Plata', 24000, 6, 1);
+
+-- Inserciones para la tabla "venta"
+INSERT INTO venta (folio, fecha, monto, vehiculo_idvehiculo, rutcliente) VALUES
+(1, '2024-01-15', 25000, 1, '1234567890'),
+(2, '2024-02-20', 30000, 2, '2345678901'),
+(3, '2024-03-25', 18000, 3, '3456789012'),
+(4, '2024-04-30', 35000, 4, '4567890123'),
+(5, '2024-05-05', 40000, 5, '5678901234'),
+(6, '2024-06-10', 22000, 6, '6789012345'),
+(7, '2024-07-15', 28000, 7, '7890123456'),
+(8, '2024-08-20', 27000, 8, '8901234567'),
+(9, '2024-09-25', 29000, 9, '9012345678'),
+(10, '2024-10-30', 24000, 10, '0123456789');
+
+-- Inserciones para la tabla "mantencion"
+INSERT INTO mantencion (fecha, trabajosrealizados, idventa) VALUES
+('2024-07-15', 'Cambio de aceite y filtros', 1),
+('2024-08-20', 'Revisión de frenos y suspensión', 2),
+('2024-09-25', 'Alineación y balanceo', 3),
+('2024-10-30', 'Cambio de bujías', 4),
+('2024-11-05', 'Revisión del sistema eléctrico', 5),
+('2024-12-10', 'Cambio de correa de distribución', 6),
+('2025-01-15', 'Revisión de la transmisión', 7),
+('2025-02-20', 'Cambio de líquido de frenos', 8),
+('2025-03-25', 'Revisión del aire acondicionado', 9),
+('2025-04-30', 'Cambio de amortiguadores', 10);
+
+
+UPDATE cliente
+SET nombre = 'Segundo Cliente'
+WHERE rut = (SELECT rut FROM cliente where rut <> (SELECT rut FROM cliente order by rut desc limit 1) order by rut desc limit 1)
+
+select * from venta
+
+SELECT * FROM venta where rutcliente = (SELECT rut FROM cliente order by rut desc limit 1)
+
+SELECT DISTINCT patente from vehículo
+
+DELETE FROM cliente where rut = (SELECT rut FROM cliente order by rut asc limit 1);
