@@ -28,23 +28,26 @@ public class EVM4S2 {
                    break;
                case 2:
                    System.out.println("¿Cuanto dinero desea retirar?");
-                   if(saldo< teclado.nextDouble()){
+                   double aux= teclado.nextDouble();
+                   if(saldo< aux){
                        System.out.println("No tiene suficiente saldo");
                        break;
                    }else{
-                       saldo-= teclado.nextDouble();
+                       saldo-= aux;
                        System.out.println("Su nuevo saldo es de: "+(saldo));
                    }
                    break;
                case 3:
                    continuar=false;
                    break;
+               default:
+                   System.out.println("Opcion no valida");
+                   break;
            }
-           System.out.println("Su saldo es de: "+saldo);
         }while(continuar);
     }
 
-    public static void temperatura(int temperatura) {
+    private static void temperatura(int temperatura) {
         if(temperatura<=10){
             System.out.println("Frio");
         }else{
