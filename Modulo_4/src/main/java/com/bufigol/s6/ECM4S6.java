@@ -81,15 +81,26 @@ public class ECM4S6 {
         personasMap.put("carlos", new Persona("Carlos Rodríguez", "segura789","carlos"));
         personasMap.put("ana", new Persona("Ana Martínez", "acceso000","ana"));
     }
+
+
     private static int pedirEntero(String msg) {
-        System.out.println(msg);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        try{
+            System.out.println(msg);
+            Scanner scanner = new Scanner(System.in);
+            return scanner.nextInt();
+        } catch (RuntimeException e) {
+            return pedirEntero(msg);
+        }
+
     }
     private static String pedirCadena(String msg) {
-        System.out.println(msg);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        try{
+            System.out.println(msg);
+            Scanner scanner = new Scanner(System.in);
+            return scanner.nextLine();
+        }catch (RuntimeException e) {
+            return pedirCadena(msg);
+        }
     }
 
 }
