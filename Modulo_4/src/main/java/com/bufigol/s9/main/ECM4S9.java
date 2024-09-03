@@ -11,10 +11,6 @@ import java.util.Date;
 public class ECM4S9 {
 
     public static void main(String[] args) {
-        ejecucion();
-    }
-
-    private static void ejecucion() {
         ArrayList<Persona> listaDePersonas = cargarDatos();
         mostrarDatos(listaDePersonas);
         mostrarSuperClase(listaDePersonas);
