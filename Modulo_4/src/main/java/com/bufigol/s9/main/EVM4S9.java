@@ -22,12 +22,12 @@ public class EVM4S9 {
     }
     private static ArrayList<Producto> cargarDatos() {
         ArrayList<Producto> listaDeProductos = new ArrayList<>();
-        listaDeProductos.add(new Producto(Zapatos.class,"Adidas"));
-        listaDeProductos.add(new Producto(Zapatos.class,"Puma"));
-        listaDeProductos.add(new Producto(Zapatos.class,"Reebok"));
-        listaDeProductos.add(new Producto(Poleras.class,"Rojo"));
-        listaDeProductos.add(new Producto(Poleras.class,"Blanco"));
-        listaDeProductos.add(new Producto(Poleras.class,"Azul"));
+        listaDeProductos.add(new Producto(new Zapatos(),"Adidas"));
+        listaDeProductos.add(new Producto(new Zapatos(),"Puma"));
+        listaDeProductos.add(new Producto(new Zapatos(),"Reebok"));
+        listaDeProductos.add(new Producto(new Poleras(),"Rojo"));
+        listaDeProductos.add(new Producto(new Poleras(),"Blanco"));
+        listaDeProductos.add(new Producto(new Poleras(),"Azul"));
         return listaDeProductos;
     }
 

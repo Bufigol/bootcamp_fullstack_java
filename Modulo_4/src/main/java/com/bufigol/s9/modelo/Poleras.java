@@ -4,6 +4,8 @@ public class Poleras {
 
     private String color;
 
+    public Poleras() {}
+
     public Poleras(String color) {
         this.color = color;
     }

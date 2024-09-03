@@ -4,6 +4,8 @@ public class Zapatos {
 
     private String marca;
 
+    public Zapatos() {}
+
     public Zapatos(String marca) {
         this.marca = marca;
     }
