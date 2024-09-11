@@ -1,4 +1,4 @@
-package com.bufigol.s12;
+package com.bufigol.s12.main;
 
 import com.bufigol.utils.EntradaPorTeclado;
 import com.bufigol.utils.MetodosMatematicos;
