@@ -1,63 +1,63 @@
-TABLE empresa{
+TABLE Empresa{
   RUT VARCHAR(12) [PRIMARY KEY]
-  nombre VARCHAR(25)
-  direccion VARCHAR(50) [NOT NULL]
-  telefono VARCHAR(12) [NOT NULL]
-  email VARCHAR(50)
-  web VARCHAR(50)
+  Nombre VARCHAR(25)
+  Direccion VARCHAR(50)
+  Telefono VARCHAR(12)
+  Correo  VARCHAR(100)
+  Web VARCHAR(25)
 }
-https://pastebin.com/myGEGQnN
 
-TABLE cliente{
+Table Cliente{
   RUT VARCHAR(12) [PRIMARY KEY]
-  nombre VARCHAR(25)
-  email VARCHAR(50)
-  direccion VARCHAR(50) [NOT NULL]
-  celular VARCHAR(12)
-  alta BOOLEAN [NOT NULL]
+  Nombre VARCHAR(25)
+  Correo  VARCHAR(100)
+  Direccion VARCHAR(50)
+  Celular VARCHAR(12)
+  Alta boolean
 }
 
-TABLE tipoVehiculo{
-  idTipoVehiculo SERIAL [PRIMARY KEY]
-  nombre VARCHAR(50) [NOT NULL]
+Table TipoVehiculo{
+  ID_TipoVehiculo SERIAL [PRIMARY KEY]
+  Nombre VARCHAR(25)
 }
 
-TABLE mantencion{
-  idMantencion SERIAL [PRIMARY KEY]
-  fecha DATE [NOT NULL]
-  trabajosRealizados VARCHAR(500) [NOT NULL]
-  idVenta INT [NOT NULL]
-}
-TABLE venta{
-  folio INT [PRIMARY KEY]
-  rutCliente VARCHAR(12) [NOT NULL]
-  fecha DATE [NOT NULL]
-  monto INT [NOT NULL]
+Table Mantencion{
+  ID_Mantencion SERIAL [PRIMARY KEY]
+  Fecha DATE [default: 'NOW()']
+  Trabajos_Realizados VARCHAR(500)
+  Folio INT [NOT NULL] 
 }
 
-TABLE vehiculo{
-  idVehiculo SERIAL [PRIMARY KEY]
-  patente VARCHAR(8) [NOT NULL]
-  marca INT [NOT NULL]
-  modelo VARCHAR(20)
-  color  VARCHAR(20)
-  precio INT [NOT NULL]
-  frecuenciaMantencion INT [NOT NULL]
-  idVenta INT [NOT NULL]
-  tipoVehiculo INT [NOT NULL]
+Table Venta{
+  Folio INT [PRIMARY KEY]
+  Fecha DATE [default: 'NOW()']
+  Monto INT [NOT NULL]
+  RUT_cliente VARCHAR(12) [NOT NULL]
 }
 
-TABLE marca{
-  idMarca SERIAL [PRIMARY KEY]
+Table Vehiculo{
+  ID_Vehiculo SERIAL [PRIMARY KEY]
+  Tipo_Vehiculo INT [NOT NULL] 
+  Patente VARCHAR(8)
+  ID_Marca INT [NOT NULL] 
+  Modelo VARCHAR(20)
+  Color VARCHAR(20)
+  Precio INT [NOT NULL]
+  FrecuenciaMantencion INT [DEFAULT: 15]
+  Folio INT [NOT NULL] 
+}
+
+Table Marca{
+  ID_Marca SERIAL [PRIMARY KEY]
   Nombre VARCHAR(20) [NOT NULL]
 }
 
-Ref: "cliente"."RUT" < "venta"."rutCliente"
+Ref: "Cliente"."RUT" < "Venta"."RUT_cliente"
 
-Ref: "venta"."folio" < "mantencion"."idVenta"
+Ref: "Venta"."Folio" < "Mantencion"."Folio"
 
-Ref: "venta"."folio" < "vehiculo"."idVenta"
+Ref: "Venta"."Folio" < "Vehiculo"."Folio"
 
-Ref: "marca"."idMarca" < "vehiculo"."marca"
+Ref: "Marca"."ID_Marca" < "Vehiculo"."ID_Marca"
 
-Ref: "tipoVehiculo"."idTipoVehiculo" < "vehiculo"."tipoVehiculo"
+Ref: "TipoVehiculo"."ID_TipoVehiculo" < "Vehiculo"."Tipo_Vehiculo"
