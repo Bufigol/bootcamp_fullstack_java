@@ -80,7 +80,7 @@ public class ECM4S12 {
         try {
             FileWriter archivo = new FileWriter(rutaArchivo, true);
             PrintWriter pw = new PrintWriter(archivo);
-            pw.println(nombreDelParticipante);
+            pw.println("\n" + nombreDelParticipante);
             pw.close();
             archivo.close();
         } catch (Exception e) {
