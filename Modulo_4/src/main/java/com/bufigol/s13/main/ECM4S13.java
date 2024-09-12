@@ -1,5 +1,6 @@
-package com.bufigol.s13;
+package com.bufigol.s13.main;
 
+import com.bufigol.utils.ComprobacionesVarias;
 import com.bufigol.utils.EntradaPorTeclado;
 
 import java.util.ArrayList;
