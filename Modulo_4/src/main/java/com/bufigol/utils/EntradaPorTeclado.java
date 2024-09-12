@@ -4,21 +4,25 @@ import java.util.Scanner;
 
 public class EntradaPorTeclado {
     public static int pedirEntero(String msg) {
-        try{
+        try {
             System.out.println(msg);
-            Scanner scanner = new Scanner(System.in);
+            Scanner scanner  = new Scanner(System.in);
             return scanner.nextInt();
         } catch (RuntimeException e) {
             return pedirEntero(msg);
         }
     }
     public static String pedirCadena(String msg) {
-        try{
+        Scanner scanner = null;
+        try {
             System.out.println(msg);
-            Scanner scanner = new Scanner(System.in);
+            scanner = new Scanner(System.in);
             return scanner.nextLine();
         } catch (RuntimeException e) {
             return pedirCadena(msg);
+        } finally {
+            assert scanner != null;
+            scanner.close();
         }
     }
 }
