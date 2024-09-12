@@ -1,6 +1,30 @@
 package com.bufigol.utils;
 
+import java.net.InetAddress;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ComprobacionesVarias {
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    public static boolean isValidEmail(String email) {
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        if (!matcher.matches()) {
+            return false;
+        }
+
+        String domain = email.split("@")[1];
+        try {
+            InetAddress address = InetAddress.getByName(domain);
+            return address.getHostAddress() != null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static boolean isValidRut(String rut) {
         // Eliminar puntos y guión del RUT
         rut = rut.replace(".", "").replace("-", "");
