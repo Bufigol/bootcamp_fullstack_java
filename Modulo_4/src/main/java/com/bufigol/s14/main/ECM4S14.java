@@ -1,4 +1,4 @@
-package com.bufigol.s14;
+package com.bufigol.s14.main;
 
 public class ECM4S14 {
     public static void main(String[] args) {
