@@ -3,7 +3,7 @@ package com.bufigol.utils;
 import java.io.*;
 import java.util.ArrayList;
 
-public class ManejoDeArchvios {
+public class ManejoDeArchivos {
 
     private static boolean isFirstCall = true;
 
