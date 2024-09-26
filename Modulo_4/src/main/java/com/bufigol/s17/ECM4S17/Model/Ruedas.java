@@ -7,6 +7,13 @@ import java.util.*;
  * 
  */
 public class Ruedas {
+    private boolean infladas;
+    private boolean buenEstado;
+
+    public Ruedas(boolean infladas, boolean buenEstado) {
+        this.infladas = infladas;
+        this.buenEstado = buenEstado;
+    }
 
     /**
      * Default constructor
@@ -14,21 +21,28 @@ public class Ruedas {
     public Ruedas() {
     }
 
-    /**
-     * 
-     */
-    private void infladas;
-
-    /**
-     * 
-     */
-    private void buenEstado;
-
-    /**
-     * 
-     */
     public void inflar() {
-        // TODO implement here
+        if (infladas) {
+            System.out.println("Las ruedas ya estaban infladas");
+        } else {
+            infladas = true;
+            System.out.println("Las ruedas han sido infladas");
+        }
     }
 
+    public boolean isInfladas() {
+        return infladas;
+    }
+
+    public void setInfladas(boolean infladas) {
+        this.infladas = infladas;
+    }
+
+    public boolean isBuenEstado() {
+        return buenEstado;
+    }
+
+    public void setBuenEstado(boolean buenEstado) {
+        this.buenEstado = buenEstado;
+    }
 }

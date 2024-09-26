@@ -28,7 +28,12 @@ public class Cabina {
 
 
     public void cerrarPuertas() {
-        // TODO implement here
+        if(puertasCerradas) {
+            System.out.println("Las puertas ya estaban cerradas");
+        }else {
+            this.puertasCerradas = true;
+            System.out.println("Las puertas estan cerradas");
+        }
     }
 
     public int getCapacidadPasajeros() {
