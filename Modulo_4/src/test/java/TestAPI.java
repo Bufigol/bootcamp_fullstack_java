@@ -1,8 +1,8 @@
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.bufigol.s18.ECS4M18.Modelo.API;
-import com.bufigol.s18.ECS4M18.Modelo.Respuesta;
+import com.bufigol.s18.ECM4S18.Modelo.API;
+import com.bufigol.s18.ECM4S18.Modelo.Respuesta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.*;
 

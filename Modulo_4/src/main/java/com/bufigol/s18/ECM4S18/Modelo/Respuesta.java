@@ -1,4 +1,4 @@
-package com.bufigol.s18.ECS4M18.Modelo;
+package com.bufigol.s18.ECM4S18.Modelo;
 
 public class Respuesta {
     private float latitude;
