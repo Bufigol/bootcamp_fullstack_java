@@ -6,5 +6,5 @@ import java.util.List;
 
 public class ArchivoServicio {
     private List<Alumno> alumnosACargar;
-    private 
+
 }

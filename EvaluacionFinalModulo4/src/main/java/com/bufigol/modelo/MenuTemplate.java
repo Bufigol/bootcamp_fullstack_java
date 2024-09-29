@@ -1,6 +1,9 @@
 package com.bufigol.modelo;
 
+import com.bufigol.utils.EntradaPorTeclado;
+
 import java.util.Scanner;
+
 
 public abstract class MenuTemplate {
 
@@ -17,7 +20,31 @@ public abstract class MenuTemplate {
     public abstract void terminarPrograma();
 
     public void iniciarMenu(Scanner scanner) {
+        String menu="""
+                MENU PRINCIPAL
+                1. Crear Alumnos
+                2. Listar Alumnos
+                3. Agregar Materias
+                4. Agregar Notas
+                5. Exportar Datos
+                6. Salir
+                Selección:""";
+        int opcion = EntradaPorTeclado.pedirEntero(menu, scanner);
 
+
+        if(opcion < 1 || opcion > 6){
+            System.out.println("Opcion no valida");
+            iniciarMenu(scanner);
+        }else{
+            switch (opcion) {
+                case 1 -> crearAlummno();
+                case 2 -> listarAlummnos();
+                case 3 -> agregarMateria();
+                case 4 -> agregarNotaPasoUno();
+                case 5 -> exportarDatos();
+                case 6 -> terminarPrograma();
+            }
+        }
     }
 
 }
