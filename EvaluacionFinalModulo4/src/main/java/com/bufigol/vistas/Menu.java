@@ -1,0 +1,154 @@
+package com.bufigol.vistas;
+
+import com.bufigol.modelo.MenuTemplate;
+import com.bufigol.servicios.AlumnoServicio;
+import com.bufigol.servicios.ArchivoServicio;
+import com.bufigol.utils.EntradaPorTeclado;
+import com.bufigol.modelo.Alumno;
+import com.bufigol.modelo.Materia;
+import com.bufigol.modelo.MateriasEnum;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Menu extends MenuTemplate {
+    private AlumnoServicio alumnoServicio;
+    private ArchivoServicio archivoServicio;
+
+    public Menu() {
+        this.alumnoServicio = new AlumnoServicio();
+        this.archivoServicio = new ArchivoServicio();
+    }
+
+    @Override
+    public void exportarDatos() {
+        System.out.println("--- Exportar Datos ---");
+        String ruta = EntradaPorTeclado.pedirCadena("Ingresa la ruta donde se exportarán los datos:");
+        archivoServicio.exportarDatos(ruta);
+    }
+
+    @Override
+    public void importarDatos() {
+        System.out.println("--- Importar Datos ---");
+        String rutaArchivo = EntradaPorTeclado.pedirCadena("Ingresa la ruta del archivo CSV a importar:");
+        archivoServicio.cargarAlumnos(rutaArchivo);
+        System.out.println("Se han cargado " + archivoServicio.contarAlumnosACargar() + " alumnos.");
+
+        String confirmar = EntradaPorTeclado.pedirCadena("¿Desea guardar los alumnos cargados? (S/N):");
+        if (confirmar.equalsIgnoreCase("S")) {
+            archivoServicio.guardarAlumnosCargados();
+            System.out.println("Alumnos guardados exitosamente.");
+        } else {
+            archivoServicio.limpiarAlumnosACargar();
+            System.out.println("Operación cancelada. Los alumnos no han sido guardados.");
+        }
+    }
+
+    @Override
+    public void crearAlummno() {
+        System.out.println("--- Crear Alumno ---");
+        String rut = EntradaPorTeclado.pedirCadena("Ingresa RUT:");
+        String nombre = EntradaPorTeclado.pedirCadena("Ingresa nombre:");
+        String apellido = EntradaPorTeclado.pedirCadena("Ingresa apellido:");
+        String direccion = EntradaPorTeclado.pedirCadena("Ingresa dirección:");
+
+        Alumno nuevoAlumno = new Alumno(rut, nombre, apellido, direccion, new ArrayList<>());
+        alumnoServicio.crearAlumno(nuevoAlumno);
+        System.out.println("--- ¡Alumno agregado! ---");
+    }
+
+    @Override
+    public void agregarMateria() {
+        System.out.println("--- Agregar Materia ---");
+        String rut = EntradaPorTeclado.pedirCadena("Ingresa rut del Alumno:");
+        Alumno alumno = alumnoServicio.buscarAlumnoPorRut(rut);
+
+        if (alumno == null) {
+            System.out.println("Alumno no encontrado.");
+            return;
+        }
+
+        System.out.println("1. MATEMATICAS");
+        System.out.println("2. LENGUAJE");
+        System.out.println("3. CIENCIA");
+        System.out.println("4. HISTORIA");
+        int opcion = EntradaPorTeclado.pedirEntero("Selecciona una Materia:");
+
+        MateriasEnum materiaSeleccionada;
+        switch (opcion) {
+            case 1 -> materiaSeleccionada = MateriasEnum.MATEMATICAS;
+            case 2 -> materiaSeleccionada = MateriasEnum.LENGUAJE;
+            case 3 -> materiaSeleccionada = MateriasEnum.CIENCIA;
+            case 4 -> materiaSeleccionada = MateriasEnum.HISTORIA;
+            default -> {
+                System.out.println("Opción no válida.");
+                return;
+            }
+        }
+
+        Materia nuevaMateria = new Materia(materiaSeleccionada, new ArrayList<>());
+        alumnoServicio.agregarMateria(alumno, nuevaMateria);
+        System.out.println("--- ¡Materia agregada! ---");
+    }
+
+    @Override
+    public void agregarNotaPasoUno() {
+        System.out.println("--- Agregar Nota ---");
+        String rut = EntradaPorTeclado.pedirCadena("Ingresa rut del Alumno:");
+        Alumno alumno = alumnoServicio.buscarAlumnoPorRut(rut);
+
+        if (alumno == null) {
+            System.out.println("Alumno no encontrado.");
+            return;
+        }
+
+        List<Materia> materias = alumnoServicio.materiasPorAlumno(alumno.getRut());
+        if (materias.isEmpty()) {
+            System.out.println("El alumno no tiene materias asignadas.");
+            return;
+        }
+
+        System.out.println("Alumno tiene las siguientes materias agregadas:");
+        for (int i = 0; i < materias.size(); i++) {
+            System.out.println((i + 1) + ". " + materias.get(i).getNombre());
+        }
+
+        int opcionMateria = EntradaPorTeclado.pedirEntero("Seleccionar materia:");
+        if (opcionMateria < 1 || opcionMateria > materias.size()) {
+            System.out.println("Opción no válida.");
+            return;
+        }
+
+        Materia materiaSeleccionada = materias.get(opcionMateria - 1);
+        float nota = EntradaPorTeclado.pedirEntero("Ingresar nota:");
+        materiaSeleccionada.getNotas().add(nota);
+
+        System.out.println("--- ¡Nota agregada a " + materiaSeleccionada.getNombre() + "! ---");
+    }
+
+    @Override
+    public void listarAlummnos() {
+        System.out.println("--- Listar Alumnos ---");
+        for (Alumno alumno : alumnoServicio.listarAlumnos().values()) {
+            System.out.println("Datos Alumno");
+            System.out.println("RUT: " + alumno.getRut());
+            System.out.println("Nombre: " + alumno.getNombre());
+            System.out.println("Apellido: " + alumno.getApellido());
+            System.out.println("Dirección: " + alumno.getDirección());
+            System.out.println("Materias");
+            for (Materia materia : alumno.getMaterias()) {
+                System.out.println(materia.getNombre());
+                System.out.println("Notas:");
+                System.out.println(materia.getNotas());
+            }
+            System.out.println("--------------------");
+        }
+    }
+
+    @Override
+    public void terminarPrograma() {
+        System.out.println("Finalizando el programa...");
+        System.exit(0);
+    }
+}

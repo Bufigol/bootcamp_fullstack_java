@@ -2,8 +2,9 @@ package com.bufigol.utils;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class ManejoDeArchvios {
+public class ManejoDeArchivos {
 
     private static boolean isFirstCall = true;
 
@@ -35,4 +36,16 @@ public class ManejoDeArchvios {
             e.printStackTrace();
         }
     }
+
+    public static void writeToFile(String filePath, List<String> lines) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
