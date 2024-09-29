@@ -2,6 +2,7 @@ package com.bufigol.utils;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ManejoDeArchivos {
 
@@ -35,4 +36,16 @@ public class ManejoDeArchivos {
             e.printStackTrace();
         }
     }
+
+    public static void writeToFile(String filePath, List<String> lines) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

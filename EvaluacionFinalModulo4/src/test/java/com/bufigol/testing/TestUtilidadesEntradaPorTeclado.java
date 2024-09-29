@@ -1,3 +1,5 @@
+package com.bufigol.testing;
+
 import com.bufigol.utils.EntradaPorTeclado;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,3 +1,5 @@
+package com.bufigol.testing;
+
 import com.bufigol.servicios.PromedioServicioImp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestPromedioServicioImp {

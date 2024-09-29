@@ -11,6 +11,7 @@ import com.bufigol.modelo.MateriasEnum;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Menu extends MenuTemplate {
     private AlumnoServicio alumnoServicio;
     private ArchivoServicio archivoServicio;
@@ -22,8 +23,26 @@ public class Menu extends MenuTemplate {
 
     @Override
     public void exportarDatos() {
-        System.out.println("Exportando datos...");
-        // Implementar lógica para exportar promedios
+        System.out.println("--- Exportar Datos ---");
+        String ruta = EntradaPorTeclado.pedirCadena("Ingresa la ruta donde se exportarán los datos:");
+        archivoServicio.exportarDatos(ruta);
+    }
+
+    @Override
+    public void importarDatos() {
+        System.out.println("--- Importar Datos ---");
+        String rutaArchivo = EntradaPorTeclado.pedirCadena("Ingresa la ruta del archivo CSV a importar:");
+        archivoServicio.cargarAlumnos(rutaArchivo);
+        System.out.println("Se han cargado " + archivoServicio.contarAlumnosACargar() + " alumnos.");
+
+        String confirmar = EntradaPorTeclado.pedirCadena("¿Desea guardar los alumnos cargados? (S/N):");
+        if (confirmar.equalsIgnoreCase("S")) {
+            archivoServicio.guardarAlumnosCargados();
+            System.out.println("Alumnos guardados exitosamente.");
+        } else {
+            archivoServicio.limpiarAlumnosACargar();
+            System.out.println("Operación cancelada. Los alumnos no han sido guardados.");
+        }
     }
 
     @Override

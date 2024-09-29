@@ -1,3 +1,5 @@
+package com.bufigol.testing;
+
 import com.bufigol.modelo.Alumno;
 import com.bufigol.modelo.Materia;
 import com.bufigol.modelo.MateriasEnum;

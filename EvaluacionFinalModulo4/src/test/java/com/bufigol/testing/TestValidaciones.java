@@ -1,3 +1,5 @@
+package com.bufigol.testing;
+
 import com.bufigol.utils.RealInetAddressWrapper;
 import com.bufigol.utils.Validaciones;
 import org.junit.jupiter.api.BeforeEach;
