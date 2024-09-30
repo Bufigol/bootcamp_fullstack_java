@@ -1,3 +1,5 @@
+package S18;
+
 import com.bufigol.s18.EVM4S18.Modelo.Mercado;
 import com.bufigol.s18.EVM4S18.Modelo.Producto;
 import org.junit.Before;
