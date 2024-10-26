@@ -1,7 +1,12 @@
 package com.bufigol.modelo;
 
+import com.bufigol.utils.Comprobadores;
+import com.bufigol.utils.PasswordGenerator;
+
 import java.sql.Date;
 import java.util.Objects;
+
+import static com.bufigol.utils.Comprobadores.*;
 
 public class Usuario {
 
@@ -17,9 +22,9 @@ public class Usuario {
         this.id = id;
         this.nombre = nombre;
         this.userName = userName;
-        this.email = email;
+        setEmail(email);
         this.fechaNacimiento = fechaNacimiento;
-        this.password = password;
+        setPassword(password);
         this.horoscopo = horoscopo;
     }
 
@@ -55,6 +60,7 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
+        if(Comprobadores.comprobarEmail(email))
         this.email = email;
     }
 
@@ -71,7 +77,7 @@ public class Usuario {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = PasswordGenerator.generarContrasenaSegura(password);
     }
 
     public Horoscopo getHoroscopo() {
