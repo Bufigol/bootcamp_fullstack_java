@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4068f27-49ae-4995-9065-bb2b11080a9c" name="Changes" comment="primera version base de la evaluacion final" />
+    <list default="true" id="a4068f27-49ae-4995-9065-bb2b11080a9c" name="Changes" comment="primera version base de la evaluacion final">
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesaLogin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesarRegistro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/modelo/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/other.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/utils/styles/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Elefante.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Hijo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Humano.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Mamifero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Modulo 5/ECM5S1/ECM5S1/src/main/java/com/bufigol/ecm5s1/HelloServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Modulo 5/ECM5S1/ECM5S1/src/main/java/com/bufigol/ecm5s1/HelloServlet.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,23 +62,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "evaluacion-final-modulo-4",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "F:/Repos/bootcamp_fullstack_java/EvaluacionFinalModulo4/src/main/java/com/bufigol/Main.java",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Repos/bootcamp_fullstack_java/EvaluacionFinalModulo4&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;F:/Repos/bootcamp_fullstack_java/EvaluacionFinalModulo4/src/main/java/com/bufigol/Main.java&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.bufigol.modelo" />
@@ -75,8 +90,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -90,6 +105,9 @@
       <updated>1726577174034</updated>
       <workItem from="1726577175129" duration="4000000" />
       <workItem from="1726585872596" duration="813000" />
+      <workItem from="1729624158796" duration="13000" />
+      <workItem from="1729879603811" duration="77000" />
+      <workItem from="1729882716514" duration="64000" />
     </task>
     <task id="LOCAL-00001" summary="primera version base de la evaluacion final">
       <option name="closed" value="true" />

@@ -1,0 +1,576 @@
+Index: ../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/other.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/other.jsp b/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/other.jsp
+new file mode 100644
+--- /dev/null	(date 1729103232911)
++++ b/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/other.jsp	(date 1729103232911)
+@@ -0,0 +1,16 @@
++<%--
++  Created by IntelliJ IDEA.
++  User: User
++  Date: 16/10/2024
++  Time: 15:19
++  To change this template use File | Settings | File Templates.
++--%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<html>
++<head>
++    <title>Title</title>
++</head>
++<body>
++    <p>Hello World</p>
++</body>
++</html>
+Index: ../Modulo 5/EVM5S1/EVM5S1/.idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/EVM5S1/.idea/uiDesigner.xml b/../Modulo 5/EVM5S1/EVM5S1/.idea/uiDesigner.xml
+new file mode 100644
+--- /dev/null	(date 1729101825323)
++++ b/../Modulo 5/EVM5S1/EVM5S1/.idea/uiDesigner.xml	(date 1729101825323)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.svg" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: ../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesarRegistro.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesarRegistro.java b/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesarRegistro.java
+new file mode 100644
+--- /dev/null	(date 1729115980862)
++++ b/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesarRegistro.java	(date 1729115980862)
+@@ -0,0 +1,8 @@
++package com.bufigol.evm5s1;
++
++import jakarta.servlet.annotation.WebServlet;
++import jakarta.servlet.http.HttpServlet;
++
++@WebServlet(name = "registro", value = "/registro")
++public class ProcesarRegistro extends HttpServlet {
++}
+Index: ../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Mamifero.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Mamifero.java b/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Mamifero.java
+new file mode 100644
+--- /dev/null	(date 1729281380077)
++++ b/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Mamifero.java	(date 1729281380077)
+@@ -0,0 +1,33 @@
++package com.bufigol.modelo;
++
++public abstract class Mamifero {
++    private int patas;
++    private int peso;
++
++    public Mamifero(int patas, int peso) {
++        this.patas = patas;
++        this.peso = peso;
++    }
++
++    public Mamifero() {
++    }
++
++    public int getPatas() {
++        return patas;
++    }
++
++    public void setPatas(int patas) {
++        this.patas = patas;
++    }
++
++    public int getPeso() {
++        return peso;
++    }
++
++    public void setPeso(int peso) {
++        this.peso = peso;
++    }
++    public void comer(){
++        System.out.println("Mamifero come");
++    }
++}
+Index: ../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesaLogin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesaLogin.java b/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesaLogin.java
+new file mode 100644
+--- /dev/null	(date 1729115980876)
++++ b/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesaLogin.java	(date 1729115980876)
+@@ -0,0 +1,38 @@
++package com.bufigol.evm5s1;
++
++import java.io.IOException;
++import java.io.PrintWriter;
++import java.util.ArrayList;
++
++import com.bufigol.modelo.Usuario;
++import jakarta.servlet.http.*;
++import jakarta.servlet.annotation.*;
++
++@WebServlet(name = "login", value = "/login")
++public class ProcesaLogin extends HttpServlet{
++    private ArrayList<Usuario> usuarios;
++
++
++    public void init(){
++        this.usuarios = new ArrayList<Usuario>();
++        this.usuarios.add(new Usuario("admin", "admin"));
++        this.usuarios.add(new Usuario("user", "user"));
++    }
++
++    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
++        //login_username
++
++        String username = request.getParameter("login_username");
++        String password = request.getParameter("login_password");
++        Cookie galleta = new Cookie("usuarios", this.usuarios.toString());
++        Usuario user = new Usuario(username, password);
++        for(Usuario u : this.usuarios){
++            if(u.equals(user)){
++                response.sendRedirect("other.jsp");
++            }else{
++                response.getWriter().println("Login incorrecto");
++                response.sendRedirect("index.jsp");
++            }
++        }
++    }
++}
+Index: ../Modulo 5/ECM5S1/ECM5S1/src/main/java/com/bufigol/ecm5s1/HelloServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.bufigol.ecm5s1;\r\n\r\nimport java.io.*;\r\n\r\nimport jakarta.servlet.http.*;\r\nimport jakarta.servlet.annotation.*;\r\n\r\n@WebServlet(name = \"helloServlet\", value = \"/hello-servlet\")\r\npublic class HelloServlet extends HttpServlet {\r\n    private String message;\r\n\r\n    public void init() {\r\n        message = \"El nombre enviado es: \";\r\n    }\r\n\r\n    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {\r\n        response.setContentType(\"text/html\");\r\n\r\n        // Hello\r\n        PrintWriter out = response.getWriter();\r\n        out.println(\"<html><body>\");\r\n        out.println(\"<h1> Respuesta del formulario:</h1>\");\r\n        out.println(\"<p>\" + message + request.getParameter(\"nombre\") + \"</p>\");\r\n        out.println(\"</body></html>\");\r\n\r\n    }\r\n\r\n    public void destroy() {\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/ECM5S1/ECM5S1/src/main/java/com/bufigol/ecm5s1/HelloServlet.java b/../Modulo 5/ECM5S1/ECM5S1/src/main/java/com/bufigol/ecm5s1/HelloServlet.java
+--- a/../Modulo 5/ECM5S1/ECM5S1/src/main/java/com/bufigol/ecm5s1/HelloServlet.java	(revision 571f5421195cac578e5e32f83addc6aec5526524)
++++ b/../Modulo 5/ECM5S1/ECM5S1/src/main/java/com/bufigol/ecm5s1/HelloServlet.java	(date 1728403332239)
+@@ -18,8 +18,18 @@
+ 
+         // Hello
+         PrintWriter out = response.getWriter();
+-        out.println("<html><body>");
+-        out.println("<h1> Respuesta del formulario:</h1>");
++        out.println("""
++                <head>
++                    <meta charset="UTF-8">
++                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++                    <title>Formulario ECM5S1</title>
++                    <link rel="stylesheet" href="./styles/index.css" />
++                </head>
++                <html>
++                <body>
++        """);
++        out.println("<h2> Respuesta del formulario:</h2>" +
++                "</br>");
+         out.println("<p>" + message + request.getParameter("nombre") + "</p>");
+         out.println("</body></html>");
+ 
+Index: ../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/utils/styles/index.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/utils/styles/index.css b/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/utils/styles/index.css
+new file mode 100644
+--- /dev/null	(date 1728672288386)
++++ b/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/utils/styles/index.css	(date 1728672288386)
+@@ -0,0 +1,60 @@
++body, html {
++    height: 100%;
++    margin: 0;
++    font-family: Arial, sans-serif;
++    background: linear-gradient(45deg, #000000, #1a1a2e);
++    display: flex;
++    justify-content: center;
++    align-items: center;
++}
++.container {
++    background: rgba(255, 255, 255, 0.1);
++    border-radius: 10px;
++    padding: 20px;
++    backdrop-filter: blur(10px);
++    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
++}
++.tabs {
++    display: flex;
++    margin-bottom: 20px;
++}
++.tab {
++    flex: 1;
++    text-align: center;
++    padding: 10px;
++    cursor: pointer;
++    color: #fff;
++    transition: all 0.3s ease;
++}
++.tab.active {
++    border-bottom: 2px solid #00ffff;
++    color: #00ffff;
++}
++.content {
++    display: none;
++}
++.content.active {
++    display: block;
++}
++input {
++    width: 100%;
++    padding: 10px;
++    margin: 10px 0;
++    border: none;
++    border-radius: 5px;
++    background: rgba(255, 255, 255, 0.1);
++    color: #fff;
++}
++button {
++    width: 100%;
++    padding: 10px;
++    border: none;
++    border-radius: 5px;
++    background: #00ffff;
++    color: #000;
++    cursor: pointer;
++    transition: all 0.3s ease;
++}
++button:hover {
++    background: #00cccc;
++}
+\ No newline at end of file
+Index: ../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Humano.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Humano.java b/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Humano.java
+new file mode 100644
+--- /dev/null	(date 1729281380097)
++++ b/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Humano.java	(date 1729281380097)
+@@ -0,0 +1,26 @@
++package com.bufigol.modelo;
++
++public class Humano extends Mamifero {
++
++    private int IQ;
++    private String nombre;
++
++    public Humano(int patas, int peso) {
++        super(patas, peso);
++    }
++
++    public Humano(int patas, int peso, String nombre, int IQ) {
++        super(patas, peso);
++        this.nombre = nombre;
++        this.IQ = IQ;
++    }
++
++    public Humano() {
++        super();
++    }
++
++    @Override
++    public void comer(){
++        System.out.println("Humano come");
++    }
++}
+Index: ../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Hijo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Hijo.java b/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Hijo.java
+new file mode 100644
+--- /dev/null	(date 1729281380135)
++++ b/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Hijo.java	(date 1729281380135)
+@@ -0,0 +1,18 @@
++package com.bufigol.modelo;
++
++public class Hijo extends Humano{
++    private String cuenta;
++
++    public Hijo(int patas, int peso, String nombre, int IQ) {
++        super(patas, peso, nombre, IQ);
++    }
++
++    public Hijo(int patas, int peso, String nombre, int IQ, String cuenta) {
++        super(patas, peso, nombre, IQ);
++        this.cuenta = cuenta;
++    }
++
++    public Hijo() {
++        super();
++    }
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a4068f27-49ae-4995-9065-bb2b11080a9c\" name=\"Changes\" comment=\"primera version base de la evaluacion final\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$/..\" value=\"dev\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;Bufigol&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/Bufigol/bootcamp_fullstack_java.git&quot;,\r\n    &quot;accountId&quot;: &quot;dcaeda2d-3f1c-4e2f-83cb-6b72116da187&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 7\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2mCObyDSoBWECdBDq06atvtbJJc\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"com.codeium.enabled\": \"true\",\r\n    \"git-widget-placeholder\": \"evaluacion-final-modulo-4\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"onboarding.tips.debug.path\": \"F:/Repos/bootcamp_fullstack_java/EvaluacionFinalModulo4/src/main/java/com/bufigol/Main.java\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"com.bufigol.modelo\" />\r\n      <recent name=\"ç\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a4068f27-49ae-4995-9065-bb2b11080a9c\" name=\"Changes\" comment=\"\" />\r\n      <created>1726577174034</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1726577174034</updated>\r\n      <workItem from=\"1726577175129\" duration=\"4000000\" />\r\n      <workItem from=\"1726585872596\" duration=\"813000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"primera version base de la evaluacion final\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1726586078396</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1726586078396</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"primera version base de la evaluacion final\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"primera version base de la evaluacion final\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/main/java/com/bufigol/Main.java</url>\r\n          <line>13</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 571f5421195cac578e5e32f83addc6aec5526524)
++++ b/.idea/workspace.xml	(date 1729879681146)
+@@ -4,7 +4,20 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="a4068f27-49ae-4995-9065-bb2b11080a9c" name="Changes" comment="primera version base de la evaluacion final" />
++    <list default="true" id="a4068f27-49ae-4995-9065-bb2b11080a9c" name="Changes" comment="primera version base de la evaluacion final">
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/.idea/uiDesigner.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesaLogin.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/evm5s1/ProcesarRegistro.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/modelo/Usuario.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/other.jsp" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/EVM5S1/src/main/webapp/utils/styles/index.css" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Elefante.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Hijo.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Humano.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Mamifero.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../Modulo 5/ECM5S1/ECM5S1/src/main/java/com/bufigol/ecm5s1/HelloServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Modulo 5/ECM5S1/ECM5S1/src/main/java/com/bufigol/ecm5s1/HelloServlet.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -55,8 +68,10 @@
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+     "com.codeium.enabled": "true",
+-    "git-widget-placeholder": "evaluacion-final-modulo-4",
++    "git-widget-placeholder": "dev",
++    "ignore.virus.scanning.warn.message": "true",
+     "kotlin-language-version-configured": "true",
++    "last_opened_file_path": "F:/Repos/bootcamp_fullstack_java/EvaluacionFinalModulo4",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+@@ -75,8 +90,8 @@
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
++        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
++        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+       </set>
+     </attachedChunks>
+   </component>
+@@ -90,6 +105,8 @@
+       <updated>1726577174034</updated>
+       <workItem from="1726577175129" duration="4000000" />
+       <workItem from="1726585872596" duration="813000" />
++      <workItem from="1729624158796" duration="13000" />
++      <workItem from="1729879603811" duration="77000" />
+     </task>
+     <task id="LOCAL-00001" summary="primera version base de la evaluacion final">
+       <option name="closed" value="true" />
+Index: ../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Elefante.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Elefante.java b/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Elefante.java
+new file mode 100644
+--- /dev/null	(date 1729281083833)
++++ b/../Modulo 5/EVM5S1/demos/src/main/java/com/bufigol/modelo/Elefante.java	(date 1729281083833)
+@@ -0,0 +1,10 @@
++package com.bufigol.modelo;
++
++public class Elefante extends Mamifero {
++
++    public Elefante(int patas, int peso) {
++        super(patas, peso);
++    }
++
++
++}
+Index: ../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/modelo/Usuario.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/modelo/Usuario.java b/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/modelo/Usuario.java
+new file mode 100644
+--- /dev/null	(date 1729103232922)
++++ b/../Modulo 5/EVM5S1/EVM5S1/src/main/java/com/bufigol/modelo/Usuario.java	(date 1729103232922)
+@@ -0,0 +1,46 @@
++package com.bufigol.modelo;
++
++public class Usuario {
++    private String nombreUsuario;
++    private String pwd;
++
++    public Usuario(String nombreUsuario, String pwd) {
++        this.nombreUsuario = nombreUsuario;
++        this.pwd = pwd;
++    }
++
++    public Usuario() {
++    }
++
++    public String getNombreUsuario() {
++        return nombreUsuario;
++    }
++
++    public void setNombreUsuario(String nombreUsuario) {
++        this.nombreUsuario = nombreUsuario;
++    }
++
++    public String getPwd() {
++        return pwd;
++    }
++
++    public void setPwd(String pwd) {
++        this.pwd = pwd;
++    }
++
++    @Override
++    public boolean equals(Object o) {
++        if (this == o) return true;
++        if (o == null || getClass() != o.getClass()) return false;
++
++        Usuario usuario = (Usuario) o;
++        return getNombreUsuario().equals(usuario.getNombreUsuario()) && getPwd().equals(usuario.getPwd());
++    }
++
++    @Override
++    public int hashCode() {
++        int result = getNombreUsuario().hashCode();
++        result = 31 * result + getPwd().hashCode();
++        return result;
++    }
++}

@@ -18,8 +18,18 @@ public class HelloServlet extends HttpServlet {
 
         // Hello
         PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1> Respuesta del formulario:</h1>");
+        out.println("""
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Formulario ECM5S1</title>
+                    <link rel="stylesheet" href="./styles/index.css" />
+                </head>
+                <html>
+                <body>
+        """);
+        out.println("<h2> Respuesta del formulario:</h2>" +
+                "</br>");
         out.println("<p>" + message + request.getParameter("nombre") + "</p>");
         out.println("</body></html>");
 
