@@ -10,7 +10,7 @@ import static com.bufigol.utils.Comprobadores.*;
 
 public class Usuario {
 
-    private long id;
+    private int id;
     private String nombre;
     private String userName;
     private String email;
@@ -18,7 +18,7 @@ public class Usuario {
     private String password;
     private Horoscopo horoscopo;
 
-    public Usuario(long id, String nombre, String userName, String email, Date fechaNacimiento, String password, Horoscopo horoscopo) {
+    public Usuario(int id, String nombre, String userName, String email, Date fechaNacimiento, String password, Horoscopo horoscopo) {
         this.id = id;
         this.nombre = nombre;
         this.userName = userName;
@@ -31,11 +31,11 @@ public class Usuario {
     public Usuario() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

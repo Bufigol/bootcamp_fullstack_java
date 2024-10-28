@@ -29,11 +29,15 @@ public class DatabaseConnection {
 
     // METODO QUE CONSUME AL CONSTRUCTOR
     public static synchronized DatabaseConnection getInstance() {
-        if (instance == null) {
-            instance = new DatabaseConnection();
+        try {
+            if (instance == null || instance.getConnection().isClosed()) {
+                instance = new DatabaseConnection();
+                return getInstance();
+            }else{
+                return instance;
+            }
+        } catch (SQLException e) {
             return getInstance();
-        }else{
-            return instance;
         }
 
     }
