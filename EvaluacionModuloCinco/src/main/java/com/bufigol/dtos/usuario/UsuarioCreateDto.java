@@ -1,25 +1,37 @@
 package com.bufigol.dtos.usuario;
 
+import com.bufigol.modelo.Horoscopo;
+
 import java.sql.Date;
 
 public class UsuarioCreateDto {
+    private int id;
     private String nombre;
     private String username;
     private String email;
     private Date fechaNacimiento;
     private String password;
-    private int horoscopoId;
+    private Horoscopo horoscopo;
 
-    public UsuarioCreateDto() {
-    }
-
-    public UsuarioCreateDto(String nombre, String username, String email, Date fechaNacimiento, String password, int horoscopoId) {
+    public UsuarioCreateDto(int id, String nombre, String username, String email, Date fechaNacimiento, String password, Horoscopo horoscopo) {
+        this.id = id;
         this.nombre = nombre;
         this.username = username;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
         this.password = password;
-        this.horoscopoId = horoscopoId;
+        this.horoscopo = horoscopo;
+    }
+
+    public UsuarioCreateDto() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -62,24 +74,11 @@ public class UsuarioCreateDto {
         this.password = password;
     }
 
-    public int getHoroscopoId() {
-        return horoscopoId;
+    public Horoscopo getHoroscopo() {
+        return horoscopo;
     }
 
-    public void setHoroscopoId(int horoscopoId) {
-        this.horoscopoId = horoscopoId;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("UsuarioDTO{");
-        sb.append("nombre='").append(nombre).append('\'');
-        sb.append(", username='").append(username).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", fechaNacimiento=").append(fechaNacimiento);
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", horoscopoId=").append(horoscopoId);
-        sb.append('}');
-        return sb.toString();
+    public void setHoroscopo(Horoscopo horoscopo) {
+        this.horoscopo = horoscopo;
     }
 }

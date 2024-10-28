@@ -1,5 +1,7 @@
 package com.bufigol.dtos.usuario;
 
+import com.bufigol.modelo.Horoscopo;
+
 import java.sql.Date;
 
 public class UsuarioUpdateDTO {
@@ -9,16 +11,16 @@ public class UsuarioUpdateDTO {
     private String email;
     private Date fechaNacimiento;
     private String password;
-    private int horoscopoId;
+    private Horoscopo horoscopo;
 
-    public UsuarioUpdateDTO(int id, String nombre, String username, String email, Date fechaNacimiento, String password, int horoscopoId) {
+    public UsuarioUpdateDTO(int id, String nombre, String username, String email, Date fechaNacimiento, String password, Horoscopo horoscopo) {
         this.id = id;
         this.nombre = nombre;
         this.username = username;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
         this.password = password;
-        this.horoscopoId = horoscopoId;
+        this.horoscopo = horoscopo;
     }
 
     public UsuarioUpdateDTO() {
@@ -72,12 +74,12 @@ public class UsuarioUpdateDTO {
         this.password = password;
     }
 
-    public int getHoroscopoId() {
-        return horoscopoId;
+    public Horoscopo getHoroscopo() {
+        return horoscopo;
     }
 
-    public void setHoroscopoId(int horoscopoId) {
-        this.horoscopoId = horoscopoId;
+    public void setHoroscopo(Horoscopo horoscopo) {
+        this.horoscopo = horoscopo;
     }
 
     @Override
@@ -89,7 +91,7 @@ public class UsuarioUpdateDTO {
         sb.append(", email='").append(email).append('\'');
         sb.append(", fechaNacimiento=").append(fechaNacimiento);
         sb.append(", password='").append(password).append('\'');
-        sb.append(", horoscopoId=").append(horoscopoId);
+        sb.append(", horoscopoId=").append(horoscopo);
         sb.append('}');
         return sb.toString();
     }
