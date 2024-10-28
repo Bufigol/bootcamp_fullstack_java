@@ -5,12 +5,15 @@ import com.bufigol.modelo.AnimalesHoroscopoEnum;
 import java.sql.Date;
 
 public class HoroscopoUpdateDTO {
+
+    private int id;
     private String animal;
     private AnimalesHoroscopoEnum animalEnum;
     private Date fechaInicio;
     private Date fechaFinal;
 
-    public HoroscopoUpdateDTO(String animal, AnimalesHoroscopoEnum animalEnum, Date fechaInicio, Date fechaFinal) {
+    public HoroscopoUpdateDTO(int id, String animal, AnimalesHoroscopoEnum animalEnum, Date fechaInicio, Date fechaFinal) {
+        this.id = id;
         this.animal = animal;
         this.animalEnum = animalEnum;
         this.fechaInicio = fechaInicio;
@@ -18,6 +21,14 @@ public class HoroscopoUpdateDTO {
     }
 
     public HoroscopoUpdateDTO() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAnimal() {

@@ -4,14 +4,16 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class Horoscopo {
+    private int id;
     private AnimalesHoroscopoEnum animalEnum;
     private String animal;
     private Date inicio;
     private Date fin;
 
-    public Horoscopo(AnimalesHoroscopoEnum animalEnum, Date inicio, Date fin) {
+    public Horoscopo(int id, AnimalesHoroscopoEnum animalEnum, String animal, Date inicio, Date fin) {
+        this.id = id;
         this.animalEnum = animalEnum;
-        this.animal = animalEnum != null ? animalEnum.getNombre() : null;
+        this.animal = animal;
         this.inicio = inicio;
         this.fin = fin;
     }
