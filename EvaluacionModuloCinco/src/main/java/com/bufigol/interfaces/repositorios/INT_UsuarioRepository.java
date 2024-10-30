@@ -9,6 +9,7 @@ public interface INT_UsuarioRepository {
     List<Usuario> listarUsuarios();
     void insertarUsuario(Usuario usuario);
     Optional<Usuario> buscarUsuario(int id);
+    Usuario buscarUsuario(String usrnm);
     void actualizarUsuario(Usuario usuario);
     void eliminarUsuario(int id);
 }

@@ -2,8 +2,8 @@ package com.bufigol.interfaces.repositorios;
 
 import com.bufigol.modelo.Horoscopo;
 
+import java.sql.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -89,4 +89,6 @@ public interface INT_HoroscopoRepository {
      *
      */
     void eliminarHoroscopo(int id);
+
+    Horoscopo buscarHoroscopoPorFecha(Date fecha);
 }

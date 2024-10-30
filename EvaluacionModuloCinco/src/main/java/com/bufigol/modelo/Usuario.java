@@ -60,8 +60,10 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
-        if(Comprobadores.comprobarEmail(email))
-        this.email = email;
+        if(Comprobadores.comprobarEmail(email)){
+            this.email = email;
+        }
+
     }
 
     public Date getFechaNacimiento() {

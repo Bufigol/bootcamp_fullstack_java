@@ -1,15 +1,12 @@
 package com.bufigol.repositorio;
 
 import com.bufigol.configuracion.DatabaseConnection;
-import com.bufigol.constantes.Constantes;
+import com.bufigol.constantes.ConstantesCRUD;
 import com.bufigol.interfaces.repositorios.INT_UsuarioRepository;
 import com.bufigol.modelo.Horoscopo;
 import com.bufigol.modelo.Usuario;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +17,7 @@ public class UsuarioRepository implements INT_UsuarioRepository {
         ArrayList<Usuario> out = new ArrayList<>();
         DatabaseConnection db = DatabaseConnection.getInstance();
         try {
-            PreparedStatement pstm = db.getConnection().prepareStatement(Constantes.BUSQUEDA_COMPLETA_USUARIOS_ORDENADA);
+            PreparedStatement pstm = db.getConnection().prepareStatement(ConstantesCRUD.BUSQUEDA_COMPLETA_USUARIOS_ORDENADA);
             ResultSet rs = pstm.executeQuery();
             if( rs.getFetchSize() == 0 ) {
                 pstm.close();
@@ -44,7 +41,7 @@ public class UsuarioRepository implements INT_UsuarioRepository {
     public void insertarUsuario(Usuario usuario) {
         DatabaseConnection db = DatabaseConnection.getInstance();
         try {
-            PreparedStatement pstm = db.getConnection().prepareStatement(Constantes.INSERTAR_USUARIO);
+            PreparedStatement pstm = db.getConnection().prepareStatement(ConstantesCRUD.INSERTAR_USUARIO);
             //INSERT INTO usuarios (nombre, username, email, fecha_nacimiento, password, animal)  VALUES (?, ?, ?, ?, ?, ?);
             pstm.setString(1, usuario.getNombre());
             pstm.setString(2, usuario.getUserName());
@@ -65,7 +62,7 @@ public class UsuarioRepository implements INT_UsuarioRepository {
     public Optional<Usuario> buscarUsuario(int id) {
         DatabaseConnection db = DatabaseConnection.getInstance();
         try {
-            PreparedStatement pstm = db.getConnection().prepareStatement(Constantes.BUSCAR_USUARIO_POR_ID);
+            PreparedStatement pstm = db.getConnection().prepareStatement(ConstantesCRUD.BUSCAR_USUARIO_POR_ID);
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
@@ -84,11 +81,39 @@ public class UsuarioRepository implements INT_UsuarioRepository {
     }
 
     @Override
+    public Usuario buscarUsuario(String usrnm) {
+        Usuario out;
+        DatabaseConnection db = DatabaseConnection.getInstance();
+        try{
+            PreparedStatement pstm = db.getConnection().prepareStatement(ConstantesCRUD.BUSQUEDA_COMPLETA_POR_USERNAME);
+            pstm.setString(1,usrnm);
+            ResultSet resultSet = pstm.executeQuery();
+            if (resultSet.getFetchSize() > 0){
+                resultSet.next();
+                out = extraerUsuarioDeResultSet(resultSet);
+                pstm.close();
+            }else{
+                throw new RuntimeException("No se encontro ese resultado");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (RuntimeException rte){
+            Usuario error = new Usuario();
+            error.setId(-1);
+            error.setNombre("No encontrado");
+            return error;
+        } finally{
+            db.closeConnection();
+        }
+        return out;
+    }
+
+    @Override
     public void actualizarUsuario(Usuario usuario) {
         DatabaseConnection db = DatabaseConnection.getInstance();
         try {
             Connection conn = DatabaseConnection.getInstance().getConnection();
-            PreparedStatement pstm = conn.prepareStatement(Constantes.ACTUALIZAR_USUARIO);
+            PreparedStatement pstm = conn.prepareStatement(ConstantesCRUD.ACTUALIZAR_USUARIO);
             pstm.setString(1, usuario.getNombre());
             pstm.setString(2, usuario.getUserName());
             pstm.setString(3, usuario.getEmail());
@@ -108,7 +133,7 @@ public class UsuarioRepository implements INT_UsuarioRepository {
         DatabaseConnection db = DatabaseConnection.getInstance();
         try {
             Connection conn = DatabaseConnection.getInstance().getConnection();
-            PreparedStatement pstm = conn.prepareStatement(Constantes.ELIMINAR_USUARIO);
+            PreparedStatement pstm = conn.prepareStatement(ConstantesCRUD.ELIMINAR_USUARIO);
             pstm.setInt(1, id);
             pstm.executeUpdate();
             pstm.close();

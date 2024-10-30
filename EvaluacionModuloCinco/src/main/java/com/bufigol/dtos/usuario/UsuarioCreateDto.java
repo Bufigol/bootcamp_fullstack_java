@@ -1,6 +1,10 @@
 package com.bufigol.dtos.usuario;
 
+import com.bufigol.constantes.ConstantesTablas;
 import com.bufigol.modelo.Horoscopo;
+import com.bufigol.modelo.Usuario;
+import com.bufigol.repositorio.HoroscopoRepository;
+import com.bufigol.utils.UtilidadesDDBB;
 
 import java.sql.Date;
 
@@ -21,6 +25,17 @@ public class UsuarioCreateDto {
         this.fechaNacimiento = fechaNacimiento;
         this.password = password;
         this.horoscopo = horoscopo;
+    }
+
+    public UsuarioCreateDto(Usuario usr){
+        this.id = UtilidadesDDBB.buscarIDDisponible(ConstantesTablas.USUARIOS_TABLE,ConstantesTablas.USUARIOS_TABLE_COLUMNS[0]);
+        this.nombre = usr.getNombre();
+        this.username = usr.getUserName();
+        this.email = usr.getEmail();
+        this.fechaNacimiento = usr.getFechaNacimiento();
+        this.password = getPassword();
+        HoroscopoRepository hr= new HoroscopoRepository();
+        this.horoscopo = hr.buscarHoroscopoPorFecha(this.fechaNacimiento);
     }
 
     public UsuarioCreateDto() {

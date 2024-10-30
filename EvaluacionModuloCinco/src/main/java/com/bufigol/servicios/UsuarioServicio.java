@@ -35,6 +35,23 @@ public class UsuarioServicio implements INT_UsuarioServicio {
     }
 
     @Override
+    public UsuarioResponseDTO buscarUsuarioPorUserName(String username) {
+        UsuarioResponseDTO out;
+        Usuario resultado = usuarioRepository.buscarUsuario(username);
+
+        out = new UsuarioResponseDTO(
+                resultado.getId(),
+                resultado.getNombre(),
+                resultado.getUserName(),
+                resultado.getEmail(),
+                resultado.getFechaNacimiento(),
+                resultado.getPassword(),
+                resultado.getHoroscopo()
+        );
+        return out;
+    }
+
+    @Override
     public void crearUsuario(UsuarioCreateDto usuarioCreateDTO) {
 
         Usuario usuario = new Usuario(
