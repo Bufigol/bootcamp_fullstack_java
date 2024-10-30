@@ -33,9 +33,9 @@ public class UsuarioCreateDto {
         this.username = usr.getUserName();
         this.email = usr.getEmail();
         this.fechaNacimiento = usr.getFechaNacimiento();
-        this.password = getPassword();
+        this.password = usr.getPassword();
         HoroscopoRepository hr= new HoroscopoRepository();
-        this.horoscopo = hr.buscarHoroscopoPorFecha(this.fechaNacimiento);
+        this.horoscopo = hr.buscarHoroscopoPorFecha(usr.getFechaNacimiento());
     }
 
     public UsuarioCreateDto() {

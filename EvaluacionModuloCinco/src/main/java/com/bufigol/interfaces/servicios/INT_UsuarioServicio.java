@@ -15,4 +15,5 @@ public interface INT_UsuarioServicio {
     void crearUsuario(UsuarioCreateDto usuarioCreateDTO);
     void actualizarUsuario(UsuarioUpdateDTO usuarioUpdateDTO);
     void eliminarUsuario(int id);
+
 }

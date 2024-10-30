@@ -94,6 +94,8 @@ public class UsuarioServicio implements INT_UsuarioServicio {
         usuarioRepository.eliminarUsuario(id);
     }
 
+
+
     private UsuarioResponseDTO mapToResponseDTO(Usuario usuario) {
         Optional<Horoscopo> horoscopo = horoscopoRepository.buscarHoroscopo(usuario.getHoroscopo().getId());
         String horoscopoAnimal = horoscopo.map(Horoscopo::getAnimal).orElse("Desconocido");

@@ -74,11 +74,11 @@ public class HoroscopoRepository implements INT_HoroscopoRepository {
             try (ResultSet rs = pstm.executeQuery()) {
                 if (rs.next()) {
                     Horoscopo horoscopo = new Horoscopo(
-                            rs.getInt("id"),
-                            OtrasUtilidades.getAnimalEnumFromString(rs.getString("animal")),
-                            rs.getString("animal"),
-                            rs.getDate("fecha_inicio"),
-                            rs.getDate("fecha_final")
+                            rs.getInt(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[0]),
+                            OtrasUtilidades.getAnimalEnumFromString(rs.getString(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[1])),
+                            rs.getString(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[1]),
+                            rs.getDate(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[2]),
+                            rs.getDate(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[3])
                     );
                     return Optional.of(horoscopo);
                 }
@@ -140,7 +140,7 @@ public class HoroscopoRepository implements INT_HoroscopoRepository {
                 //Horoscopo(int id, AnimalesHoroscopoEnum animalEnum, String animal, Date inicio, Date fin)
                 return new Horoscopo(
                         rs.getInt(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[0]),
-                        AnimalesHoroscopoEnum.valueOf( rs.getString(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[1]) ),
+                        AnimalesHoroscopoEnum.valueOf( rs.getString(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[1]).toUpperCase() ),
                         rs.getString(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[1]),
                         rs.getDate(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[2]),
                         rs.getDate(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[3])

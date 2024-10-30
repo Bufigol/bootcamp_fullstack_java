@@ -10,19 +10,24 @@ import java.sql.SQLException;
 public class UtilidadesDDBB {
 
     public static int buscarIDDisponible(String nombreTabla, String id){
-        int out = 1;
+        int out;
         DatabaseConnection ddbb = DatabaseConnection.getInstance();
         String sql = "SELECT MAX(" + id +  ") AS maximo FROM " + nombreTabla + ";";
         try {
             PreparedStatement pstm = ddbb.getConnection().prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
-            out = rs.getInt(1) + 1 ;
+            if(rs.next()){
+                out = rs.getInt(1) + 1 ;
+            }else{
+                out = 1;
+            }
+            pstm.close();
+            return out;
         } catch (SQLException | RuntimeException e) {
-
             return -1;
         } finally {
             ddbb.closeConnection();
         }
-        return out;
+
     }
 }

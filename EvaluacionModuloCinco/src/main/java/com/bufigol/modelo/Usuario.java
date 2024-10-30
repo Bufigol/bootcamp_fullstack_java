@@ -79,7 +79,7 @@ public class Usuario {
     }
 
     public void setPassword(String password) {
-        this.password = PasswordGenerator.generarContrasenaSegura(password);
+        this.password = password;
     }
 
     public Horoscopo getHoroscopo() {

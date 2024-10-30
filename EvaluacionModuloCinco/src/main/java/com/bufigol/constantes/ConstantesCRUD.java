@@ -2,10 +2,10 @@ package com.bufigol.constantes;
 
 public class ConstantesCRUD {
     // Horoscopo
-    public static final String BUSQUEDA_COMPLETA_HOROSCOPO_ODERNADA = "SELECT id, animal, fecha_inicio, fecha_final FROM horoscopo ORDER BY id ASC;";
-    public static final String INSERTAR_HOROSCOPO = "INSERT INTO horoscopo (animal, fecha_inicio, fecha_final) VALUES (?, ?, ?);";
-    public static final String BUSCAR_HOROSCOPO_POR_ID ="SELECT id, animal, fecha_inicio, fecha_final FROM horoscopo WHERE id = ?";
-    public static final String ACTULIZAR_HOROSCOPO = "UPDATE horoscopo SET animal = ?, fecha_inicio = ?, fecha_final = ? WHERE id = ?";
+    public static final String BUSQUEDA_COMPLETA_HOROSCOPO_ODERNADA = "SELECT id, animal, fecha_inicio, fecha_fin FROM horoscopo ORDER BY id ASC;";
+    public static final String INSERTAR_HOROSCOPO = "INSERT INTO horoscopo (animal, fecha_inicio, fecha_fin) VALUES (?, ?, ?);";
+    public static final String BUSCAR_HOROSCOPO_POR_ID ="SELECT id, animal, fecha_inicio, fecha_fin FROM horoscopo WHERE id = ?";
+    public static final String ACTULIZAR_HOROSCOPO = "UPDATE horoscopo SET animal = ?, fecha_inicio = ?, fecha_fin = ? WHERE id = ?";
     public static final String ELIMINAR_HOROSCOPO = "DELETE FROM horoscopo WHERE id = ?";
     public static final String BUSCAR_HORSCOPO_POR_FECHA = "SELECT * FROM horoscopo WHERE ? >= fecha_inicio AND ? <= fecha_fin; ";
 

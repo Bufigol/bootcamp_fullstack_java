@@ -88,8 +88,7 @@ public class UsuarioRepository implements INT_UsuarioRepository {
             PreparedStatement pstm = db.getConnection().prepareStatement(ConstantesCRUD.BUSQUEDA_COMPLETA_POR_USERNAME);
             pstm.setString(1,usrnm);
             ResultSet resultSet = pstm.executeQuery();
-            if (resultSet.getFetchSize() > 0){
-                resultSet.next();
+            if (resultSet.next()){
                 out = extraerUsuarioDeResultSet(resultSet);
                 pstm.close();
             }else{

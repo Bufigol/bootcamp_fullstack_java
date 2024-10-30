@@ -6,6 +6,7 @@ import com.bufigol.modelo.Usuario;
 import com.bufigol.servicios.UsuarioServicio;
 import com.bufigol.utils.Comprobadores;
 import com.bufigol.utils.ControlFechas;
+import com.bufigol.utils.PasswordGenerator;
 import com.bufigol.utils.UtilidadesCookies;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -48,7 +49,7 @@ public class ProcesarRegistro extends HttpServlet {
             user.setNombre(nombre);
             user.setEmail(email);
             user.setFechaNacimiento(fechaNacimiento);
-            user.setPassword(password);
+            user.setPassword(PasswordGenerator.generarContrasenaSegura(password));
             UsuarioCreateDto createDto = new UsuarioCreateDto(user);
 
             usuarioServicio.crearUsuario(createDto);
@@ -62,7 +63,7 @@ public class ProcesarRegistro extends HttpServlet {
             response.addCookie(usrName);
             response.addCookie(usuario);
 
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("index.jsp");
         }else{
             Cookie errores = UtilidadesCookies.stringArrayListToCookie(mensajesDeError,"errores");
             errores.setPath("/"); // Establecer el path para que la cookie esté disponible en todo el contexto
