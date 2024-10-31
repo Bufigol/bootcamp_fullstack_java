@@ -34,8 +34,12 @@ public class ProcesarLogin extends HttpServlet {
         String pwd = user.getPassword();
         if(PasswordGenerator.verificarContrasena(password, pwd ) ){
             Cookie usrName = new Cookie("usrName", userName);
+            Cookie usuarioID = new Cookie("usuarioID", String.valueOf(user.getId()));
             usrName.setMaxAge(60 * 60);
+            usuarioID.setMaxAge(60 * 60);
             usrName.setPath("/");
+            usuarioID.setPath("/");
+            response.addCookie(usuarioID);
             response.addCookie(usrName);
             response.sendRedirect("/pgs/home.jsp");
         }else{
