@@ -1,14 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 31/10/2024
-  Time: 12:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Información de Usuario</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Información de Usuario</title>
+  <link rel="stylesheet" href="../utils/styles/index.css">
 </head>
 <body>
 <div class="banner">
@@ -16,10 +13,16 @@
   <a href="${pageContext.request.contextPath}/pgs/AdminUsers.jsp">Administración de Usuarios</a>
   <a href="${pageContext.request.contextPath}/pgs/about.jsp">Sobre el Horóscopo Chino</a>
 </div>
-<div class="zodiac-icons">
-  <span>🐀</span><span>🐂</span><span>🐅</span><span>🐇</span><span>🐉</span><span>🐍</span>
-  <span>🐎</span><span>🐐</span><span>🐒</span><span>🐓</span><span>🐕</span><span>🐖</span>
+<div class="container">
+  <div class="zodiac-icons">
+    <span>🐀</span><span>🐂</span><span>🐅</span><span>🐇</span><span>🐉</span><span>🐍</span>
+    <span>🐎</span><span>🐐</span><span>🐒</span><span>🐓</span><span>🐕</span><span>🐖</span>
+  </div>
+  <h1>Información de Usuario</h1>
+  <div class="zodiac-icons">
+    <span>🐀</span><span>🐂</span><span>🐅</span><span>🐇</span><span>🐉</span><span>🐍</span>
+    <span>🐎</span><span>🐐</span><span>🐒</span><span>🐓</span><span>🐕</span><span>🐖</span>
+  </div>
 </div>
-<h1>Información de Usuario</h1>
 </body>
 </html>

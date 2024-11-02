@@ -23,5 +23,13 @@
         <servlet-name>ProceserRegistro</servlet-name>
         <url-pattern>/proceser-registro</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ProcesarLogout</servlet-name>
+        <servlet-class>com.bufigol.servlets.ProcesarLogout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProcesarLogout</servlet-name>
+        <url-pattern>/ProcesarLogout</url-pattern>
+    </servlet-mapping>
 
 </web-app>

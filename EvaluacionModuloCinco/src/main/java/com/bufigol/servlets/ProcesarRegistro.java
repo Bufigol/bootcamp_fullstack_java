@@ -34,11 +34,8 @@ public class ProcesarRegistro extends HttpServlet {
         String userName = request.getParameter("userName");
         String nombre = request.getParameter("nombre");
         String email = request.getParameter( "email");
-
         String  fn = request.getParameter("fechaNacimiento");
-
         Date fechaNacimiento = ControlFechas.dateFromString(fn);
-
         String password = request.getParameter("password");
         String confirmarPassword = request.getParameter("confirmarPassword");
 
