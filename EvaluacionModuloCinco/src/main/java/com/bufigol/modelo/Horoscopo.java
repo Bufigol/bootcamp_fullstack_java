@@ -87,10 +87,11 @@ public class Horoscopo {
      * @return String con la información detallada del animal
      */
     public String getDescripcionAnimal() {
-        Instant instant = inicio.toInstant();
-        LocalDate fecha = java.time.LocalDate.from(instant);
-        int year = fecha.getYear();
-        return animalEnum != null ? animalEnum.getDescripcionCompleta(year) : "Animal no especificado";
+        if (inicio == null || animalEnum == null) {
+            return "Animal no especificado";
+        }
+        int year = inicio.toLocalDate().getYear();
+        return animalEnum.getDescripcionCompleta(year);
     }
 
     /**
@@ -98,10 +99,11 @@ public class Horoscopo {
      * @return String con el elemento correspondiente
      */
     public String getElemento() {
-        Instant instant = inicio.toInstant();
-        LocalDate fecha = java.time.LocalDate.from(instant);
-        int year = fecha.getYear();
-        return animalEnum != null ? animalEnum.getElemento(year) : "Elemento no disponible";
+        if (inicio == null || animalEnum == null) {
+            return "Elemento no disponible";
+        }
+        int year = inicio.toLocalDate().getYear();
+        return animalEnum.getElemento(year);
     }
 
     /**

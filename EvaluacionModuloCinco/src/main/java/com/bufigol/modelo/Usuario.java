@@ -94,6 +94,7 @@ public class Usuario implements Serializable {
         this.horoscopo = horoscopo;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

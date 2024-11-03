@@ -5,31 +5,31 @@
          version="6.0">
 
     <servlet>
-        <servlet-name>ProceserLogin</servlet-name>
+        <servlet-name>ProcesarLogin</servlet-name>
         <servlet-class>com.bufigol.servlets.ProcesarLogin</servlet-class>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>ProceserLogin</servlet-name>
-        <url-pattern>/proceser-login</url-pattern>
+        <servlet-name>ProcesarLogin</servlet-name>
+        <url-pattern>/procesar-login</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>ProceserRegistro</servlet-name>
+        <servlet-name>ProcesarRegistro</servlet-name>
         <servlet-class>com.bufigol.servlets.ProcesarRegistro</servlet-class>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>ProceserRegistro</servlet-name>
-        <url-pattern>/proceser-registro</url-pattern>
+        <servlet-name>ProcesarRegistro</servlet-name>
+        <url-pattern>/procesar-registro</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>ProcesarLogout</servlet-name>
         <servlet-class>com.bufigol.servlets.ProcesarLogout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProcesarLogout</servlet-name>
-        <url-pattern>/ProcesarLogout</url-pattern>
+        <url-pattern>/procesar-logout</url-pattern>
     </servlet-mapping>
+
 
 </web-app>

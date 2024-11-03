@@ -26,40 +26,40 @@ public enum AnimalesHoroscopoEnum {
         this.caracteristicas = caracteristicas;
         switch (nombre){
             case "Mono":
-                this.rutaImagen = "src/main/webapp/assets/imng/Mono.jpg";
+                this.rutaImagen = "../assets/imng/Mono.jpg";
                 break;
-            case "GALLO":
-                this.rutaImagen = "src/main/webapp/assets/imng/Gallo.jpg";
+            case "Gallo":
+                this.rutaImagen = "../assets/imng/Gallo.jpg";
                 break;
             case "Perro":
-                this.rutaImagen = "src/main/webapp/assets/imng/Perro.jpg";
+                this.rutaImagen = "../assets/imng/Perro.jpg";
                 break;
             case "Cerdo":
-                this.rutaImagen = "src/main/webapp/assets/imng/Cerdo.jpg";
+                this.rutaImagen = "../assets/imng/Cerdo.jpg";
                 break;
             case "Rata":
-                this.rutaImagen = "src/main/webapp/assets/imng/Rata.jpg";
+                this.rutaImagen = "../assets/imng/Rata.jpg";
                 break;
             case "Buey":
-                this.rutaImagen = "src/main/webapp/assets/imng/Buey.jpg";
+                this.rutaImagen = "../assets/imng/Buey.jpg";
                 break;
             case "Tigre":
-                this.rutaImagen = "src/main/webapp/assets/imng/Tigre.jpg";
+                this.rutaImagen = "../assets/imng/Tigre.jpg";
                 break;
             case "Conejo":
-                this.rutaImagen = "src/main/webapp/assets/imng/Conejo.jpg";
+                this.rutaImagen = "../assets/imng/Conejo.jpg";
                 break;
             case "Dragón":
-                this.rutaImagen = "src/main/webapp/assets/imng/Dragon.jpg";
+                this.rutaImagen = "../assets/imng/Dragon.jpg";
                 break;
             case "Serpiente":
-                this.rutaImagen = "src/main/webapp/assets/imng/Serpiente.jpg";
+                this.rutaImagen = "../assets/imng/Serpiente.jpg";
                 break;
             case "Caballo":
-                this.rutaImagen = "src/main/webapp/assets/imng/Caballo.jpg";
+                this.rutaImagen = "../assets/imng/Caballo.jpg";
                 break;
             case "Cabra":
-                this.rutaImagen = "src/main/webapp/assets/imng/Cabra.jpg";
+                this.rutaImagen = "../assets/imng/Cabra.jpg";
                 break;
         }
     }
