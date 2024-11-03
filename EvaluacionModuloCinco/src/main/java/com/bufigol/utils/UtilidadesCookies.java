@@ -1,9 +1,12 @@
 package com.bufigol.utils;
 
+import com.bufigol.modelo.Usuario;
 import jakarta.servlet.http.Cookie;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 
 public class UtilidadesCookies {
 
@@ -64,5 +67,24 @@ public class UtilidadesCookies {
         }
 
         return lista;
+    }
+
+    public static String serializeToBase64(Usuario objeto)  {
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        try (ObjectOutputStream objectStream = new ObjectOutputStream(byteStream)) {
+            objectStream.writeObject(objeto);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return Base64.getEncoder().encodeToString(byteStream.toByteArray());
+    }
+
+    public static Usuario deserializeFromBase64(String base64)  {
+        byte[] data = Base64.getDecoder().decode(base64);
+        try (ObjectInputStream objectStream = new ObjectInputStream(new ByteArrayInputStream(data))) {
+            return (Usuario) objectStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

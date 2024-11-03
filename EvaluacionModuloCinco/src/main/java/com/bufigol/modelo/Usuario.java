@@ -3,13 +3,17 @@ package com.bufigol.modelo;
 import com.bufigol.utils.Comprobadores;
 import com.bufigol.utils.PasswordGenerator;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 import static com.bufigol.utils.Comprobadores.*;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 1L;
     private int id;
     private String nombre;
     private String userName;
@@ -94,11 +98,12 @@ public class Usuario {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario usuario)) return false;
-        return getId() == usuario.getId() && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getUserName(), usuario.getUserName()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getFechaNacimiento(), usuario.getFechaNacimiento()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getHoroscopo(), usuario.getHoroscopo());
+        return getId() == usuario.getId();
     }
 
     @Override
     public int hashCode() {
+
         return Objects.hash(getId(), getNombre(), getUserName(), getEmail(), getFechaNacimiento(), getPassword(), getHoroscopo());
     }
 

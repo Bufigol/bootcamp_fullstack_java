@@ -17,10 +17,51 @@ public enum AnimalesHoroscopoEnum {
     private final String nombre;
     private final String caracteristicas;
     private static final int CICLO_ZODIACAL = 12;
+    private String rutaImagen;
+
+
 
     AnimalesHoroscopoEnum(String nombre, String caracteristicas) {
         this.nombre = nombre;
         this.caracteristicas = caracteristicas;
+        switch (nombre){
+            case "Mono":
+                this.rutaImagen = "src/main/webapp/assets/imng/Mono.jpg";
+                break;
+            case "GALLO":
+                this.rutaImagen = "src/main/webapp/assets/imng/Gallo.jpg";
+                break;
+            case "Perro":
+                this.rutaImagen = "src/main/webapp/assets/imng/Perro.jpg";
+                break;
+            case "Cerdo":
+                this.rutaImagen = "src/main/webapp/assets/imng/Cerdo.jpg";
+                break;
+            case "Rata":
+                this.rutaImagen = "src/main/webapp/assets/imng/Rata.jpg";
+                break;
+            case "Buey":
+                this.rutaImagen = "src/main/webapp/assets/imng/Buey.jpg";
+                break;
+            case "Tigre":
+                this.rutaImagen = "src/main/webapp/assets/imng/Tigre.jpg";
+                break;
+            case "Conejo":
+                this.rutaImagen = "src/main/webapp/assets/imng/Conejo.jpg";
+                break;
+            case "Dragón":
+                this.rutaImagen = "src/main/webapp/assets/imng/Dragon.jpg";
+                break;
+            case "Serpiente":
+                this.rutaImagen = "src/main/webapp/assets/imng/Serpiente.jpg";
+                break;
+            case "Caballo":
+                this.rutaImagen = "src/main/webapp/assets/imng/Caballo.jpg";
+                break;
+            case "Cabra":
+                this.rutaImagen = "src/main/webapp/assets/imng/Cabra.jpg";
+                break;
+        }
     }
 
     public String getNombre() {
@@ -66,6 +107,9 @@ public enum AnimalesHoroscopoEnum {
         return values()[indiceAnterior];
     }
 
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
     /**
      * Calcula la compatibilidad con otro animal del horóscopo
      * @param otroAnimal El animal con el que se quiere comparar
@@ -85,27 +129,22 @@ public enum AnimalesHoroscopoEnum {
      * Obtiene el elemento asociado al animal según la astrología china
      * @return El elemento correspondiente (Madera, Fuego, Tierra, Metal, Agua)
      */
-    public String getElemento() {
-        switch(this) {
-            case TIGRE:
-            case CONEJO:
-                return "Madera";
-            case SERPIENTE:
-            case CABALLO:
-                return "Fuego";
-            case BUEY:
-            case DRAGON:
-            case CABRA:
-                return "Tierra";
-            case MONO:
-            case GALLO:
-                return "Metal";
-            case RATA:
-            case CERDO:
-                return "Agua";
-            default:
-                return "Desconocido";
+    public String getElemento(int year) {
+        int ultimaCifra = year % 10;
+        String[] elementos={"Metal" , "Agua", "Madera", "Fuego", "Tierra"};
+        int posicion = -1;
+        if( (ultimaCifra == 0) || (ultimaCifra == 1)){
+            posicion = 0;
+        }else if( (ultimaCifra == 2) || (ultimaCifra == 3)){
+            posicion = 1;
+        }else if( (ultimaCifra == 4) || (ultimaCifra == 5)){
+            posicion = 2;
+        }else if( (ultimaCifra == 6) || (ultimaCifra == 7)){
+            posicion = 3;
+        }else if( (ultimaCifra == 8) || (ultimaCifra == 9)){
+            posicion = 4;
         }
+        return elementos[posicion];
     }
 
     /**
@@ -150,13 +189,13 @@ public enum AnimalesHoroscopoEnum {
      * Obtiene una descripción completa del animal
      * @return String con toda la información del animal
      */
-    public String getDescripcionCompleta() {
+    public String getDescripcionCompleta(int year) {
         return String.format(
                 "Animal: %s%n" +
                         "Características: %s%n" +
                         "Elemento: %s%n" +
                         "Posición en el ciclo: %d de %d",
-                nombre, caracteristicas, getElemento(),
+                nombre, caracteristicas, getElemento(year),
                 ordinal() + 1, values().length
         );
     }

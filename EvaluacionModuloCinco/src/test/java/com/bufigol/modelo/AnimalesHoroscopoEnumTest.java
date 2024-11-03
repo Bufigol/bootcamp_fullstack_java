@@ -74,11 +74,11 @@ class AnimalesHoroscopoEnumTest {
 
     @Test
     void getElemento() {
-        assertEquals("Metal", mono.getElemento());
-        assertEquals("Tierra", dragon.getElemento());
-        assertEquals("Fuego", AnimalesHoroscopoEnum.SERPIENTE.getElemento());
-        assertEquals("Agua", AnimalesHoroscopoEnum.RATA.getElemento());
-        assertEquals("Madera", AnimalesHoroscopoEnum.TIGRE.getElemento());
+        assertEquals("Metal", mono.getElemento(1990));
+        assertEquals("Tierra", dragon.getElemento(1989));
+        assertEquals("Fuego", AnimalesHoroscopoEnum.SERPIENTE.getElemento(1996));
+        assertEquals("Agua", AnimalesHoroscopoEnum.RATA.getElemento(1882));
+        assertEquals("Madera", AnimalesHoroscopoEnum.TIGRE.getElemento(1554));
     }
 
     @Test
@@ -121,7 +121,7 @@ class AnimalesHoroscopoEnumTest {
 
     @Test
     void getDescripcionCompleta() {
-        String descripcionMono = mono.getDescripcionCompleta();
+        String descripcionMono = mono.getDescripcionCompleta(1990);
 
         // Verifica que la descripción contiene todos los elementos necesarios
         assertTrue(descripcionMono.contains("Mono"));

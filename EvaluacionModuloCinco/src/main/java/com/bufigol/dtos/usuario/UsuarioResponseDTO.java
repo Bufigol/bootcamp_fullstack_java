@@ -1,6 +1,7 @@
 package com.bufigol.dtos.usuario;
 
 import com.bufigol.modelo.Horoscopo;
+import com.bufigol.modelo.Usuario;
 
 import java.sql.Date;
 
@@ -77,5 +78,9 @@ public class UsuarioResponseDTO {
 
     public void setHoroscopo(Horoscopo horoscopo) {
         this.horoscopo = horoscopo;
+    }
+
+    public Usuario toModel() {
+        return new Usuario(id, nombre, userName, email, fechaNacimiento, password, horoscopo);
     }
 }

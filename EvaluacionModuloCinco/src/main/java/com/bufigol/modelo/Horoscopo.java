@@ -1,6 +1,8 @@
 package com.bufigol.modelo;
 
 import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Horoscopo {
@@ -85,7 +87,10 @@ public class Horoscopo {
      * @return String con la información detallada del animal
      */
     public String getDescripcionAnimal() {
-        return animalEnum != null ? animalEnum.getDescripcionCompleta() : "Animal no especificado";
+        Instant instant = inicio.toInstant();
+        LocalDate fecha = java.time.LocalDate.from(instant);
+        int year = fecha.getYear();
+        return animalEnum != null ? animalEnum.getDescripcionCompleta(year) : "Animal no especificado";
     }
 
     /**
@@ -93,7 +98,10 @@ public class Horoscopo {
      * @return String con el elemento correspondiente
      */
     public String getElemento() {
-        return animalEnum != null ? animalEnum.getElemento() : "Elemento no disponible";
+        Instant instant = inicio.toInstant();
+        LocalDate fecha = java.time.LocalDate.from(instant);
+        int year = fecha.getYear();
+        return animalEnum != null ? animalEnum.getElemento(year) : "Elemento no disponible";
     }
 
     /**
