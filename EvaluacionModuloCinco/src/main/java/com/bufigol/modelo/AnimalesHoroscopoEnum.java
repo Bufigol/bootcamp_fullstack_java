@@ -199,4 +199,16 @@ public enum AnimalesHoroscopoEnum {
                 ordinal() + 1, values().length
         );
     }
+
+    public static AnimalesHoroscopoEnum fromString(String text) {
+        if(text.equalsIgnoreCase("Dragón") || text.equalsIgnoreCase("Dragon")){
+            return DRAGON;
+        }
+        for (AnimalesHoroscopoEnum animal : AnimalesHoroscopoEnum.values()) {
+            if (animal.nombre.equalsIgnoreCase(text) || animal.name().equalsIgnoreCase(text)) {
+                return animal;
+            }
+        }
+        throw new IllegalArgumentException("No se encontró el animal del horóscopo: " + text);
+    }
 }

@@ -140,7 +140,7 @@ public class HoroscopoRepository implements INT_HoroscopoRepository {
                 //Horoscopo(int id, AnimalesHoroscopoEnum animalEnum, String animal, Date inicio, Date fin)
                 return new Horoscopo(
                         rs.getInt(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[0]),
-                        AnimalesHoroscopoEnum.valueOf( rs.getString(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[1]).toUpperCase() ),
+                        AnimalesHoroscopoEnum.fromString( rs.getString(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[1]).toUpperCase() ),
                         rs.getString(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[1]),
                         rs.getDate(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[2]),
                         rs.getDate(ConstantesTablas.HOROSCOPO_TABLE_COLUMNS[3])

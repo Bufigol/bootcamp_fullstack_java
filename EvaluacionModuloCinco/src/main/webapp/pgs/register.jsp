@@ -44,7 +44,7 @@
             }
         %>
 
-        <form action="${pageContext.request.contextPath}/register" method="GET">
+        <form action="${pageContext.request.contextPath}/procesar-registro" method="GET">
             <div class="form-group">
                 <label for="userName">Nombre de Usuario:</label>
                 <input type="text" id="userName" name="userName" required
