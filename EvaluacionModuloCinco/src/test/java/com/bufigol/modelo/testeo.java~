@@ -1,0 +1,8 @@
+package com.bufigol.modelo;
+
+public class testeo {
+
+    public static void main(String[] args) {
+        System.out.println(AnimalesHoroscopoEnum.valueOf("SERPIENTE"));
+    }
+}
