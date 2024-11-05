@@ -1,3 +1,6 @@
+<%@ page import="com.bufigol.modelo.Usuario" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
+<%@ page import="java.net.URLDecoder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -8,11 +11,20 @@
   <link rel="stylesheet" href="../utils/styles/home.css">
 </head>
 <body>
+<%
+  Usuario usuarioActivo = (Usuario) session.getAttribute("usuarioActivo");
+  if (usuarioActivo == null) {
+    response.sendRedirect(request.getContextPath() + "/index.jsp");
+    return;
+  }else{
+    session.setAttribute("usuarioActivo", usuarioActivo);
+  }
+%>
   <div class="banner">
-    <a href="${pageContext.request.contextPath}/Informacion_del_Usuario">Información del Usuario</a>
+    <a href="${pageContext.request.contextPath}/pgs/InfoUsuario.jsp">Información del Usuario</a>
     <a href="${pageContext.request.contextPath}/pgs/AdminUsers.jsp">Administración de Usuarios</a>
     <a href="${pageContext.request.contextPath}/pgs/about.jsp">Sobre el Horóscopo Chino</a>
-    <a href="${pageContext.request.contextPath}/ProcesarLogout">Log Out</a>
+    <a href="${pageContext.request.contextPath}/procesar-logout">Log Out</a>
   </div>
   <div class="zodiac-icons">
     <span>🐀</span><span>🐂</span><span>🐅</span><span>🐇</span><span>🐉</span><span>🐍</span>
@@ -27,6 +39,9 @@
                 username = cookie.getValue();
             }
         }
+    }
+    if(username.isEmpty()) {
+        username = usuarioActivo.getUserName();
     }
   %>
   <h1>¿Que deseas hacer, <%= username %> ?</h1>

@@ -17,9 +17,10 @@
   }
 %>
 <div class="banner">
-  <a href="${pageContext.request.contextPath}/pgs/InfoUsuario.jsp">Información del Usuario</a>
+  <a href="${pageContext.request.contextPath}/pgs/home.jsp">Home</a>
   <a href="${pageContext.request.contextPath}/pgs/AdminUsers.jsp">Administración de Usuarios</a>
   <a href="${pageContext.request.contextPath}/pgs/about.jsp">Sobre el Horóscopo Chino</a>
+  <a href="${pageContext.request.contextPath}/procesar-logout">Log Out</a>
 </div>
 <div class="container">
   <div class="zodiac-icons">

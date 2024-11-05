@@ -7,6 +7,7 @@ import com.bufigol.interfaces.servicios.INT_HoroscopoServicio;
 import com.bufigol.modelo.Horoscopo;
 import com.bufigol.repositorio.HoroscopoRepository;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -63,6 +64,12 @@ public class HoroscopoServicio implements INT_HoroscopoServicio {
     @Override
     public void eliminarHoroscopo(int id) {
         horoscopoRepository.eliminarHoroscopo(id);
+    }
+
+    @Override
+    public Horoscopo buscarHoroscopoPorFecha(Date fecha) {
+        this.horoscopoRepository.buscarHoroscopoPorFecha(fecha);
+        return this.horoscopoRepository.buscarHoroscopoPorFecha(fecha);
     }
 
     private HoroscopoResponseDTO mapToDTO(Horoscopo horoscopo) {

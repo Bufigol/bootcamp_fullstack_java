@@ -33,18 +33,11 @@ public class ProcesarLogin extends HttpServlet {
         UsuarioResponseDTO user = usuarioServicio.buscarUsuarioPorUserName(userName);
         String pwd = user.getPassword();
         if(PasswordGenerator.verificarContrasena(password, pwd ) ){
-            Cookie usrName = new Cookie("usrName", userName);
-            Cookie usuarioID = new Cookie("usuarioID", String.valueOf(user.getId()));
-            usrName.setMaxAge(60 * 60);
-            usuarioID.setMaxAge(60 * 60);
-            usrName.setPath("/");
-            usuarioID.setPath("/");
-            response.addCookie(usuarioID);
-            response.addCookie(usrName);
             response.sendRedirect("/pgs/home.jsp");
+            request.getSession().setAttribute("usuarioActivo", user.toModel());
         }else{
             Cookie error = new Cookie("invalidPwd", "true");
-            error.setMaxAge(60 * 60);
+            error.setMaxAge(10);
             error.setPath("/");
             response.addCookie(error);
             response.sendRedirect("index.jsp");

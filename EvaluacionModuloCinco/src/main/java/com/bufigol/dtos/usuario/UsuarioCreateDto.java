@@ -4,6 +4,7 @@ import com.bufigol.constantes.ConstantesTablas;
 import com.bufigol.modelo.Horoscopo;
 import com.bufigol.modelo.Usuario;
 import com.bufigol.repositorio.HoroscopoRepository;
+import com.bufigol.servicios.HoroscopoServicio;
 import com.bufigol.utils.UtilidadesDDBB;
 
 import java.sql.Date;
@@ -34,8 +35,8 @@ public class UsuarioCreateDto {
         this.email = usr.getEmail();
         this.fechaNacimiento = usr.getFechaNacimiento();
         this.password = usr.getPassword();
-        HoroscopoRepository hr= new HoroscopoRepository();
-        this.horoscopo = hr.buscarHoroscopoPorFecha(usr.getFechaNacimiento());
+        HoroscopoServicio hs= new HoroscopoServicio();
+        this.horoscopo = hs.buscarHoroscopoPorFecha(usr.getFechaNacimiento());
     }
 
     public UsuarioCreateDto() {

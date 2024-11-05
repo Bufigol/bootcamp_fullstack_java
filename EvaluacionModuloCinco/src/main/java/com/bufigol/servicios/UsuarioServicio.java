@@ -71,15 +71,7 @@ public class UsuarioServicio implements INT_UsuarioServicio {
         Optional<Usuario> usuarioOptional = usuarioRepository.buscarUsuario(usuarioUpdateDTO.getId());
 
         if (usuarioOptional.isPresent()) {
-            Usuario usuarioExistente = usuarioOptional.get();
-
-            // Actualizar los campos del usuario existente
-            usuarioExistente.setNombre(usuarioUpdateDTO.getNombre());
-            usuarioExistente.setUserName(usuarioUpdateDTO.getUsername());
-            usuarioExistente.setEmail(usuarioUpdateDTO.getEmail());
-            usuarioExistente.setFechaNacimiento(usuarioUpdateDTO.getFechaNacimiento());
-            usuarioExistente.setPassword(usuarioUpdateDTO.getPassword());
-            usuarioExistente.setHoroscopo(usuarioUpdateDTO.getHoroscopo());
+            Usuario usuarioExistente = getUsuarioExistente(usuarioUpdateDTO, usuarioOptional);
 
             // Llamar al repositorio para actualizar
             usuarioRepository.actualizarUsuario(usuarioExistente);
@@ -87,6 +79,19 @@ public class UsuarioServicio implements INT_UsuarioServicio {
             // Manejar el caso en que el usuario no existe
             throw new RuntimeException("No se encontró el usuario con ID: " + usuarioUpdateDTO.getId());
         }
+    }
+
+    private static Usuario getUsuarioExistente(UsuarioUpdateDTO usuarioUpdateDTO, Optional<Usuario> usuarioOptional) {
+        Usuario usuarioExistente = usuarioOptional.get();
+
+        // Actualizar los campos del usuario existente
+        usuarioExistente.setNombre(usuarioUpdateDTO.getNombre());
+        usuarioExistente.setUserName(usuarioUpdateDTO.getUsername());
+        usuarioExistente.setEmail(usuarioUpdateDTO.getEmail());
+        usuarioExistente.setFechaNacimiento(usuarioUpdateDTO.getFechaNacimiento());
+        usuarioExistente.setPassword(usuarioUpdateDTO.getPassword());
+        usuarioExistente.setHoroscopo(usuarioUpdateDTO.getHoroscopo());
+        return usuarioExistente;
     }
 
     @Override

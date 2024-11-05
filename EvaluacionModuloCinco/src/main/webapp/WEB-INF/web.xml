@@ -30,6 +30,13 @@
         <servlet-name>ProcesarLogout</servlet-name>
         <url-pattern>/procesar-logout</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>InformacionDelUsuario</servlet-name>
+        <servlet-class>com.bufigol.servlets.ObtenerInfoZodiaco</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InformacionDelUsuario</servlet-name>
+        <url-pattern>/Informacion_del_Usuario</url-pattern>
+    </servlet-mapping>
 
 </web-app>

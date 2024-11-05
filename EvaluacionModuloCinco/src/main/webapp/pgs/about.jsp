@@ -1,4 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -8,9 +10,20 @@
 </head>
 <body>
 <div class="banner">
-    <a href="${pageContext.request.contextPath}/index.jsp">Inicio de Sesión</a>
-    <a href="${pageContext.request.contextPath}/pgs/register.jsp">Registrarse</a>
-    <a href="">Sobre el Horóscopo Chino</a>
+    <c:choose>
+        <c:when test="${not empty sessionScope.usuarioActivo}">
+            <a href="./home.jsp">Home</a>
+            <a href="${pageContext.request.contextPath}/pgs/InfoUsuario.jsp">Información del Usuario</a>
+            <a href="${pageContext.request.contextPath}/pgs/AdminUsers.jsp">Administración de Usuarios</a>
+            <a href="${pageContext.request.contextPath}/pgs/about.jsp">Sobre el Horóscopo Chino</a>
+            <a href="${pageContext.request.contextPath}/procesar-logout">Log Out</a>
+        </c:when>
+        <c:otherwise>
+            <a href="${pageContext.request.contextPath}/index.jsp">Log In</a>
+            <a href="${pageContext.request.contextPath}/pgs/register.jsp">Registrarse</a>
+            <a href="${pageContext.request.contextPath}/pgs/about.jsp">Sobre el Horóscopo Chino</a>
+        </c:otherwise>
+    </c:choose>
 </div>
 <div class="zodiac-icons">
     <span>🐀</span><span>🐂</span><span>🐅</span><span>🐇</span><span>🐉</span><span>🐍</span>

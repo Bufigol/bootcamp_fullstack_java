@@ -1,6 +1,7 @@
 package com.bufigol.dtos.usuario;
 
 import com.bufigol.modelo.Horoscopo;
+import com.bufigol.modelo.Usuario;
 
 import java.sql.Date;
 
@@ -94,5 +95,9 @@ public class UsuarioUpdateDTO {
         sb.append(", horoscopoId=").append(horoscopo);
         sb.append('}');
         return sb.toString();
+    }
+
+    public Usuario toModel() {
+        return new Usuario(id, nombre, username, email, fechaNacimiento, password, horoscopo);
     }
 }

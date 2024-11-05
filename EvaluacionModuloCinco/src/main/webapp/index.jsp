@@ -25,7 +25,6 @@
     }
 %>
 <div class="banner">
-    <a href="index.jsp">Inicio de Sesión</a>
     <a href="${pageContext.request.contextPath}/pgs/register.jsp">Registrarse</a>
     <a href="${pageContext.request.contextPath}/pgs/about.jsp">Sobre el Horóscopo Chino</a>
 </div>

@@ -2,6 +2,8 @@ package com.bufigol.utils;
 
 import com.bufigol.modelo.Usuario;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -85,6 +87,23 @@ public class UtilidadesCookies {
             return (Usuario) objectStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public static void eliminarTodasLasCookies(HttpServletRequest request, HttpServletResponse response) {
+        // Obtener todas las cookies de la solicitud
+        Cookie[] cookies = request.getCookies();
+
+        // Verificar si hay cookies
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                // Crear una nueva cookie con el mismo nombre
+                Cookie cookieToDelete = new Cookie(cookie.getName(), null);
+                // Establecer la ruta y el tiempo de vida a 0
+                cookieToDelete.setPath(cookie.getPath());
+                cookieToDelete.setMaxAge(0);
+                // Agregar la cookie de eliminación a la respuesta
+                response.addCookie(cookieToDelete);
+            }
         }
     }
 }

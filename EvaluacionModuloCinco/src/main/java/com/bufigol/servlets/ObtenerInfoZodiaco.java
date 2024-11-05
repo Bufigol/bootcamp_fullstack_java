@@ -13,7 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/obtener-info-zodiaco")
+
+
 public class ObtenerInfoZodiaco extends HttpServlet {
     private UsuarioServicio usuarioServicio;
     private HoroscopoServicio horoscopoServicio;

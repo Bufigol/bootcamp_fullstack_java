@@ -25,10 +25,12 @@ public class ProcesarRegistro extends HttpServlet {
 
     private UsuarioServicio usuarioServicio;
 
+    @Override
     public void init() {
         usuarioServicio = new UsuarioServicio();
     }
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String userName = request.getParameter("userName");
@@ -63,7 +65,7 @@ public class ProcesarRegistro extends HttpServlet {
             response.sendRedirect("index.jsp");
         }else{
             Cookie errores = UtilidadesCookies.stringArrayListToCookie(mensajesDeError,"errores");
-            errores.setPath("/"); // Establecer el path para que la cookie esté disponible en todo el contexto
+            errores.setPath("/");
             // Agregar la cookie a la respuesta
             response.addCookie(errores);
             // Redirigir a otro JSP
@@ -71,6 +73,8 @@ public class ProcesarRegistro extends HttpServlet {
         }
     }
 
+
+    @Override
     public void destroy() {
     }
 

@@ -149,6 +149,8 @@ public class HoroscopoRepository implements INT_HoroscopoRepository {
                 throw new RuntimeException();
             }
         } catch (SQLException |RuntimeException e) {
+            Horoscopo horoscopo = new Horoscopo();
+
             throw new RuntimeException("No es posible encontrar el horóscopo",e);
         }finally {
             db.closeConnection();

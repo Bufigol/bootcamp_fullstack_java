@@ -14,7 +14,7 @@ public class ConstantesCRUD {
     public static final String BUSQUEDA_COMPLETA_POR_USERNAME = "SELECT * FROM usuarios WHERE username = ?;";
     public static final String INSERTAR_USUARIO = "INSERT INTO usuarios (nombre, username, email, fecha_nacimiento, password, horoscopo_id)  VALUES (?, ?, ?, ?, ?, ?);";
     public static final String BUSCAR_USUARIO_POR_ID = "SELECT * FROM usuarios WHERE id = ?;";
-    public static final String ACTUALIZAR_USUARIO = "UPDATE usuarios SET nombre = ?, username = ?, email = ?, fecha_nacimiento = ?, password = ?, animal = ?  WHERE id = ?;";
+    public static final String ACTUALIZAR_USUARIO = "UPDATE usuarios SET nombre = ?, username = ?, email = ?, fecha_nacimiento = ?, password = ?, horoscopo_id = ?  WHERE id = ?;";
     public static final String ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE id = ?;";
 
 }
