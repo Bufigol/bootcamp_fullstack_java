@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre el Horóscopo Chino</title>
-    <link rel="stylesheet" href="../utils/styles/about.css">
+    <link rel="stylesheet" href="../utils/styles/styles.css">
 </head>
 <body>
 <div class="banner">

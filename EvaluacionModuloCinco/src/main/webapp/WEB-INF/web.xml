@@ -38,5 +38,12 @@
         <servlet-name>InformacionDelUsuario</servlet-name>
         <url-pattern>/Informacion_del_Usuario</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>ProcesarEliminarCuenta</servlet-name>
+        <servlet-class>com.bufigol.servlets.ProcesarEliminarCuenta</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProcesarEliminarCuenta</servlet-name>
+        <url-pattern>/procesar-eliminar-cuenta</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./utils/styles/index.css" />
+    <link rel="stylesheet" href="./utils/styles/styles.css">
     <title>Horóscopo Chino - Inicio de Sesión</title>
 </head>
 <body>
@@ -13,13 +13,15 @@
     String usuarioID = null;
     String usrName = "";
     Cookie[] cookies = request.getCookies();
-
+    String cuentaEliminada = null;
     if (cookies != null) {
         for (Cookie cookie : cookies) {
 
             if (cookie.getName().equals("usrName")) {
                 usrName = cookie.getValue();
-
+            }
+            if(cookie.getName().equals("cuentaEliminada")) {
+                cuentaEliminada = "Cuenta eliminada con exito";
             }
         }
     }
@@ -30,6 +32,11 @@
 </div>
 <div class="container">
     <h1>Horóscopo Chino</h1>
+    <% if (cuentaEliminada != null) { %>
+    <div class="message success" role="alert">
+        <%= cuentaEliminada %>
+    </div>
+    <% } %>
     <p style="text-align: center;">Inicia sesión para descubrir tu destino</p>
     <form action="/login" method="POST">
         <label for="username" >Nombre de usuario:</label>
