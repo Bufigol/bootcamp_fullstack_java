@@ -19,10 +19,6 @@ public class UsuarioRepository implements INT_UsuarioRepository {
         try {
             PreparedStatement pstm = db.getConnection().prepareStatement(ConstantesCRUD.BUSQUEDA_COMPLETA_USUARIOS_ORDENADA);
             ResultSet rs = pstm.executeQuery();
-            if( rs.getFetchSize() == 0 ) {
-                pstm.close();
-                throw new RuntimeException("No hay usuarios registrados");
-            }
             while (rs.next()) {
                 Usuario usuario = extraerUsuarioDeResultSet(rs);
                 out.add(usuario);

@@ -47,7 +47,7 @@
   <h1>¿Que deseas hacer, <%= username %> ?</h1>
   <div class="menu-options">
     <button class="menu-button" onclick="location.href='${pageContext.request.contextPath}/pgs/InfoUsuario.jsp'">Conoce tu animal</button>
-    <button class="menu-button" onclick="location.href='/pgs/animal.jsp'">Buscar usuarios</button>
+    <button class="menu-button" onclick="location.href='/pgs/UsuariosRegistrados.jsp'">Ver Usuarios registrados</button>
     <button class="menu-button" onclick="location.href='/pgs/AdminUsers.jsp'">Modificar datos</button>
     <button class="menu-button" onclick="location.href='/pgs/EliminarCuenta.jsp'">Eliminar cuenta</button>
   </div>
