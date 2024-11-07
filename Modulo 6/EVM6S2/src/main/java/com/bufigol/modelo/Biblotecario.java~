@@ -1,0 +1,50 @@
+package com.bufigol.modelo;
+
+
+import com.bufigol.interfaces.IAyudante;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class Biblotecario {
+
+    @Autowired
+    private IAyudante ayudante;
+
+
+    public void solicitanTodosLosLibros() {
+        List<Libro> libros = ayudante.obtenerLibros();
+        for(Libro libro : libros) {
+            System.out.println(libro.toString());
+        }
+    }
+
+
+
+
+    public void agregarUnLibro(Libro libro) {
+        ayudante.agregarLibro(libro);
+        if(ayudante.obtenerLibros().contains(libro)) {
+            System.out.println("El libro " + libro.getTitulo() + " fue agregado a la biblioteca");
+        }else {
+            System.out.println("El libro " + libro.getTitulo() + " no fue agregado a la biblioteca");
+        }
+    }
+
+
+    public void devolucionOPrestamoDeLibro(int id) {
+        Libro libro = ayudante.cambiarDisponibilidad(id);
+        System.out.println("El libro " + libro.getTitulo() + " ahora tiene el estado " + libro.isDisponible());
+    }
+
+
+    public void buscarLibro(String frase) {
+        List<Libro> librosEncontrados = ayudante.buscarLibro(frase);
+        for (Libro libro : librosEncontrados) {
+            System.out.println(libro.toString());
+        }
+
+    }
+}

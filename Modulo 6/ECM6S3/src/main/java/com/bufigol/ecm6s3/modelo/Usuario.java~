@@ -1,0 +1,12 @@
+package com.bufigol.ecm6s3.modelo;
+
+@AllArgsConstructor
+@NoArgsConstructor
+public class Usuario {
+    private String nombre;
+    private String apellido;
+    private String username;
+    private String password;
+    private String email;
+
+}

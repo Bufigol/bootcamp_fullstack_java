@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Datos del Usuario</title>
+</head>
+<body>
+<h2>Datos del Usuario Registrado</h2>
+<div>
+    <p>Nombre: <!--/*@thymesVar id="usuario" type="com.bufigol.ecm6s3.modelo.Usuario"*/-->
+    <span th:text="${usuario.nombre}"></span><span th:text="${usuario.apellido}"></span></p>
+    <p>Username: <span th:text="${usuario.username}"></span></p>
+    <p>Email: <span th:text="${usuario.email}"></span></p>
+</div>
+</body>
+</html>
