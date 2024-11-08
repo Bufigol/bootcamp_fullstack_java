@@ -1,0 +1,92 @@
+:root {
+    --color-tierra: #8B4513;
+    --color-pasto: #228B22;
+    --color-cielo: #87CEEB;
+    --color-montana: #A0522D;
+    --color-texto: #333333;
+}
+
+body {
+    background-color: #F4F4F4;
+    color: var(--color-texto);
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/campo-chileno-background-zNHCZXpTHCXoRXTLBXbhzGXTXvBHZg.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 50px;
+}
+
+h1 {
+    color: var(--color-tierra);
+    border-bottom: 3px solid var(--color-pasto);
+    padding-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: var(--color-pasto);
+    border-color: var(--color-pasto);
+}
+
+.btn-primary:hover {
+    background-color: #1e7e1e;
+    border-color: #1e7e1e;
+}
+
+.btn-secondary {
+    background-color: var(--color-montana);
+    border-color: var(--color-montana);
+}
+
+.btn-secondary:hover {
+    background-color: #8B4513;
+    border-color: #8B4513;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.table {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.table-light thead {
+    background-color: var(--color-cielo);
+    color: white;
+}
+
+.form-control:focus {
+    border-color: var(--color-pasto);
+    box-shadow: 0 0 0 0.2rem rgba(34, 139, 34, 0.25);
+}
+
+.alert-success {
+    background-color: rgba(34, 139, 34, 0.2);
+    border-color: var(--color-pasto);
+    color: var(--color-pasto);
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.2);
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin-top: 20px;
+        padding: 20px;
+    }
+}

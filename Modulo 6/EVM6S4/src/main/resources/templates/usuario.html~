@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Formulario de Usuario</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script th:src="@{/js/validacionFormulario.js}"></script>
+    <link th:href="@{/css/estilos.css}" rel="stylesheet">
+</head>
+<body>
+<!--/*@thymesVar id="usuario" type="com.bufigol.evm6s4.modelo.Usuario"*/-->
+<div class="container mt-4">
+    <!-- Encabezado -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 th:text="${titulo}" class="display-5">Formulario de Usuario</h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a th:href="@{/}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <!-- Mensajes de error -->
+    <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span th:text="${param.error}">Error en el formulario</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <!-- Formulario -->
+    <div class="card">
+        <div class="card-body">
+
+            <form th:action="@{${accion == 'agregar' ? '/agregar' : '/editar'}}"
+                  th:object="${usuario}"
+                  method="post"
+                  class="needs-validation"
+                  novalidate>
+
+
+                <input type="hidden" th:if="${accion == 'editar'}" th:field="*{username}">
+
+                <!-- Nombre -->
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text"
+                           class="form-control"
+                           id="nombre"
+                           th:field="*{nombre}"
+                           required
+                           pattern="[A-Za-z]+"
+                           title="Solo se permiten letras">
+                    <div class="invalid-feedback">
+                        Por favor ingrese un nombre válido (solo letras).
+                    </div>
+                </div>
+
+                <!-- Apellido -->
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text"
+                           class="form-control"
+                           id="apellido"
+                           th:field="*{apellido}"
+                           required
+                           pattern="[A-Za-z]+"
+                           title="Solo se permiten letras">
+                    <div class="invalid-feedback">
+                        Por favor ingrese un apellido válido (solo letras).
+                    </div>
+                </div>
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text"
+                           class="form-control"
+                           id="username"
+                           th:field="*{username}"
+                           th:readonly="${accion == 'editar'}"
+                           required
+                           pattern="[A-Za-z0-9]+"
+                           title="Solo se permiten letras y números, sin espacios">
+                    <div class="invalid-feedback">
+                        Por favor ingrese un username válido (letras y números, sin espacios).
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <input type="password"
+                               class="form-control"
+                               id="password"
+                               th:field="*{password}"
+                               required
+                               pattern="^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!¡¿?*])(?=\S+$).{10,}$"
+                               title="Mínimo 10 caracteres, debe incluir al menos: una mayúscula, un número y un símbolo">
+                        <button class="btn btn-outline-secondary"
+                                type="button"
+                                onclick="togglePassword()">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    <div class="invalid-feedback">
+                        La contraseña debe tener al menos 10 caracteres, una mayúscula, un número y un símbolo.
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email"
+                           class="form-control"
+                           id="email"
+                           th:field="*{email}"
+                           required
+                           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                    <div class="invalid-feedback">
+                        Por favor ingrese un email válido.
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="text-end">
+                    <a th:href="@{/}" class="btn btn-secondary me-2">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi" th:classappend="${accion == 'agregar' ? 'bi-person-plus-fill' : 'bi-save'}"></i>
+                        <span th:text="${accion == 'agregar' ? 'Agregar' : 'Guardar cambios'}">Enviar</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
