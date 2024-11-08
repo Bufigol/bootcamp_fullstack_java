@@ -10,4 +10,5 @@ public interface INT_PeliculaServicio {
     List<Pelicula> obtenerTodas();
     void actualizarPelicula(Pelicula pelicula);
     void eliminarPelicula(Long id);
+    void eliminarTodas();
 }
