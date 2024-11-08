@@ -4,9 +4,10 @@ import com.bufigol.evm6s5.modelo.Pelicula;
 
 import java.util.List;
 
-public interface INT_PeliculaRepository {
+public interface INT_PeliculaRepositorio {
     void insertar(Pelicula pelicula);
-    List<Pelicula> obtenerTodos();
+    Pelicula buscarPorId(Long id);
+    List<Pelicula> buscarTodos();
     void actualizar(Pelicula pelicula);
     void eliminar(Long id);
 }

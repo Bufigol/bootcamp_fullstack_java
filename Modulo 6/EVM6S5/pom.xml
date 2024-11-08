@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bufigol</groupId>
-    <artifactId>ECM6S5</artifactId>
+    <artifactId>EVM6S5</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ECM6S5</name>
-    <description>ECM6S5</description>
+    <name>EVM6S5</name>
+    <description>EVM6S5</description>
     <url/>
     <licenses>
         <license/>
