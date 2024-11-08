@@ -1,0 +1,7 @@
+package com.bufigol.evm6s5.excepciones;
+
+public class PeliculaIdExistenteException extends RuntimeException {
+    public PeliculaIdExistenteException(String message) {
+        super(message);
+    }
+}

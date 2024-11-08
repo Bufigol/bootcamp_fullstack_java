@@ -1,0 +1,4 @@
+package com.bufigol.evm6s5.excepciones;
+
+public class ErrorLogger {
+}
