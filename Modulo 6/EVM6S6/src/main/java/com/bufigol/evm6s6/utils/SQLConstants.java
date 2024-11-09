@@ -29,5 +29,5 @@ public class SQLConstants {
 
     // Consultas SQL Nativas
     public static final String SQL_BUSCAR_POR_DESCRIPCION =
-            "SELECT * FROM products WHERE descripcion LIKE %:palabra%";
+            "SELECT * FROM products WHERE descripcion ILIKE CONCAT('%', :palabra, '%')";
 }

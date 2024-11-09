@@ -3,7 +3,8 @@ CREATE TABLE IF NOT EXISTS products (
                                         id_producto SERIAL PRIMARY KEY,
                                         modelo VARCHAR(100) NOT NULL,
                                         marca VARCHAR(100) NOT NULL,
-                                        descripcion TEXT
+                                        descripcion TEXT,
+                                        UNIQUE (modelo, marca)
 );
 
 -- Insertar datos iniciales
