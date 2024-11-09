@@ -1,7 +1,9 @@
 package com.bufigol.evm6s6.controlador;
 
+import com.bufigol.evm6s6.dto.ProductoRequestDTO;
+import com.bufigol.evm6s6.dto.ProductoResponseDTO;
 import com.bufigol.evm6s6.interfaces.INT_ProductService;
-import com.bufigol.evm6s6.modelo.Producto;
+import com.bufigol.evm6s6.mapper.ProductoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -12,7 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/productos")
@@ -22,83 +26,113 @@ import java.util.List;
 public class ProductController {
 
     private final INT_ProductService productService;
+    private final ProductoMapper productoMapper;
 
     // Endpoints de búsqueda
     @GetMapping
-    public ResponseEntity<List<Producto>> findAll() {
+    public ResponseEntity<List<ProductoResponseDTO>> findAll() {
         log.debug("REST request para obtener todos los productos");
-        return ResponseEntity.ok(productService.findAll());
+        return ResponseEntity.ok(
+                productService.findAll().stream()
+                        .map(productoMapper::toDto)
+                        .collect(Collectors.toList())
+        );
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> findById(@PathVariable Long id) {
+    public ResponseEntity<ProductoResponseDTO> findById(@PathVariable Long id) {
         log.debug("REST request para obtener el producto con id: {}", id);
         return productService.findById(id)
+                .map(productoMapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/marca/{marca}")
-    public ResponseEntity<List<Producto>> findByMarca(@PathVariable String marca) {
+    public ResponseEntity<List<ProductoResponseDTO>> findByMarca(@PathVariable String marca) {
         log.debug("REST request para obtener productos por marca: {}", marca);
-        return ResponseEntity.ok(productService.findByMarca(marca));
+        return ResponseEntity.ok(
+                productService.findByMarca(marca).stream()
+                        .map(productoMapper::toDto)
+                        .collect(Collectors.toList())
+        );
     }
 
     @GetMapping("/modelo/{modelo}")
-    public ResponseEntity<List<Producto>> findByModelo(@PathVariable String modelo) {
+    public ResponseEntity<List<ProductoResponseDTO>> findByModelo(@PathVariable String modelo) {
         log.debug("REST request para obtener productos por modelo: {}", modelo);
-        return ResponseEntity.ok(productService.findByModelo(modelo));
+        return ResponseEntity.ok(
+                productService.findByModelo(modelo).stream()
+                        .map(productoMapper::toDto)
+                        .collect(Collectors.toList())
+        );
     }
 
     @GetMapping("/descripcion")
-    public ResponseEntity<List<Producto>> findByDescripcion(@RequestParam String palabra) {
+    public ResponseEntity<List<ProductoResponseDTO>> findByDescripcion(@RequestParam String palabra) {
         log.debug("REST request para obtener productos por descripción: {}", palabra);
-        return ResponseEntity.ok(productService.buscarPorDescripcion(palabra));
+        return ResponseEntity.ok(
+                productService.buscarPorDescripcion(palabra).stream()
+                        .map(productoMapper::toDto)
+                        .collect(Collectors.toList())
+        );
     }
 
     @GetMapping("/busqueda")
-    public ResponseEntity<List<Producto>> busquedaGeneral(@RequestParam String termino) {
+    public ResponseEntity<List<ProductoResponseDTO>> busquedaGeneral(@RequestParam String termino) {
         log.debug("REST request para búsqueda general con término: {}", termino);
-        return ResponseEntity.ok(productService.busquedaGeneral(termino));
+        return ResponseEntity.ok(
+                productService.busquedaGeneral(termino).stream()
+                        .map(productoMapper::toDto)
+                        .collect(Collectors.toList())
+        );
     }
 
     // Endpoints de paginación y ordenamiento
     @GetMapping("/paginado")
-    public ResponseEntity<Page<Producto>> findAllPaginado(
+    public ResponseEntity<Page<ProductoResponseDTO>> findAllPaginado(
             @PageableDefault(size = 10, sort = "idProducto", direction = Sort.Direction.ASC) Pageable pageable) {
         log.debug("REST request para obtener productos paginados");
-        return ResponseEntity.ok(productService.findAll(pageable));
+        return ResponseEntity.ok(
+                productService.findAll(pageable).map(productoMapper::toDto)
+        );
     }
 
     @GetMapping("/ordenado")
-    public ResponseEntity<List<Producto>> findAllOrdenado(@RequestParam(required = false) String[] sort) {
+    public ResponseEntity<List<ProductoResponseDTO>> findAllOrdenado(@RequestParam(required = false) String[] sort) {
         log.debug("REST request para obtener productos ordenados");
         Sort ordering = sort != null && sort.length > 0 ?
                 Sort.by(sort) : Sort.by("idProducto");
-        return ResponseEntity.ok(productService.findAll(ordering));
+        return ResponseEntity.ok(
+                productService.findAll(ordering).stream()
+                        .map(productoMapper::toDto)
+                        .collect(Collectors.toList())
+        );
     }
 
     // Endpoints CRUD
     @PostMapping
-    public ResponseEntity<Producto> create(@RequestBody Producto producto) {
-        log.debug("REST request para crear un nuevo producto: {}", producto);
-        if (producto.getIdProducto() != null) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<ProductoResponseDTO> create(@Valid @RequestBody ProductoRequestDTO productoDTO) {
+        log.debug("REST request para crear un nuevo producto: {}", productoDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(productService.save(producto));
+                .body(productoMapper.toDto(
+                        productService.save(productoMapper.toEntity(productoDTO))
+                ));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> update(
+    public ResponseEntity<ProductoResponseDTO> update(
             @PathVariable Long id,
-            @RequestBody Producto producto) {
+            @Valid @RequestBody ProductoRequestDTO productoDTO) {
         log.debug("REST request para actualizar producto con id: {}", id);
         if (!productService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
+        var producto = productoMapper.toEntity(productoDTO);
         producto.setIdProducto(id);
-        return ResponseEntity.ok(productService.update(producto));
+        return ResponseEntity.ok(
+                productoMapper.toDto(productService.update(producto))
+        );
     }
 
     @DeleteMapping("/{id}")
@@ -113,10 +147,16 @@ public class ProductController {
 
     // Endpoints para operaciones masivas
     @PostMapping("/batch")
-    public ResponseEntity<List<Producto>> createBatch(@RequestBody List<Producto> productos) {
+    public ResponseEntity<List<ProductoResponseDTO>> createBatch(
+            @Valid @RequestBody List<ProductoRequestDTO> productosDTO) {
         log.debug("REST request para crear múltiples productos");
+        var productos = productosDTO.stream()
+                .map(productoMapper::toEntity)
+                .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(productService.saveAll(productos));
+                .body(productService.saveAll(productos).stream()
+                        .map(productoMapper::toDto)
+                        .collect(Collectors.toList()));
     }
 
     @DeleteMapping("/batch")

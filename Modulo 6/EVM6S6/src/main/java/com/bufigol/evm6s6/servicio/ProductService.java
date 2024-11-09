@@ -1,6 +1,11 @@
 package com.bufigol.evm6s6.servicio;
 
+import com.bufigol.evm6s6.dto.ProductoRequestDTO;
+import com.bufigol.evm6s6.dto.ProductoResponseDTO;
+import com.bufigol.evm6s6.excepciones.ProductoDuplicadoException;
+import com.bufigol.evm6s6.excepciones.ProductoNotFoundException;
 import com.bufigol.evm6s6.interfaces.INT_ProductService;
+import com.bufigol.evm6s6.mapper.ProductoMapper;
 import com.bufigol.evm6s6.modelo.Producto;
 import com.bufigol.evm6s6.repositorio.ProductoRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -21,70 +27,95 @@ import java.util.Optional;
 public class ProductService implements INT_ProductService {
 
     private final ProductoRepository productoRepository;
+    private final ProductoMapper productoMapper;
 
     @Override
     @Transactional(readOnly = true)
-    public List<Producto> findByMarca(String marca) {
+    public List<ProductoResponseDTO> findByMarca(String marca) {
         log.debug("Buscando productos por marca: {}", marca);
-        return productoRepository.findByMarca(marca);
+        return productoRepository.findByMarca(marca).stream()
+                .map(productoMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Producto> findByModelo(String modelo) {
+    public List<ProductoResponseDTO> findByModelo(String modelo) {
         log.debug("Buscando productos por modelo: {}", modelo);
-        return productoRepository.findByModelo(modelo);
+        return productoRepository.findByModelo(modelo).stream()
+                .map(productoMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Producto> buscarPorDescripcion(String palabra) {
+    public List<ProductoResponseDTO> buscarPorDescripcion(String palabra) {
         log.debug("Buscando productos por descripción: {}", palabra);
-        return productoRepository.buscarPorDescripcion(palabra);
+        return productoRepository.buscarPorDescripcion(palabra).stream()
+                .map(productoMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Producto> busquedaGeneral(String termino) {
+    public List<ProductoResponseDTO> busquedaGeneral(String termino) {
         log.debug("Realizando búsqueda general con término: {}", termino);
-        return productoRepository.busquedaGeneral(termino);
+        return productoRepository.busquedaGeneral(termino).stream()
+                .map(productoMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Producto save(Producto producto) {
-        log.debug("Guardando nuevo producto: {}", producto);
-        return productoRepository.save(producto);
+    public ProductoResponseDTO saveDTO(ProductoRequestDTO productoDTO) {
+        log.debug("Guardando nuevo producto: {}", productoDTO);
+        if (productoRepository.existsByModeloAndMarca(productoDTO.getModelo(), productoDTO.getMarca())) {
+            throw new ProductoDuplicadoException(productoDTO.getModelo(), productoDTO.getMarca());
+        }
+        Producto producto = productoMapper.toEntity(productoDTO);
+        return productoMapper.toDto(productoRepository.save(producto));
     }
 
     @Override
-    public List<Producto> saveAll(List<Producto> productos) {
-        log.debug("Guardando lista de {} productos", productos.size());
-        return productoRepository.saveAll(productos);
+    public List<ProductoResponseDTO> saveAllDTO(List<ProductoRequestDTO> productosDTO) {
+        log.debug("Guardando lista de {} productos", productosDTO.size());
+        List<Producto> productos = productosDTO.stream()
+                .map(productoMapper::toEntity)
+                .collect(Collectors.toList());
+        return productoRepository.saveAll(productos).stream()
+                .map(productoMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Producto> findById(Long id) {
+    public Optional<ProductoResponseDTO> findById(Long id) {
         log.debug("Buscando producto por ID: {}", id);
-        return productoRepository.findById(id);
+        return productoRepository.findById(id)
+                .map(productoMapper::toDto);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Producto> findAll() {
+    public List<ProductoResponseDTO> findAll() {
         log.debug("Recuperando todos los productos");
-        return productoRepository.findAll();
+        return productoRepository.findAll().stream()
+                .map(productoMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public void deleteById(Long id) {
         log.debug("Eliminando producto con ID: {}", id);
+        if (!productoRepository.existsById(id)) {
+            throw new ProductoNotFoundException(id);
+        }
         productoRepository.deleteById(id);
     }
 
     @Override
-    public void delete(Producto producto) {
-        log.debug("Eliminando producto: {}", producto);
+    public void deleteDTO(ProductoRequestDTO productoDTO) {
+        log.debug("Eliminando producto: {}", productoDTO);
+        Producto producto = productoMapper.toEntity(productoDTO);
         productoRepository.delete(producto);
     }
 
@@ -102,16 +133,19 @@ public class ProductService implements INT_ProductService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Producto> findAll(Pageable pageable) {
+    public Page<ProductoResponseDTO> findAll(Pageable pageable) {
         log.debug("Recuperando página {} de productos", pageable.getPageNumber());
-        return productoRepository.findAll(pageable);
+        return productoRepository.findAll(pageable)
+                .map(productoMapper::toDto);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Producto> findAll(Sort sort) {
+    public List<ProductoResponseDTO> findAll(Sort sort) {
         log.debug("Recuperando todos los productos ordenados");
-        return productoRepository.findAll(sort);
+        return productoRepository.findAll(sort).stream()
+                .map(productoMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -121,12 +155,14 @@ public class ProductService implements INT_ProductService {
     }
 
     @Override
-    public Producto update(Producto producto) {
-        log.debug("Actualizando producto: {}", producto);
-        if (!productoRepository.existsById(producto.getIdProducto())) {
-            throw new RuntimeException("No se puede actualizar un producto que no existe");
+    public ProductoResponseDTO update(Long id, ProductoRequestDTO productoDTO) {
+        log.debug("Actualizando producto con ID {}: {}", id, productoDTO);
+        if (!productoRepository.existsById(id)) {
+            throw new ProductoNotFoundException(id);
         }
-        return productoRepository.save(producto);
+        Producto producto = productoMapper.toEntity(productoDTO);
+        producto.setIdProducto(id);
+        return productoMapper.toDto(productoRepository.save(producto));
     }
 
     @Override
@@ -136,8 +172,11 @@ public class ProductService implements INT_ProductService {
     }
 
     @Override
-    public void deleteAll(List<Producto> productos) {
-        log.debug("Eliminando lista de {} productos", productos.size());
+    public void deleteAllDTO(List<ProductoRequestDTO> productosDTO) {
+        log.debug("Eliminando lista de {} productos", productosDTO.size());
+        List<Producto> productos = productosDTO.stream()
+                .map(productoMapper::toEntity)
+                .collect(Collectors.toList());
         productoRepository.deleteAll(productos);
     }
 
@@ -149,8 +188,34 @@ public class ProductService implements INT_ProductService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Producto> findAllById(List<Long> ids) {
+    public List<ProductoResponseDTO> findAllById(List<Long> ids) {
         log.debug("Buscando productos por lista de IDs, cantidad: {}", ids.size());
-        return productoRepository.findAllById(ids);
+        return productoRepository.findAllById(ids).stream()
+                .map(productoMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    // Métodos auxiliares para mantener compatibilidad con el controlador
+    @Override
+    public Producto save(Producto producto) {
+        return productoRepository.save(producto);
+    }
+
+    @Override
+    public List<Producto> saveAll(List<Producto> productos) {
+        return productoRepository.saveAll(productos);
+    }
+
+    @Override
+    public Optional<Producto> findByIdEntity(Long id) {
+        return productoRepository.findById(id);
+    }
+
+    @Override
+    public Producto update(Producto producto) {
+        if (!productoRepository.existsById(producto.getIdProducto())) {
+            throw new ProductoNotFoundException(producto.getIdProducto());
+        }
+        return productoRepository.save(producto);
     }
 }
