@@ -1,5 +1,6 @@
 package com.bufigol.universidad.modelo;
 
+import com.bufigol.universidad.validacion.RutValido;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -25,6 +26,7 @@ public class Alumno {
     @NotBlank(message = "El RUT no puede estar vacío")
     @Column(unique = true, nullable = false, length = 12)
     @Size(min = 8, max = 12, message = "El RUT debe tener entre 8 y 12 caracteres")
+    @RutValido(message = "El RUT ingresado no es válido")
     private String rut;
 
     @NotBlank(message = "El nombre no puede estar vacío")
