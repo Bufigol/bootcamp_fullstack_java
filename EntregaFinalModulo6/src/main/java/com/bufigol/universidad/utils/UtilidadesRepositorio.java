@@ -1,5 +1,6 @@
 package com.bufigol.universidad.utils;
 
+import com.bufigol.universidad.modelo.Alumno;
 import com.bufigol.universidad.modelo.Role;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
@@ -48,5 +49,31 @@ public class UtilidadesRepositorio {
         }
     }
 
+    public static <T> List<T> iterableToList(Iterable<T> iterable) {
+        List<T> list = new ArrayList<>();
+        iterable.forEach(list::add);
+        return list;
+    }
 
+    public static  <S extends Alumno> void validateExampleAlumno(Example<S> example) {
+        if (example == null) {
+            throw new IllegalArgumentException("Example no puede ser null");
+        }
+    }
+
+
+    public static void validateEntity(Object entity) {
+        if (entity == null) {
+            throw new IllegalArgumentException("La entidad no puede ser null");
+        }
+    }
+
+    public static void validateId(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("El ID no puede ser null");
+        }
+        if (id <= 0) {
+            throw new IllegalArgumentException("El ID debe ser mayor que 0");
+        }
+    }
 }

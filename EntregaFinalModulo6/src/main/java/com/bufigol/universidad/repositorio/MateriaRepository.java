@@ -602,15 +602,7 @@ public class MateriaRepository implements INT_MateriaRepository {
     }
 
     private List<Order> getOrders(Root<?> root, Sort sort, CriteriaBuilder cb) {
-        List<Order> orders = new ArrayList<>();
-        for (Sort.Order order : sort) {
-            if (order.isAscending()) {
-                orders.add(cb.asc(root.get(order.getProperty())));
-            } else {
-                orders.add(cb.desc(root.get(order.getProperty())));
-            }
-        }
-        return orders;
+        return createOrders(root, sort, cb);
     }
 
     // Métodos helper
