@@ -22,4 +22,19 @@ public class ConstantesSQLyHQL {
     public static final String FIND_BY_ID = "SELECT a FROM Alumno a WHERE a.id IN :ids";
     public static final String DELETE_ALL = "DELETE FROM Alumno a";
     public static final String DELETE_BY_IDS = "DELETE FROM Alumno a WHERE a.id IN :ids";
+
+    //USUARIO
+    public static final String FIND_BY_USERNAME = "SELECT u FROM Usuario u WHERE u.username = :username";
+    public static final String FIND_BY_EMAIL = "SELECT u FROM Usuario u WHERE u.email = :email";
+    public static final String EXISTS_BY_USERNAME = "SELECT COUNT(u) > 0 FROM Usuario u WHERE u.username = :username";
+    public static final String EXISTS_BY_EMAIL = "SELECT COUNT(u) > 0 FROM Usuario u WHERE u.email = :email";
+    public static final String COUNT_ALL_USUARIOS = "SELECT COUNT(u) FROM Usuario u";
+    public static final String COUNT_BY_ID_USUARIOS = "SELECT COUNT(u) FROM Usuario u WHERE u.id = :id";
+    public static final String FIND_ALL_USUARIOS = "SELECT u FROM Usuario u";
+    public static final String FIND_BY_ID_USUARIOS = "SELECT u FROM Usuario u WHERE u.id IN :ids";
+    public static final String DELETE_ALL_USUARIOS = "DELETE FROM Usuario u";
+    public static final String DELETE_BY_IDS_USUARIOS = "DELETE FROM Usuario u WHERE u.id IN :ids";
+    public static final String FIND_BY_USERNAME_OR_EMAIL = "SELECT u FROM Usuario u WHERE u.username = :username OR u.email = :email";
+    public static final String COUNT_BY_ROLE = "SELECT COUNT(u) FROM Usuario u JOIN u.roles r WHERE r.name = :roleName";
+    public static final String FIND_BY_ROLE = "SELECT u FROM Usuario u JOIN u.roles r WHERE r.name = :roleName";
 }

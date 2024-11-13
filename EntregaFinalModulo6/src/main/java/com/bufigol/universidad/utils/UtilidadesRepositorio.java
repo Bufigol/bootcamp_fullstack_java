@@ -2,6 +2,7 @@ package com.bufigol.universidad.utils;
 
 import com.bufigol.universidad.modelo.Alumno;
 import com.bufigol.universidad.modelo.Role;
+import com.bufigol.universidad.modelo.Usuario;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import lombok.extern.slf4j.Slf4j;
@@ -60,6 +61,13 @@ public class UtilidadesRepositorio {
             throw new IllegalArgumentException("Example no puede ser null");
         }
     }
+
+    public static  <S extends Usuario> void validateExampleUsuario(Example<S> example) {
+        if (example == null) {
+            throw new IllegalArgumentException("Example no puede ser null");
+        }
+    }
+
 
 
     public static void validateEntity(Object entity) {
