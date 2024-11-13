@@ -14,15 +14,3 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-# Configuración JWT
-security:
-  jwt:
-    token:
-      secret-key: tu_clave_secreta_muy_larga_y_segura_para_el_jwt_token_2024
-      expire-length: 3600000 # 1 hora en milisegundos
-
-# Configuración de logging
-logging:
-  level:
-    root: INFO
-    com.example.universidad: DEBUG

@@ -1,6 +1,6 @@
 package com.bufigol.universidad.repositorio;
 
-import com.bufigol.universidad.interfaces.INT_MateriaRepository;
+import com.bufigol.universidad.interfaces.repositorios.INT_MateriaRepository;
 import com.bufigol.universidad.modelo.Materia;
 import com.bufigol.universidad.utils.ConstantesSQLyHQL;
 import jakarta.persistence.EntityManager;

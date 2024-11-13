@@ -1,7 +1,7 @@
-package com.bufigol.universidad.dtos;
+package com.bufigol.universidad.dtos.mappers;
 
-import com.bufigol.universidad.dtos.MateriaRequestDTO;
-import com.bufigol.universidad.dtos.MateriaResponseDTO;
+import com.bufigol.universidad.dtos.modelo.MateriaRequestDTO;
+import com.bufigol.universidad.dtos.modelo.MateriaResponseDTO;
 import com.bufigol.universidad.modelo.Materia;
 import org.springframework.stereotype.Component;
 

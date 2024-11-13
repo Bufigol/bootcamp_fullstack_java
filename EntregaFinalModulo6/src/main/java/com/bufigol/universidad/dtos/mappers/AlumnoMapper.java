@@ -1,7 +1,7 @@
-package com.bufigol.universidad.dtos;
+package com.bufigol.universidad.dtos.mappers;
 
-import com.bufigol.universidad.dtos.AlumnoRequestDTO;
-import com.bufigol.universidad.dtos.AlumnoResponseDTO;
+import com.bufigol.universidad.dtos.modelo.AlumnoRequestDTO;
+import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
 import com.bufigol.universidad.modelo.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

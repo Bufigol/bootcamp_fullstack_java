@@ -1,6 +1,6 @@
 package com.bufigol.universidad.repositorio;
 
-import com.bufigol.universidad.interfaces.INT_RoleRepository;
+import com.bufigol.universidad.interfaces.repositorios.INT_RoleRepository;
 import com.bufigol.universidad.modelo.Role;
 import com.bufigol.universidad.utils.QueryByExamplePredicateBuilder;
 import com.bufigol.universidad.utils.UtilidadesRepositorio;
@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Slf4j
 @Repository

@@ -1,4 +1,4 @@
-package com.bufigol.universidad.interfaces;
+package com.bufigol.universidad.interfaces.repositorios;
 
 import com.bufigol.universidad.modelo.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.bufigol.universidad.dtos;
+package com.bufigol.universidad.dtos.modelo;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

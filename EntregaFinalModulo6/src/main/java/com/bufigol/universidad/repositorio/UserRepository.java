@@ -1,6 +1,6 @@
 package com.bufigol.universidad.repositorio;
 
-import com.bufigol.universidad.interfaces.INT_UserRepository;
+import com.bufigol.universidad.interfaces.repositorios.INT_UserRepository;
 import com.bufigol.universidad.modelo.Usuario;
 import com.bufigol.universidad.utils.ConstantesSQLyHQL;
 import com.bufigol.universidad.utils.QueryByExamplePredicateBuilder;
