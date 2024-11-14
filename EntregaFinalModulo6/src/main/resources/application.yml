@@ -6,13 +6,62 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: validate  # Cambiado de update a validate
+      ddl-auto: validate
     show-sql: true
     properties:
       hibernate:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    filter:
+      order: 10
+
+# Configuración de JWT
+jwt:
+  secret: 8yF7gK9mP2qR5tN3wX6vJ4uH1cB0zL4kI8sA7dE2nM5pQ9wR3vT6yU8iO1xC4
+  expiration: 86400000  # 24 horas en milisegundos
+  refresh-expiration: 604800000  # 7 días en milisegundos
+  header: Authorization
+  prefix: "Bearer "
+  issuer: universidad-api
+  audience: universidad-clients
+  claims:
+    roles: roles
+    username: sub
+
+# Configuración de seguridad
+security:
+  permitted-urls:
+    - /api/auth/**
+    - /api/public/**
+    - /swagger-ui/**
+    - /v3/api-docs/**
+    - /actuator/health
+  cors:
+    allowed-origins: "*"
+    allowed-methods: "*"
+    allowed-headers: "*"
+    exposed-headers: "Authorization"
+    max-age: 3600
+
+# Configuración de Logging
 logging:
   level:
-    com.bufigol.universidad.servicio: DEBUG
+    root: INFO
+    com.bufigol.universidad: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Configuración de la aplicación
+app:
+  auth:
+    token-secret: ${JWT_SECRET:8yF7gK9mP2qR5tN3wX6vJ4uH1cB0zL4kI8sA7dE2nM5pQ9wR3vT6yU8iO1xC4}
+    token-expiration: ${JWT_EXPIRATION:86400000}
+    refresh-token-expiration: ${JWT_REFRESH_EXPIRATION:604800000}
+  security:
+    password-strength: 10
+    max-login-attempts: 5
+    account-lock-duration: 300 # 5 minutos en segundos
