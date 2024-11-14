@@ -7,6 +7,8 @@ import com.bufigol.universidad.modelo.Usuario;
 import com.bufigol.universidad.repositorio.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -144,4 +146,6 @@ public class UsuarioServicio implements INT_UsuarioServicio {
             throw new RuntimeException("Error al cargar usuario", e);
         }
     }
+
+
 }

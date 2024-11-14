@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -57,6 +59,30 @@ public class RoleServicio implements INT_RoleServicio {
         } catch (Exception e) {
             log.error("Error al guardar rol {}: {}", role.getAuthority(), e.getMessage());
             throw new RuntimeException("Error al guardar el rol", e);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Set<Role>> validateAndGetRoles(Set<String> roleNames) {
+        Assert.notNull(roleNames, "El conjunto de nombres de roles no puede ser nulo");
+        log.debug("Validando roles: {}", roleNames);
+
+        try {
+            Set<Role> validatedRoles = new HashSet<>();
+            for (String roleName : roleNames) {
+                Optional<Role> roleOpt = findByName(roleName);
+                if (roleOpt.isEmpty()) {
+                    log.warn("Rol no encontrado: {}", roleName);
+                    return Optional.empty();
+                }
+                validatedRoles.add(roleOpt.get());
+            }
+            return Optional.of(validatedRoles);
+
+        } catch (Exception e) {
+            log.error("Error al validar roles: {}", e.getMessage());
+            return Optional.empty();
         }
     }
 }
