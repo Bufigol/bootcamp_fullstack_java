@@ -1,0 +1,42 @@
+package com.bufigol.universidad.controlador;
+
+import com.bufigol.universidad.dtos.modelo.MateriaRequestDTO;
+import com.bufigol.universidad.dtos.modelo.MateriaResponseDTO;
+import com.bufigol.universidad.interfaces.controladores.INT_MateriaController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+
+public class MateriaController implements INT_MateriaController {
+    @Override
+    public ResponseEntity<MateriaResponseDTO> createMateria(MateriaRequestDTO materiaRequest) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<MateriaResponseDTO> updateMateria(Long id, MateriaRequestDTO materiaRequest) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteMateria(Long id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<MateriaResponseDTO> getMateriaById(Long id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<List<MateriaResponseDTO>> getMateriasByAlumnoId(Long alumnoId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Page<MateriaResponseDTO>> getAllMaterias(Pageable pageable) {
+        return null;
+    }
+}

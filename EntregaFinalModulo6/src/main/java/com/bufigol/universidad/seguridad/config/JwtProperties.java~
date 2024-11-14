@@ -10,9 +10,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import java.time.Duration;
-import java.security.Key;
-import javax.crypto.spec.SecretKeySpec;
-import java.util.Base64;
 
 @Component
 @ConfigurationProperties(prefix = "jwt")
@@ -88,12 +85,4 @@ public class JwtProperties {
     }
 
     private Claims claims = new Claims();
-
-    /**
-     * Obtener la clave secreta como un objeto Key
-     */
-    public Key getSecretKey() {
-        byte[] keyBytes = Base64.getDecoder().decode(secret.getBytes());
-        return new SecretKeySpec(keyBytes, "HmacSHA256");
-    }
 }

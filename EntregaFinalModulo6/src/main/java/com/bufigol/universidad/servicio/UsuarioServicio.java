@@ -1,14 +1,12 @@
 package com.bufigol.universidad.servicio;
 
-import com.bufigol.universidad.configuracion.CustomPasswordEncoder;
+import com.bufigol.universidad.utils.CustomPasswordEncoder;
 import com.bufigol.universidad.excepciones.servicio.DuplicateResourceException;
 import com.bufigol.universidad.interfaces.servicio.INT_UsuarioServicio;
 import com.bufigol.universidad.modelo.Usuario;
 import com.bufigol.universidad.repositorio.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -4,7 +4,6 @@ import com.bufigol.universidad.excepciones.seguridad.JwtExpiredTokenException;
 import com.bufigol.universidad.excepciones.seguridad.JwtInvalidTokenException;
 import com.bufigol.universidad.seguridad.config.JwtProperties;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,14 +17,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
+import java.security.Key;
 import static com.bufigol.universidad.seguridad.constantes.ConstantesSeguridad.*;
 
 @Slf4j
@@ -34,12 +30,11 @@ import static com.bufigol.universidad.seguridad.constantes.ConstantesSeguridad.*
 public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
-    private SecretKey secretKey;
+    private Key secretKey;
 
     @PostConstruct
     protected void init() {
-        byte[] keyBytes = Base64.getDecoder().decode(jwtProperties.getSecret().getBytes(StandardCharsets.UTF_8));
-        this.secretKey = Keys.hmacShaKeyFor(keyBytes);
+        this.secretKey = jwtProperties.getSecretKey();
     }
 
     public String createToken(String username, List<String> roles) {
@@ -55,7 +50,7 @@ public class JwtTokenProvider {
                 .setExpiration(validity)
                 .setIssuer(jwtProperties.getIssuer())
                 .setAudience(jwtProperties.getAudience())
-                .signWith(secretKey)
+                .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
 
