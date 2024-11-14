@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Example;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Alumno {
+public class Alumno  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +37,10 @@ public class Alumno {
 
     @Column(length = 255)
     private String direccion;
+
+    @NotBlank(message = "La contraseña no puede estar vacía")
+    @Column(nullable = false)
+    private String password;
 
     @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Materia> materiaList = new HashSet<>();

@@ -15,6 +15,7 @@ public class AlumnoResponseDTO {
     private String rut;
     private String nombre;
     private String direccion;
+    private String password;
     private Set<MateriaResponseDTO> materias;
     private LocalDateTime createdAt;
 }

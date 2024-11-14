@@ -45,7 +45,7 @@ public class AlumnoMapper {
         alumno.setDireccion(dto.getDireccion());
     }
 
-    // Método para normalizar el formato del RUT
+
     private String normalizarRut(String rut) {
         if (rut == null) return null;
         return rut.replace(".", "").replace("-", "").toUpperCase();
