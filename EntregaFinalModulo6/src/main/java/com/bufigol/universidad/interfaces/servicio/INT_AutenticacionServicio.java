@@ -10,6 +10,4 @@ public interface INT_AutenticacionServicio {
     TokenResponseDTO signup(SignupRequestDTO signupRequest);
     boolean validateToken(String token);
     String getUsernameFromToken(String token);
-
-
 }

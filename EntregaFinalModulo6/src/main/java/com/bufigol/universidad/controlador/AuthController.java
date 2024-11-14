@@ -1,8 +1,9 @@
-package com.bufigol.universidad.controladores;
+package com.bufigol.universidad.controlador;
 
 import com.bufigol.universidad.dtos.autenticacion.LoginRequestDTO;
 import com.bufigol.universidad.dtos.autenticacion.SignupRequestDTO;
 import com.bufigol.universidad.dtos.autenticacion.TokenResponseDTO;
+import com.bufigol.universidad.interfaces.controladores.INT_AuthController;
 import com.bufigol.universidad.interfaces.servicio.INT_AutenticacionServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthController implements INT_AuthController {
 
     private final INT_AutenticacionServicio autenticacionServicio;
 
+    @Override
     @PostMapping("/signin")
     public ResponseEntity<TokenResponseDTO> authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequest) {
         log.debug("Solicitud de autenticación para usuario: {}", loginRequest.getUsername());
@@ -25,6 +27,7 @@ public class AuthController {
         return ResponseEntity.ok(tokenResponse);
     }
 
+    @Override
     @PostMapping("/signup")
     public ResponseEntity<TokenResponseDTO> registerUser(@Valid @RequestBody SignupRequestDTO signupRequest) {
         log.debug("Solicitud de registro para usuario: {}", signupRequest.getUsername());
