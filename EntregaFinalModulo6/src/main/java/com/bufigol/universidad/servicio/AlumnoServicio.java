@@ -1,5 +1,6 @@
 package com.bufigol.universidad.servicio;
 
+import com.bufigol.universidad.configuracion.CustomPasswordEncoder;
 import com.bufigol.universidad.dtos.mappers.AlumnoMapper;
 import com.bufigol.universidad.dtos.modelo.AlumnoRequestDTO;
 import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
@@ -9,7 +10,6 @@ import com.bufigol.universidad.interfaces.servicio.INT_AlumnoServicio;
 import com.bufigol.universidad.modelo.Alumno;
 import com.bufigol.universidad.repositorio.AlumnoRepository;
 import com.bufigol.universidad.utils.Comprobadores;
-import com.bufigol.universidad.utils.PasswordUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -29,6 +29,7 @@ public class AlumnoServicio implements INT_AlumnoServicio {
 
     private final AlumnoRepository alumnoRepository;
     private final AlumnoMapper alumnoMapper;
+    private final CustomPasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
@@ -46,7 +47,8 @@ public class AlumnoServicio implements INT_AlumnoServicio {
 
         try {
             Alumno alumno = alumnoMapper.toEntity(alumnoDTO);
-            alumno.setPassword(PasswordUtils.generarPasswordSegura(alumno.getPassword()));
+            // Usar CustomPasswordEncoder en lugar de PasswordUtils directamente
+            alumno.setPassword(passwordEncoder.encode(alumnoDTO.getPassword()));
 
             Alumno savedAlumno = alumnoRepository.save(alumno);
             log.info("Alumno creado exitosamente con ID: {}", savedAlumno.getId());
@@ -80,7 +82,11 @@ public class AlumnoServicio implements INT_AlumnoServicio {
 
         try {
             alumnoMapper.updateEntityFromDto(alumnoDTO, existingAlumno);
-            existingAlumno.setPassword(PasswordUtils.generarPasswordSegura(alumnoDTO.getPassword()));
+
+            // Solo actualizar la contraseña si se proporciona una nueva
+            if (alumnoDTO.getPassword() != null && !alumnoDTO.getPassword().isEmpty()) {
+                existingAlumno.setPassword(passwordEncoder.encode(alumnoDTO.getPassword()));
+            }
 
             Alumno updatedAlumno = alumnoRepository.save(existingAlumno);
             log.info("Alumno actualizado exitosamente con ID: {}", id);
@@ -151,7 +157,6 @@ public class AlumnoServicio implements INT_AlumnoServicio {
             throw new RuntimeException("Error al buscar alumnos por nombre", e);
         }
     }
-
 
     @Override
     @Transactional(readOnly = true)

@@ -55,7 +55,18 @@ ON CONFLICT DO NOTHING;
 
 -- Crear un usuario admin por defecto (password: admin123)
 INSERT INTO users (name, username, email, password)
-VALUES ('Administrator', 'admin', 'admin@universidad.com', '$2a$10$X7.H/7VYoE.wK9H2YX.O8OmJmhNz9/ZDpzHy.xQ4lB1jhP.VQUqyy')
+VALUES (
+           'Patricio Administrador',
+           'admin',
+           'admin@universidad.com',
+           'RDAwVFdqcWE3dDFBRUM5Wmgxb2M4QT09xdrQhr/AycAMyPQkduicpx1IcA+lUVuiYqC4llUt2f5WkwN/zVyEKTTnxUTwfiQw5CE='
+       );
+
+-- Asignar rol admin al usuario admin con pwd admin123
+INSERT INTO user_roles (user_id, role_id)
+SELECT u.id, r.id
+FROM users u, roles r
+WHERE u.username = 'admin' AND r.name = 'ROLE_ADMIN'
 ON CONFLICT DO NOTHING;
 
 -- Asignar rol admin al usuario admin
