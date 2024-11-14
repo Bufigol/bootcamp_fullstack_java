@@ -3,121 +3,180 @@ package com.bufigol.universidad.servicio;
 import com.bufigol.universidad.dtos.mappers.AlumnoMapper;
 import com.bufigol.universidad.dtos.modelo.AlumnoRequestDTO;
 import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
+import com.bufigol.universidad.excepciones.*;
 import com.bufigol.universidad.interfaces.servicio.INT_AlumnoServicio;
 import com.bufigol.universidad.modelo.Alumno;
 import com.bufigol.universidad.repositorio.AlumnoRepository;
 import com.bufigol.universidad.utils.Comprobadores;
 import com.bufigol.universidad.utils.PasswordUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
+@Slf4j
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class AlumnoServicio implements INT_AlumnoServicio {
 
-    @Autowired
     private final AlumnoRepository alumnoRepository;
     private final AlumnoMapper alumnoMapper;
 
-    public AlumnoServicio() {
-        this.alumnoRepository = new AlumnoRepository();
-        this.alumnoMapper = new AlumnoMapper();
-    }
-
     @Override
+    @Transactional
     public AlumnoResponseDTO create(AlumnoRequestDTO alumnoDTO) {
-        Alumno alumno = alumnoMapper.toEntity(alumnoDTO);
-        if( !alumnoRepository.existsByRut( alumno.getRut() ) ){
-            alumno.setPassword( PasswordUtils.generarPasswordSegura( alumno.getPassword() ) );
-            return this.alumnoMapper.toDto( alumnoRepository.save(alumno) );
-        }else{
-            System.out.println("El alumno ya existe");
-            Optional<Alumno> optAlumno = alumnoRepository.findByRut( alumnoDTO.getRut() );
-            if (optAlumno.isPresent()) {
-                alumno = optAlumno.get();
-                return this.alumnoMapper.toDto( alumno );
-            }else{
-                // TODO: Agregar manejo de excepciones
-                return null;
-            }
+        Assert.notNull(alumnoDTO, "El DTO del alumno no puede ser nulo");
+        log.debug("Creando nuevo alumno con RUT: {}", alumnoDTO.getRut());
+
+        if (!Comprobadores.isValidRUT(alumnoDTO.getRut())) {
+            throw new IllegalArgumentException("El RUT proporcionado no es válido");
         }
-    }
 
-    @Override
-    public AlumnoResponseDTO update(Long id, AlumnoRequestDTO alumnoDTO) {
-        Alumno alumno = this.alumnoMapper.toEntity(alumnoDTO);
-        if( this.alumnoRepository.existsById(id) ){
-            alumno.setPassword( PasswordUtils.generarPasswordSegura(alumnoDTO.getPassword()) );
-            return this.alumnoMapper.toDto( this.alumnoRepository.save(alumno) );
-        }else{
-            // TODO añadir manejo de error de id no encontrado
-            return null;
+        if (alumnoRepository.existsByRut(alumnoDTO.getRut())) {
+            throw new DuplicateResourceException("Alumno", "rut", alumnoDTO.getRut());
         }
-    }
 
-    @Override
-    public void delete(Long id) {
-        if( !this.alumnoRepository.existsById(id) ){
-            this.alumnoRepository.deleteById(id);
-        }else{
-            // TODO: Agregar manejo de excepciones
-            System.out.println("ID no encontrado");
-        }
-       
-    }
-
-    @Override
-    public Optional<AlumnoResponseDTO> findById(Long id) {
-        return this.alumnoRepository.findById(id).map(this.alumnoMapper::toDto);
-    }
-
-    @Override
-    public Optional<AlumnoResponseDTO> findByRut(String rut) {
-        if(Comprobadores.isValidRUT(rut)){
-            Alumno alumno = this.alumnoRepository.findByRut(rut).orElse(null);
-            assert alumno != null;
-            return Optional.of(this.alumnoMapper.toDto(alumno));
-        }else{
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public List<AlumnoResponseDTO> findByNombreContaining(String nombre) {
         try {
-            List<Alumno> alumnos = this.alumnoRepository.findByNombreContainingIgnoreCase(nombre);
-            return alumnos.stream().map(this.alumnoMapper::toDto).toList();
+            Alumno alumno = alumnoMapper.toEntity(alumnoDTO);
+            alumno.setPassword(PasswordUtils.generarPasswordSegura(alumno.getPassword()));
 
+            Alumno savedAlumno = alumnoRepository.save(alumno);
+            log.info("Alumno creado exitosamente con ID: {}", savedAlumno.getId());
+
+            return alumnoMapper.toDto(savedAlumno);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error("Error al crear alumno: {}", e.getMessage());
+            throw new RuntimeException("Error al crear el alumno", e);
         }
-        return List.of();
     }
 
     @Override
+    @Transactional
+    public AlumnoResponseDTO update(Long id, AlumnoRequestDTO alumnoDTO) {
+        Assert.notNull(id, "El ID no puede ser nulo");
+        Assert.notNull(alumnoDTO, "El DTO del alumno no puede ser nulo");
+        log.debug("Actualizando alumno con ID: {}", id);
+
+        if (!Comprobadores.isValidRUT(alumnoDTO.getRut())) {
+            throw new IllegalArgumentException("El RUT proporcionado no es válido");
+        }
+
+        Alumno existingAlumno = alumnoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Alumno", "id", id));
+
+        // Verificar si el nuevo RUT ya existe y no pertenece al mismo alumno
+        if (!existingAlumno.getRut().equals(alumnoDTO.getRut()) &&
+                alumnoRepository.existsByRut(alumnoDTO.getRut())) {
+            throw new DuplicateResourceException("Alumno", "rut", alumnoDTO.getRut());
+        }
+
+        try {
+            alumnoMapper.updateEntityFromDto(alumnoDTO, existingAlumno);
+            existingAlumno.setPassword(PasswordUtils.generarPasswordSegura(alumnoDTO.getPassword()));
+
+            Alumno updatedAlumno = alumnoRepository.save(existingAlumno);
+            log.info("Alumno actualizado exitosamente con ID: {}", id);
+
+            return alumnoMapper.toDto(updatedAlumno);
+        } catch (Exception e) {
+            log.error("Error al actualizar alumno con ID {}: {}", id, e.getMessage());
+            throw new RuntimeException("Error al actualizar el alumno", e);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        Assert.notNull(id, "El ID no puede ser nulo");
+        log.debug("Eliminando alumno con ID: {}", id);
+
+        if (!alumnoRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Alumno", "id", id);
+        }
+
+        try {
+            alumnoRepository.deleteById(id);
+            log.info("Alumno eliminado exitosamente con ID: {}", id);
+        } catch (Exception e) {
+            log.error("Error al eliminar alumno con ID {}: {}", id, e.getMessage());
+            throw new RuntimeException("Error al eliminar el alumno", e);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<AlumnoResponseDTO> findById(Long id) {
+        Assert.notNull(id, "El ID no puede ser nulo");
+        log.debug("Buscando alumno por ID: {}", id);
+
+        return alumnoRepository.findById(id)
+                .map(alumnoMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<AlumnoResponseDTO> findByRut(String rut) {
+        Assert.hasText(rut, "El RUT no puede estar vacío");
+        log.debug("Buscando alumno por RUT: {}", rut);
+
+        if (!Comprobadores.isValidRUT(rut)) {
+            throw new IllegalArgumentException("El RUT proporcionado no es válido");
+        }
+
+        return alumnoRepository.findByRut(rut)
+                .map(alumnoMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AlumnoResponseDTO> findByNombreContaining(String nombre) {
+        Assert.hasText(nombre, "El nombre no puede estar vacío");
+        log.debug("Buscando alumnos por nombre que contenga: {}", nombre);
+
+        try {
+            return alumnoRepository.findByNombreContainingIgnoreCase(nombre)
+                    .stream()
+                    .map(alumnoMapper::toDto)
+                    .toList();
+        } catch (Exception e) {
+            log.error("Error al buscar alumnos por nombre: {}", e.getMessage());
+            throw new RuntimeException("Error al buscar alumnos por nombre", e);
+        }
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
     public Page<AlumnoResponseDTO> findAll(Pageable pageable) {
-        if( pageable != null ){
-            return this.alumnoRepository.findAll(pageable).map(this.alumnoMapper::toDto);
-        }
-        else {
-            return null;
-        }
+        Assert.notNull(pageable, "El objeto Pageable no puede ser nulo");
+        log.debug("Obteniendo página {} de alumnos", pageable.getPageNumber());
 
+        try {
+            return alumnoRepository.findAll(pageable)
+                    .map(alumnoMapper::toDto);
+        } catch (Exception e) {
+            log.error("Error al obtener la página de alumnos: {}", e.getMessage());
+            throw new RuntimeException("Error al obtener la página de alumnos", e);
+        }
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existsByRut(String rut) {
-        if(Comprobadores.isValidRUT(rut)){
-            return this.alumnoRepository.existsByRut(rut);
-        }else{
-            return false;
+        Assert.hasText(rut, "El RUT no puede estar vacío");
+        log.debug("Verificando existencia de alumno por RUT: {}", rut);
+
+        if (!Comprobadores.isValidRUT(rut)) {
+            throw new IllegalArgumentException("El RUT proporcionado no es válido");
         }
+
+        return alumnoRepository.existsByRut(rut);
     }
 }
