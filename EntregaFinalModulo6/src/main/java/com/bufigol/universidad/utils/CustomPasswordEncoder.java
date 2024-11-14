@@ -1,6 +1,5 @@
-package com.bufigol.universidad.configuracion;
+package com.bufigol.universidad.utils;
 
-import com.bufigol.universidad.utils.PasswordUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

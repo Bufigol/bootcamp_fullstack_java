@@ -1,6 +1,6 @@
 package com.bufigol.universidad.servicio;
 
-import com.bufigol.universidad.configuracion.CustomPasswordEncoder;
+import com.bufigol.universidad.utils.CustomPasswordEncoder;
 import com.bufigol.universidad.dtos.mappers.AlumnoMapper;
 import com.bufigol.universidad.dtos.modelo.AlumnoRequestDTO;
 import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
