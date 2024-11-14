@@ -47,9 +47,6 @@ public class AlumnoServicio implements INT_AlumnoServicio {
 
         try {
             Alumno alumno = alumnoMapper.toEntity(alumnoDTO);
-            // Usar CustomPasswordEncoder en lugar de PasswordUtils directamente
-            alumno.setPassword(passwordEncoder.encode(alumnoDTO.getPassword()));
-
             Alumno savedAlumno = alumnoRepository.save(alumno);
             log.info("Alumno creado exitosamente con ID: {}", savedAlumno.getId());
 
@@ -82,12 +79,6 @@ public class AlumnoServicio implements INT_AlumnoServicio {
 
         try {
             alumnoMapper.updateEntityFromDto(alumnoDTO, existingAlumno);
-
-            // Solo actualizar la contraseña si se proporciona una nueva
-            if (alumnoDTO.getPassword() != null && !alumnoDTO.getPassword().isEmpty()) {
-                existingAlumno.setPassword(passwordEncoder.encode(alumnoDTO.getPassword()));
-            }
-
             Alumno updatedAlumno = alumnoRepository.save(existingAlumno);
             log.info("Alumno actualizado exitosamente con ID: {}", id);
 

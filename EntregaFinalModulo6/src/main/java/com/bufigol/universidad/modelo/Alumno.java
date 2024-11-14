@@ -38,10 +38,6 @@ public class Alumno  {
     @Column(length = 255)
     private String direccion;
 
-    @NotBlank(message = "La contraseña no puede estar vacía")
-    @Column(nullable = false)
-    private String password;
-
     @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Materia> materiaList = new HashSet<>();
 

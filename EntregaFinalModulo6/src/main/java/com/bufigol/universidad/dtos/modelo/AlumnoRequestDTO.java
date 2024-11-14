@@ -22,7 +22,4 @@ public class AlumnoRequestDTO {
     private String nombre;
 
     private String direccion;
-
-    @NotBlank(message = "El nombre no puede estar vacío")
-    private String password;
 }
