@@ -1,0 +1,47 @@
+package com.bufigol.universidad.controlador;
+
+import com.bufigol.universidad.dtos.modelo.AlumnoRequestDTO;
+import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
+import com.bufigol.universidad.interfaces.controladores.INT_AlumnoController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+
+public class AlumnoController implements INT_AlumnoController {
+    @Override
+    public ResponseEntity<AlumnoResponseDTO> createAlumno(AlumnoRequestDTO alumnoRequest) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<AlumnoResponseDTO> updateAlumno(Long id, AlumnoRequestDTO alumnoRequest) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteAlumno(Long id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<AlumnoResponseDTO> getAlumnoById(Long id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<AlumnoResponseDTO> getAlumnoByRut(String rut) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<List<AlumnoResponseDTO>> searchAlumnosByNombre(String nombre) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Page<AlumnoResponseDTO>> getAllAlumnos(Pageable pageable) {
+        return null;
+    }
+}
