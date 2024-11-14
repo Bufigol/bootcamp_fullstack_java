@@ -1,6 +1,6 @@
 package com.bufigol.universidad.servicio;
 
-import com.bufigol.universidad.excepciones.DuplicateResourceException;
+import com.bufigol.universidad.excepciones.servicio.DuplicateResourceException;
 import com.bufigol.universidad.interfaces.servicio.INT_RoleServicio;
 import com.bufigol.universidad.modelo.Role;
 import com.bufigol.universidad.repositorio.RoleRepository;

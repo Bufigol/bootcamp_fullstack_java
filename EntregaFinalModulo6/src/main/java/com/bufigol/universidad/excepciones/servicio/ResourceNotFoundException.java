@@ -1,4 +1,4 @@
-package com.bufigol.universidad.excepciones;
+package com.bufigol.universidad.excepciones.servicio;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

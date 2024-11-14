@@ -1,7 +1,7 @@
 package com.bufigol.universidad.servicio;
 
 import com.bufigol.universidad.configuracion.CustomPasswordEncoder;
-import com.bufigol.universidad.excepciones.DuplicateResourceException;
+import com.bufigol.universidad.excepciones.servicio.DuplicateResourceException;
 import com.bufigol.universidad.interfaces.servicio.INT_UsuarioServicio;
 import com.bufigol.universidad.modelo.Usuario;
 import com.bufigol.universidad.repositorio.UserRepository;
