@@ -1,0 +1,4 @@
+package com.bufigol.universidad.validacion;
+
+public class RutValidator {
+}
