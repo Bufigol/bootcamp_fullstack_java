@@ -1,0 +1,8 @@
+package com.bufigol.universidad.excepciones.seguridad;
+
+import org.springframework.security.core.AuthenticationException;
+
+import java.io.Serial;
+
+public class JwtAuthenticationException extends AuthenticationException{
+}
