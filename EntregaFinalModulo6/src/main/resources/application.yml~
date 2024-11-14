@@ -1,18 +1,25 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/universidad_db
+    url: jdbc:postgresql://localhost:5432/universidad_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
-    hibernate:
-      ddl-auto: validate  # Cambiado de update a validate
-    show-sql: true
     properties:
       hibernate:
-        format_sql: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-logging:
-  level:
-    com.bufigol.universidad.servicio: DEBUG
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  security:
+    user:
+      name: admin
+      password: admin123
+
+jwt:
+  secret: c3B9OBciuBQOq6N6GdO8dLMNMO1Uy16pnzBIpWp2
+  expiration: 3600000
+  refresh-expiration: 7200000
+
+server:
+  port: 8080
