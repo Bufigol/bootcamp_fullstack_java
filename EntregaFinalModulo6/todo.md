@@ -12,9 +12,9 @@
 - [ ] Mover lógica de mapeo compleja a clases de utilidad
 
 ### 1.2 Seguridad
-- [ ] Crear interfaz `TokenService`
-- [ ] Extraer lógica de tokens de `JwtTokenProvider`
-- [ ] Implementar nuevo servicio de tokens
+- [x] Crear interfaz `TokenService`
+- [x] Extraer lógica de tokens de `JwtTokenProvider`
+- [x] Implementar nuevo servicio de tokens
 - [ ] Refactorizar `AutenticacionServicio`
 
 ## 2. Actualización de Dependencias
@@ -23,13 +23,13 @@
 - [x] Actualizar `jjwt-api` a 0.12.3
 - [x] Actualizar `jjwt-impl` a 0.12.3
 - [x] Actualizar `jjwt-jackson` a 0.12.3
-- [ ] Revisar y adaptar código afectado
-    - [ ] Revisar `JwtTokenProvider`
-    - [ ] Actualizar métodos de generación de tokens
-    - [ ] Actualizar métodos de validación
+- [x] Revisar y adaptar código afectado
+    - [x] Revisar `JwtTokenProvider`
+    - [x] Actualizar métodos de generación de tokens
+    - [x] Actualizar métodos de validación
 
 ### 2.2 Verificación de Compatibilidad
-- [ ] Verificar compatibilidad con Spring Boot 3.2.3
+- [x] Verificar compatibilidad con Spring Boot 3.2.3
 - [ ] Ejecutar pruebas de integración
 - [ ] Verificar funcionalidad de autenticación
 - [ ] Documentar cambios realizados
@@ -37,9 +37,9 @@
 ## 3. Consideraciones de Java Version
 
 ### 3.1 Evaluación de Migración
-- [ ] Documentar características de Java 23 en uso
-- [ ] Identificar uso de features preview
-- [ ] Evaluar impacto de migración a Java 21
+- [x] Documentar características de Java 23 en uso
+- [x] Identificar uso de features preview
+- [x] Evaluar impacto de migración a Java 21
 - [ ] Crear plan de migración si se decide cambiar
 
 ### 3.2 Documentación
@@ -51,14 +51,7 @@
 ## 4. Mejoras en Testing
 
 ### 4.1 Configuración de H2
-- [ ] Agregar dependencia H2
-```xml
-<dependency>
-    <groupId>com.h2database</groupId>
-    <artifactId>h2</artifactId>
-    <scope>test</scope>
-</dependency>
-```
+- [x] Agregar dependencia H2
 - [ ] Configurar perfil de pruebas
 - [ ] Crear archivo `application-test.yml`
 - [ ] Configurar datasource de pruebas
@@ -72,54 +65,34 @@
 ## 5. Gestión de Dependencias
 
 ### 5.1 Implementación de BOM
-- [ ] Crear sección `dependencyManagement`
-- [ ] Definir versiones en properties
-- [ ] Centralizar gestión de versiones
+- [x] Crear sección `dependencyManagement`
+- [x] Definir versiones en properties
+- [x] Centralizar gestión de versiones
 - [ ] Documentar gestión de dependencias
 
 ### 5.2 Seguridad
-- [ ] Verificar dependencias de seguridad
-- [ ] Agregar dependencias de testing faltantes
+- [x] Verificar dependencias de seguridad
+- [x] Agregar dependencias de testing faltantes
 - [ ] Configurar Spring Security
 - [ ] Implementar pruebas de seguridad
 
-## 6. Documentación
+## 8. Revisión de Código
+1. Actualizar JwtProperties
+    - [ ] Modificar la generación de clave secreta
+    - [ ] Agregar validaciones
+    - [ ] Actualizar configuración en application.yml
 
-### 6.1 Actualización de Documentación
-- [ ] Actualizar README.md
-- [ ] Documentar configuración de seguridad
-- [ ] Actualizar guías de desarrollo
-- [ ] Documentar procedimientos de prueba
+2. Actualizar JwtAuthenticationFilter
+    - [ ] Adaptar al nuevo JwtTokenProvider
+    - [ ] Mejorar manejo de errores
+    - [ ] Agregar logging detallado
 
-### 6.2 Guías de Contribución
-- [ ] Crear guía de contribución
-- [ ] Documentar estándares de código
-- [ ] Establecer proceso de PR
-- [ ] Definir flujo de trabajo Git
+3. Actualizar SecurityConfig
+    - [ ] Configurar nuevos beans de seguridad
+    - [ ] Actualizar configuración de filtros
+    - [ ] Revisar políticas de seguridad
 
-## 7. Monitoreo de Progreso
-
-- [ ] Crear issues en el repositorio para cada tarea
-- [ ] Asignar prioridades
-- [ ] Establecer timeline
-- [ ] Programar revisiones de código
-- [ ] Validar cambios implementados
-
-## Notas Importantes
-
-1. **Prioridades**:
-    - Alta: Actualización JJWT y resolución de dependencias cíclicas
-    - Media: Implementación de pruebas y documentación
-    - Baja: Migración de versión de Java
-
-2. **Precauciones**:
-    - Realizar backups antes de actualizaciones
-    - Mantener rama principal estable
-    - Documentar todos los cambios
-    - Validar en ambiente de desarrollo
-
-3. **Validación**:
-    - Ejecutar suite completa de pruebas
-    - Verificar funcionalidad de seguridad
-    - Validar rendimiento
-    - Revisar logs y mensajes de error
+4. Actualizar AutenticacionServicio
+    - [ ] Adaptar a nuevo manejo de tokens
+    - [ ] Mejorar manejo de errores
+    - [ ] Actualizar process de login/registro
