@@ -1,4 +1,4 @@
-# Checklist de Mejoras del Proyecto Universidad
+# Checklist Completo de Mejoras del Proyecto Universidad
 
 ## 1. Resolución de Dependencias Cíclicas
 
@@ -15,7 +15,7 @@
 - [x] Crear interfaz `TokenService`
 - [x] Extraer lógica de tokens de `JwtTokenProvider`
 - [x] Implementar nuevo servicio de tokens
-- [ ] Refactorizar `AutenticacionServicio`
+- [x] Refactorizar `AutenticacionServicio`
 
 ## 2. Actualización de Dependencias
 
@@ -76,23 +76,95 @@
 - [ ] Configurar Spring Security
 - [ ] Implementar pruebas de seguridad
 
-## 8. Revisión de Código
-1. Actualizar JwtProperties
-    - [ ] Modificar la generación de clave secreta
-    - [ ] Agregar validaciones
-    - [ ] Actualizar configuración en application.yml
+## 6. Revisión de AutenticacionServicio
 
-2. Actualizar JwtAuthenticationFilter
-    - [ ] Adaptar al nuevo JwtTokenProvider
-    - [ ] Mejorar manejo de errores
-    - [ ] Agregar logging detallado
+### 6.1 Problemas Identificados
+- [ ] Validar imports y dependencias
+- [ ] Verificar manejo de excepciones
+- [ ] Revisar ciclo de vida de las transacciones
+- [ ] Comprobar inyección de dependencias
 
-3. Actualizar SecurityConfig
-    - [ ] Configurar nuevos beans de seguridad
-    - [ ] Actualizar configuración de filtros
-    - [ ] Revisar políticas de seguridad
+### 6.2 Mejoras Necesarias
+- [ ] Crear clases de soporte para excepciones
+    - [ ] `AuthenticationException`
+    - [ ] `TokenException`
+    - [ ] `ValidationException`
+- [ ] Implementar constantes para mensajes
+    - [ ] Crear clase `SecurityMessages`
+    - [ ] Crear clase `ValidationMessages`
+- [ ] Actualizar modelo Usuario
+    - [ ] Agregar builder
+    - [ ] Mejorar validaciones
+- [ ] Optimizar manejo de tokens
+    - [ ] Implementar cache de tokens
+    - [ ] Mejorar validación de expiración
 
-4. Actualizar AutenticacionServicio
-    - [ ] Adaptar a nuevo manejo de tokens
-    - [ ] Mejorar manejo de errores
-    - [ ] Actualizar process de login/registro
+### 6.3 Testing Específico
+- [ ] Crear pruebas unitarias para AutenticacionServicio
+- [ ] Implementar pruebas de integración
+- [ ] Verificar escenarios de error
+- [ ] Validar manejo de tokens
+
+## 7. Revisión de Configuración
+
+### 7.1 Actualizar JwtProperties
+- [ ] Modificar la generación de clave secreta
+- [ ] Agregar validaciones
+- [ ] Actualizar configuración en application.yml
+
+### 7.2 Actualizar JwtAuthenticationFilter
+- [ ] Adaptar al nuevo JwtTokenProvider
+- [ ] Mejorar manejo de errores
+- [ ] Agregar logging detallado
+
+### 7.3 Actualizar SecurityConfig
+- [ ] Configurar nuevos beans de seguridad
+- [ ] Actualizar configuración de filtros
+- [ ] Revisar políticas de seguridad
+
+## 8. Documentación
+
+### 8.1 Actualización de Documentación
+- [ ] Actualizar README.md
+- [ ] Documentar configuración de seguridad
+- [ ] Actualizar guías de desarrollo
+- [ ] Documentar procedimientos de prueba
+
+### 8.2 Guías de Contribución
+- [ ] Crear guía de contribución
+- [ ] Documentar estándares de código
+- [ ] Establecer proceso de PR
+- [ ] Definir flujo de trabajo Git
+
+## 9. Monitoreo de Progreso
+
+- [ ] Crear issues en el repositorio para cada tarea
+- [ ] Asignar prioridades
+- [ ] Establecer timeline
+- [ ] Programar revisiones de código
+- [ ] Validar cambios implementados
+
+## Notas Importantes
+
+1. **Prioridades Actualizadas**:
+    - Alta: Implementación de clases de soporte para AutenticacionServicio
+    - Media: Pruebas y documentación
+    - Baja: Migración de versión de Java
+
+2. **Precauciones**:
+    - Realizar backups antes de actualizaciones
+    - Mantener rama principal estable
+    - Documentar todos los cambios
+    - Validar en ambiente de desarrollo
+
+3. **Validación**:
+    - Ejecutar suite completa de pruebas
+    - Verificar funcionalidad de seguridad
+    - Validar rendimiento
+    - Revisar logs y mensajes de error
+
+4. **Siguiente Sprint**:
+    - Completar implementación de clases de soporte
+    - Realizar pruebas de integración
+    - Actualizar documentación
+    - Revisar seguridad general

@@ -37,19 +37,18 @@ public class UsuarioServicio implements INT_UsuarioServicio {
 
         log.debug("Registrando nuevo usuario: {}", usuario.getUsername());
 
-        // Verificar si el username ya existe
         if (existsByUsername(usuario.getUsername())) {
             throw new DuplicateResourceException("Usuario", "username", usuario.getUsername());
         }
 
-        // Verificar si el email ya existe
         if (existsByEmail(usuario.getEmail())) {
             throw new DuplicateResourceException("Usuario", "email", usuario.getEmail());
         }
 
         try {
             // Encriptar la contraseña usando nuestro CustomPasswordEncoder
-            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+            String encodedPassword = passwordEncoder.encode(usuario.getPassword());
+            usuario.setPassword(encodedPassword);
 
             Usuario savedUser = userRepository.save(usuario);
             log.info("Usuario registrado exitosamente con ID: {}", savedUser.getId());
@@ -118,6 +117,7 @@ public class UsuarioServicio implements INT_UsuarioServicio {
             throw new RuntimeException("Error al verificar existencia de usuario", e);
         }
     }
+
 
     @Override
     @Transactional(readOnly = true)

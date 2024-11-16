@@ -1,7 +1,8 @@
 package com.bufigol.universidad.seguridad.jwt;
 
-import com.bufigol.universidad.excepciones.seguridad.JwtExpiredTokenException;
+
 import com.bufigol.universidad.excepciones.seguridad.JwtInvalidTokenException;
+import com.bufigol.universidad.excepciones.seguridad.JwtExpiredTokenException;
 import com.bufigol.universidad.seguridad.config.JwtProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -51,7 +52,7 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token) {
-        Claims claims = getClaims(token);
+       Claims claims = getClaims(token);
         List<SimpleGrantedAuthority> authorities = getRolesFromClaims(claims);
 
         User principal = new User(
@@ -69,7 +70,7 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()
+            Jwts.parser()
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token);
@@ -86,6 +87,7 @@ public class JwtTokenProvider {
         } catch (UnsupportedJwtException e) {
             log.error("Token JWT no soportado: {}", e.getMessage());
             throw new JwtInvalidTokenException(token, "Token no soportado");
+
         } catch (IllegalArgumentException e) {
             log.error("JWT claims string está vacío: {}", e.getMessage());
             throw new JwtInvalidTokenException(token, "Claims vacíos");
@@ -106,7 +108,7 @@ public class JwtTokenProvider {
 
     private Claims getClaims(String token) {
         try {
-            return Jwts.parserBuilder()
+            return Jwts.parser()
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token)
