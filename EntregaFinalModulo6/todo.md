@@ -31,8 +31,8 @@
 ### 2.2 Verificación de Compatibilidad
 - [x] Verificar compatibilidad con Spring Boot 3.2.3
 - [ ] Ejecutar pruebas de integración
-- [ ] Verificar funcionalidad de autenticación
-- [ ] Documentar cambios realizados
+- [x] Verificar funcionalidad de autenticación
+- [x] Documentar cambios realizados
 
 ## 3. Consideraciones de Java Version
 
@@ -73,16 +73,16 @@
 ### 5.2 Seguridad
 - [x] Verificar dependencias de seguridad
 - [x] Agregar dependencias de testing faltantes
-- [ ] Configurar Spring Security
+- [x] Configurar Spring Security
 - [ ] Implementar pruebas de seguridad
 
 ## 6. Revisión de AutenticacionServicio
 
 ### 6.1 Problemas Identificados
-- [ ] Validar imports y dependencias
+- [x] Validar imports y dependencias
 - [ ] Verificar manejo de excepciones
 - [ ] Revisar ciclo de vida de las transacciones
-- [ ] Comprobar inyección de dependencias
+- [x] Comprobar inyección de dependencias
 
 ### 6.2 Mejoras Necesarias
 - [ ] Crear clases de soporte para excepciones
@@ -113,14 +113,14 @@
 - [ ] Actualizar configuración en application.yml
 
 ### 7.2 Actualizar JwtAuthenticationFilter
-- [ ] Adaptar al nuevo JwtTokenProvider
+- [x] Adaptar al nuevo JwtTokenProvider
 - [ ] Mejorar manejo de errores
 - [ ] Agregar logging detallado
 
 ### 7.3 Actualizar SecurityConfig
-- [ ] Configurar nuevos beans de seguridad
-- [ ] Actualizar configuración de filtros
-- [ ] Revisar políticas de seguridad
+- [x] Configurar nuevos beans de seguridad
+- [x] Actualizar configuración de filtros
+- [x] Revisar políticas de seguridad
 
 ## 8. Documentación
 
