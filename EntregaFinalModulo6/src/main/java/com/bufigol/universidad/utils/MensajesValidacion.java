@@ -30,7 +30,7 @@ public class MensajesValidacion {
 
     // Mensajes para validación de roles
     public static final String ROLES_REQUERIDOS = "Debe seleccionar al menos un rol";
-    public static final String ROLES_INVALIDOS = "Uno o más roles seleccionados no son válidos";
+    public static final String ROLES_INVALIDOS = "Los roles permitidos son: ROLE_ADMIN y ROLE_CLIENT";
     public static final String ROLES_MAXIMOS_EXCEDIDOS = "Se ha excedido el número máximo de roles permitidos";
 
     // Mensajes generales de registro

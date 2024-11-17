@@ -62,9 +62,10 @@ public class SignupRequestDTO {
      * Valida que los roles proporcionados sean válidos
      */
     @AssertTrue(message = MensajesValidacion.ROLES_INVALIDOS)
-    public boolean hasValidRoles() {
+    public boolean isValidRoles() {
         return roles != null && roles.stream()
-                .allMatch(role -> role.equals(ROLE_ADMIN) || role.equals(ROLE_USER));
+                .allMatch(role -> role.equals(ROLE_ADMIN) ||
+                        role.equals(ROLE_CLIENT));
     }
 
     /**
@@ -83,9 +84,7 @@ public class SignupRequestDTO {
         return roles == null || roles.size() <= MAX_ROLES_PER_USER;
     }
 
-    /**
-     * Méto do para preparar los roles añadiendo el prefijo si es necesario
-     */
+
     public void normalizeRoles() {
         if (roles != null) {
             roles = roles.stream()

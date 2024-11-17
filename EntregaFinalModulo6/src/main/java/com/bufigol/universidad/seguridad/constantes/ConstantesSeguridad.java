@@ -37,7 +37,7 @@ public class ConstantesSeguridad {
     // Constantes de Roles y Autorización
     // ========================================
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
-    public static final String ROLE_USER = "ROLE_USER";
+    public static final String ROLE_CLIENT = "ROLE_CLIENT";
     public static final String ROLE_PREFIX = "ROLE_";
 
     // Mensajes de autenticación
@@ -90,11 +90,18 @@ public class ConstantesSeguridad {
     public static final String[] PUBLIC_URLS = {
             "/api/auth/**",
             "/api/public/**",
+            "/",
+            "/login",
+            "/registro",
+            "/error",
+            "/css/**",
+            "/js/**",
+            "/images/**",
+            "/webjars/**",
             "/swagger-ui/**",
             "/v3/api-docs/**",
             "/actuator/health"
     };
-
     // ========================================
     // Configuración CORS
     // ========================================

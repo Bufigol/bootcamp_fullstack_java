@@ -32,7 +32,7 @@ public class HomeController implements INT_HomeController {
     private final INT_UsuarioServicio usuarioServicio;
 
     @Override
-    @GetMapping("/")
+    @GetMapping("/home")
     public String showHomePage(Model model) {
         log.debug("Mostrando página de inicio");
         try {
@@ -45,6 +45,11 @@ public class HomeController implements INT_HomeController {
             handleError(model, "Error al cargar la página de inicio", e);
             return "error";
         }
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "index";
     }
 
     @Override

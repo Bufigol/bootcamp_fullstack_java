@@ -7,6 +7,7 @@ import com.bufigol.universidad.utils.CustomPasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -35,19 +36,62 @@ public class SecurityConfig {
     private final JwtTokenProvider tokenProvider;
     private final UsuarioServicio usuarioServicio;
     private final CustomPasswordEncoder customPasswordEncoder;
+    public static final String[] STATIC_RESOURCES = {
+            "/css/**",
+            "/js/**",
+            "/img/**",
+            "/webjars/**"
+    };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable)  // Mantener deshabilitado para la API REST
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
+                        // Rutas públicas existentes
                         .requestMatchers(PUBLIC_URLS).permitAll()
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        // Nuevas rutas para vistas públicas
+                        .requestMatchers("/", "/login", "/registro", "/error").permitAll()
+                        // Recursos estáticos
+                        .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**",
+                                "/favicon.ico").permitAll()
+                        // Documentación API
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        // Rutas de administrador
+                        .requestMatchers("/api/admin/**", "/admin/**").hasRole("ADMIN")
+                        // Otras rutas protegidas
                         .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/api/auth/signin")  // URL para procesar el login via API
+                        .defaultSuccessUrl("/home", true)        // true fuerza la redirección
+                        .failureUrl("/login?error")             // URL en caso de error
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .deleteCookies("JSESSIONID", "JWT_TOKEN") // Limpia las cookies relevantes
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .permitAll()
+                )
+                .exceptionHandling(exceptions -> exceptions
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            // Para peticiones API
+                            if (request.getRequestURI().startsWith("/api/")) {
+                                response.sendError(HttpStatus.UNAUTHORIZED.value(),
+                                        "No autorizado");
+                            } else {
+                                // Para peticiones web
+                                response.sendRedirect("/login");
+                            }
+                        })
                 )
                 .userDetailsService(usuarioServicio)
                 .addFilterBefore(
