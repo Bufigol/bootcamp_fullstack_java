@@ -1,4 +1,4 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
 import com.bufigol.universidad.dtos.modelo.MateriaResponseDTO;
@@ -31,8 +31,15 @@ public class HomeController implements INT_HomeController {
     private final INT_MateriasServicio materiasServicio;
     private final INT_UsuarioServicio usuarioServicio;
 
-    @Override
+
     @GetMapping("/")
+    public String showIndex(Model model) {
+        return "index";
+    }
+
+
+    @Override
+    @GetMapping("/home")
     public String showHomePage(Model model) {
         log.debug("Mostrando página de inicio");
         try {

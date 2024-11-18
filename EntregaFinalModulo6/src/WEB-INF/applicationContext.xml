@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- Escaneo de componentes -->
+    <context:component-scan base-package="com.bufigol.universidad" />
+
+    <!-- Configuración de la base de datos -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5433/universidad_db" />
+        <property name="username" value="postgres" />
+        <property name="password" value="postgres" />
+    </bean>
+
+    <!-- Configuración de JPA -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.bufigol.universidad.modelo" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true" />
+                <property name="generateDdl" value="true" />
+                <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
+            </bean>
+        </property>
+    </bean>
+
+    <!-- Configuración de transacciones -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- Configuración de repositorios -->
+    <bean id="alumnoRepository" class="com.bufigol.universidad.repositorio.AlumnoRepository" />
+    <bean id="materiaRepository" class="com.bufigol.universidad.repositorio.MateriaRepository" />
+    <bean id="userRepository" class="com.bufigol.universidad.repositorio.UserRepository" />
+
+    <!-- Configuración de servicios -->
+    <bean id="alumnoServicio" class="com.bufigol.universidad.servicio.AlumnoServicio" />
+    <bean id="materiasServicio" class="com.bufigol.universidad.servicio.MateriasServicio" />
+    <bean id="usuarioServicio" class="com.bufigol.universidad.servicio.UsuarioServicio" />
+
+    <!-- Configuración de seguridad -->
+    <bean id="customPasswordEncoder" class="com.bufigol.universidad.utils.CustomPasswordEncoder" />
+    <bean id="jwtTokenProvider" class="com.bufigol.universidad.seguridad.jwt.JwtTokenProvider" />
+
+</beans>

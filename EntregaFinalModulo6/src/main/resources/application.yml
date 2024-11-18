@@ -1,5 +1,8 @@
 spring:
-
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
   datasource:
     url: jdbc:postgresql://localhost:5433/universidad_db
     username: postgres

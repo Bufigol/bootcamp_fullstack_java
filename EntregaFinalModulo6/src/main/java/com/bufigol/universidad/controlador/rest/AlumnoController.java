@@ -1,4 +1,4 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.modelo.AlumnoRequestDTO;
 import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;

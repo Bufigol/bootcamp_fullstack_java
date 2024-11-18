@@ -1,4 +1,4 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.autenticacion.LoginRequestDTO;
 import com.bufigol.universidad.dtos.autenticacion.SignupRequestDTO;

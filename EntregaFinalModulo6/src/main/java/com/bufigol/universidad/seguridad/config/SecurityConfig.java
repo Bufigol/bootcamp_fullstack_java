@@ -15,8 +15,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -36,6 +34,7 @@ public class SecurityConfig {
     private final UsuarioServicio usuarioServicio;
     private final CustomPasswordEncoder customPasswordEncoder;
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -45,11 +44,26 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(PUBLIC_URLS).permitAll()
+                        // Permitir acceso público a recursos estáticos
+                        .requestMatchers(
+                                "/",
+                                "/home",
+                                "/login",
+                                "/registro",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**"
+                        ).permitAll()
+                        // Permitir acceso público a endpoints de autenticación
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/api/public/**"
+                        ).permitAll()
+                        // Rutas de administración requieren rol de admin
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        // Cualquier otra solicitud requiere autenticación
                         .anyRequest().authenticated()
                 )
-                .userDetailsService(usuarioServicio)
                 .addFilterBefore(
                         new JwtAuthenticationFilter(tokenProvider),
                         UsernamePasswordAuthenticationFilter.class
