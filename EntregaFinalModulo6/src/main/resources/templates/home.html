@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema de Calificaciones - Home</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/header.css}"/>
+  <link rel="stylesheet" th:href="@{/css/index.css}"/>
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}">
+</div>
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-info mb-4">Lista de Alumnos y Materias</h2>
+    </div>
+  </div>
+
+  <!-- Alerta de bienvenida -->
+  <div class="alert alert-info bg-info bg-opacity-10 border-start border-info border-4 mb-4" role="alert">
+    <strong>Bienvenido/a</strong>
+    <span sec:authentication="name"></span>
+  </div>
+
+  <!-- Lista de Alumnos -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card bg-dark bg-opacity-50 border border-info border-opacity-25">
+        <div class="card-body">
+          <div th:if="${alumnos.empty}" class="text-center py-4">
+            <p>No hay alumnos registrados</p>
+          </div>
+          <div th:each="alumno : ${alumnos}" class="mb-4">
+            <h4 class="text-info" th:text="${alumno.nombre}"></h4>
+            <p class="text-muted" th:text="${'RUT: ' + alumno.rut}"></p>
+
+            <!-- Materias del Alumno -->
+            <div class="table-responsive">
+              <table class="table table-dark table-hover">
+                <thead>
+                <tr>
+                  <th>Materia</th>
+                  <th>Fecha de Registro</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${alumno.materias.empty}">
+                  <td colspan="2" class="text-center">No hay materias registradas</td>
+                </tr>
+                <tr th:each="materia : ${alumno.materias}">
+                  <td th:text="${materia.nombre}"></td>
+                  <td th:text="${#temporals.format(materia.createdAt, 'dd/MM/yyyy')}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <hr class="border-info opacity-25">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}">
+</div>
+<script>
+  // Verificar autenticación al cargar la página
+  document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem('jwt_token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
+  });
+</script>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+
+</body>
+</html>
