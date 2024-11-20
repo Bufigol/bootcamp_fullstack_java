@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error del Servidor - Sistema de Calificaciones Universitarias</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="errorStyle.css" rel="stylesheet">
+</head>
+<body>
+<div class="error-container">
+    <div class="error-code">500</div>
+    <h1 class="error-message">Error Interno del Servidor</h1>
+    <p class="error-details">
+        Lo sentimos, ha ocurrido un error inesperado mientras procesábamos tu solicitud.
+        Nuestro equipo técnico ha sido notificado y está trabajando en solucionarlo.
+    </p>
+
+    <div class="mt-4">
+        <a href="/" class="btn btn-primary">Volver al Inicio</a>
+    </div>
+
+    <button onclick="toggleTechnicalInfo()" class="show-details-btn mt-3">
+        Mostrar detalles técnicos
+    </button>
+
+    <div class="technical-info" th:if="${error != null}">
+        <p><strong>Timestamp:</strong> <span th:text="${timestamp}">2024-11-19 12:00:00</span></p>
+        <p><strong>Error:</strong> <span th:text="${error}">Internal Server Error</span></p>
+        <p><strong>Status:</strong> <span th:text="${status}">500</span></p>
+        <p><strong>Path:</strong> <span th:text="${path}">/api/example</span></p>
+        <p th:if="${message != null}"><strong>Message:</strong> <span th:text="${message}">Detailed error message</span></p>
+    </div>
+</div>
+
+<script>
+    function toggleTechnicalInfo() {
+        const technicalInfo = document.querySelector('.technical-info');
+        technicalInfo.classList.toggle('show');
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

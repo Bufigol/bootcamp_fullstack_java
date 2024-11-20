@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página No Encontrada - Sistema de Calificaciones Universitarias</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="errorStyle.css" rel="stylesheet">
+</head>
+<body>
+<div class="error-container">
+    <div class="error-code">404</div>
+    <h1 class="error-message">Página No Encontrada</h1>
+
+    <!-- Contenedor para el video -->
+    <div class="video-container">
+        <!-- Aquí puedes colocar tu elemento video -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/GO_xfR64qSk?si=fag_UqsTxSGA_J64"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <p class="error-details">
+        Lo sentimos, la página que estás buscando parece haberse perdido en el espacio académico.
+        Puede que haya sido movida, eliminada o nunca haya existido.
+    </p>
+
+    <div class="mt-4">
+        <a href="/" class="btn btn-primary me-2">Volver al Inicio</a>
+        <a href="javascript:history.back()" class="btn btn-outline-info">Regresar</a>
+    </div>
+
+    <div class="mt-4">
+        <p class="text-muted">¿Necesitas ayuda? Contacta con soporte técnico</p>
+    </div>
+
+    <button onclick="toggleTechnicalInfo()" class="show-details-btn mt-3">
+        Mostrar detalles técnicos
+    </button>
+
+    <div class="technical-info" th:if="${error != null}">
+        <p><strong>Timestamp:</strong> <span th:text="${timestamp}">2024-11-19 12:00:00</span></p>
+        <p><strong>Error:</strong> <span th:text="${error}">Not Found</span></p>
+        <p><strong>Status:</strong> <span th:text="${status}">404</span></p>
+        <p><strong>Path:</strong> <span th:text="${path}">/path-not-found</span></p>
+        <p th:if="${message != null}"><strong>Message:</strong> <span th:text="${message}">Page not found</span></p>
+    </div>
+</div>
+
+<script>
+    function toggleTechnicalInfo() {
+        const technicalInfo = document.querySelector('.technical-info');
+        technicalInfo.classList.toggle('show');
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

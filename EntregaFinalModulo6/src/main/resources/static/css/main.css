@@ -1,0 +1,52 @@
+/* main.css */
+:root {
+    /* Definición de variables CSS para colores */
+    --primary-color: #5bc0de;
+    --primary-dark: #31b0d5;
+    --background-dark: #1a2a3a;
+    --background-light: #2c3e50;
+    --text-light: #e0e0e0;
+    --text-dark: #a0a0a0;
+    --border-color: rgba(91, 192, 222, 0.3);
+}
+
+/* Estilos base */
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    color: var(--text-light);
+    background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-light) 100%);
+    min-height: 100vh;
+}
+
+/* Personalización de Bootstrap */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 15px rgba(91, 192, 222, 0.5);
+}
+
+.card {
+    background: rgba(43, 62, 80, 0.95);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(10px);
+}
+
+.form-control {
+    background-color: rgba(43, 62, 80, 0.8);
+    border: 1px solid var(--border-color);
+    color: var(--text-light);
+}
+
+.form-control:focus {
+    background-color: rgba(43, 62, 80, 0.9);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(91, 192, 222, 0.25);
+    color: var(--text-light);
+}

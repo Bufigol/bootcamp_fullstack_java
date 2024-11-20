@@ -3,64 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- CSRF Token -->
-  <meta name="_csrf" th:content="${_csrf?.token}"/>
-  <meta name="_csrf_header" th:content="${_csrf?.headerName}"/>
-  <title>Login - Sistema de Calificaciones</title>
+  <title>Iniciar Sesión - Universidad Futuro</title>
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}"/>
-  <!-- Custom CSS -->
-  <link rel="stylesheet" th:href="@{/css/login.css}"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/pages/login.css}">
 </head>
-<body class="d-flex align-items-center justify-content-center min-vh-100">
-<div class="login-container">
-  <div class="card">
-    <div class="card-header text-center">
-      <h4>Iniciar Sesión</h4>
-    </div>
-    <div class="card-body">
-      <!-- Alertas -->
-      <div id="alertContainer">
-        <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show">
-          <span th:text="${session?.SPRING_SECURITY_LAST_EXCEPTION?.message}">Credenciales inválidas</span>
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-        <div th:if="${param.logout}" class="alert alert-info alert-dismissible fade show">
-          Has cerrado sesión exitosamente
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-      </div>
+<body>
+<!-- Header -->
+<div th:replace="fragments/header :: header"></div>
 
-      <!-- Formulario de login -->
-      <form id="loginForm" th:action="@{/api/auth/signin}" method="post">
-        <div class="mb-3">
-          <label for="username" class="form-label">Usuario</label>
-          <input type="text" class="form-control" id="username" name="username" required>
+<!-- Contenido principal -->
+<main class="container">
+  <div class="row justify-content-center align-items-center min-vh-100">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-lg">
+        <div class="card-header bg-transparent border-bottom border-info border-opacity-25">
+          <h4 class="text-info text-center mb-0">Iniciar Sesión</h4>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-primary" id="submitButton">
-            <span id="loginSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
-            <span class="button-text">Iniciar Sesión</span>
-          </button>
-        </div>
-      </form>
+        <div class="card-body">
+          <!-- Alertas -->
+          <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            Credenciales inválidas
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          <div th:if="${param.logout}" class="alert alert-success alert-dismissible fade show">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            Sesión cerrada exitosamente
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
 
-      <div class="text-center mt-3">
-        <p>¿No tienes una cuenta?
-          <a th:href="@{/registro}" class="text-info">Regístrate</a>
-        </p>
+          <!-- Formulario -->
+          <form th:action="@{/login}" method="post" id="loginForm">
+            <div class="mb-3">
+              <label for="username" class="form-label">Usuario</label>
+              <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-info" id="submitButton">
+                <span class="spinner-border spinner-border-sm d-none" role="status" id="loginSpinner"></span>
+                <span class="button-text">Iniciar Sesión</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Enlaces adicionales -->
+          <div class="text-center mt-3">
+            <p class="mb-0">¿No tienes una cuenta?
+              <a th:href="@{/registro}" class="text-info">Regístrate</a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</main>
+
+<!-- Footer -->
+<div th:replace="fragments/footer :: footer"></div>
 
 <!-- Scripts -->
-<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/js/procesarLogin.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/login.js}"></script>
 </body>
 </html>
