@@ -1,4 +1,4 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.mappers.UsuarioMapper;
 import com.bufigol.universidad.dtos.modelo.AlumnoRequestDTO;
@@ -6,7 +6,7 @@ import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
 import com.bufigol.universidad.dtos.modelo.ProfileUpdateDTO;
 import com.bufigol.universidad.dtos.modelo.UsuarioResponseDTO;
 import com.bufigol.universidad.excepciones.servicio.ResourceNotFoundException;
-import com.bufigol.universidad.interfaces.controladores.INT_UserProfileController;
+import com.bufigol.universidad.interfaces.controladores.rest.INT_UserProfileController;
 import com.bufigol.universidad.interfaces.servicio.INT_AlumnoServicio;
 import com.bufigol.universidad.interfaces.servicio.INT_UsuarioServicio;
 import com.bufigol.universidad.modelo.Usuario;

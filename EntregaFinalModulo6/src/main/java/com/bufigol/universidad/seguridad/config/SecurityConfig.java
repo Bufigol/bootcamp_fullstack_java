@@ -45,56 +45,38 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable)  // Mantener deshabilitado para la API REST
+                .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                        session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                        // Rutas públicas existentes
                         .requestMatchers(PUBLIC_URLS).permitAll()
-                        // Nuevas rutas para vistas públicas
-                        .requestMatchers("/", "/login", "/registro", "/error").permitAll()
-                        // Recursos estáticos
-                        .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**",
-                                "/favicon.ico").permitAll()
-                        // Documentación API
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        // Rutas de administrador
-                        .requestMatchers("/api/admin/**", "/admin/**").hasRole("ADMIN")
-                        // Otras rutas protegidas
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/api/auth/signin")  // URL para procesar el login via API
-                        .defaultSuccessUrl("/home", true)        // true fuerza la redirección
-                        .failureUrl("/login?error")             // URL en caso de error
+                        .loginProcessingUrl("/auth/login")
+                        .defaultSuccessUrl("/home")
+                        .failureUrl("/login?error")
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .deleteCookies("JSESSIONID", "JWT_TOKEN") // Limpia las cookies relevantes
+                        .logoutSuccessUrl("/login?logout")
+                        .deleteCookies("JSESSIONID", "JWT")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .permitAll()
                 )
                 .exceptionHandling(exceptions -> exceptions
-                        .authenticationEntryPoint((request, response, authException) -> {
-                            // Para peticiones API
+                        .authenticationEntryPoint((request, response, exc) -> {
                             if (request.getRequestURI().startsWith("/api/")) {
                                 response.sendError(HttpStatus.UNAUTHORIZED.value(),
                                         "No autorizado");
                             } else {
-                                // Para peticiones web
                                 response.sendRedirect("/login");
                             }
                         })
-                )
-                .userDetailsService(usuarioServicio)
-                .addFilterBefore(
-                        new JwtAuthenticationFilter(tokenProvider),
-                        UsernamePasswordAuthenticationFilter.class
                 )
                 .build();
     }

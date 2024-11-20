@@ -1,9 +1,9 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.autenticacion.LoginRequestDTO;
 import com.bufigol.universidad.dtos.autenticacion.SignupRequestDTO;
 import com.bufigol.universidad.dtos.autenticacion.TokenResponseDTO;
-import com.bufigol.universidad.interfaces.controladores.INT_AuthController;
+import com.bufigol.universidad.interfaces.controladores.rest.INT_AuthController;
 import com.bufigol.universidad.interfaces.servicio.INT_AutenticacionServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

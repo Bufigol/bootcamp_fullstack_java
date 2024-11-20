@@ -1,10 +1,10 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.mappers.UsuarioMapper;
 import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
 import com.bufigol.universidad.dtos.modelo.MateriaResponseDTO;
 import com.bufigol.universidad.dtos.modelo.UsuarioResponseDTO;
-import com.bufigol.universidad.interfaces.controladores.INT_AdminController;
+import com.bufigol.universidad.interfaces.controladores.rest.INT_AdminController;
 import com.bufigol.universidad.interfaces.servicio.INT_AlumnoServicio;
 import com.bufigol.universidad.interfaces.servicio.INT_MateriasServicio;
 import com.bufigol.universidad.interfaces.servicio.INT_RoleServicio;

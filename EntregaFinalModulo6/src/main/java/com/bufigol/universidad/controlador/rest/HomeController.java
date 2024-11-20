@@ -1,10 +1,10 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
 import com.bufigol.universidad.dtos.modelo.MateriaResponseDTO;
 import com.bufigol.universidad.excepciones.seguridad.JwtAuthenticationException;
 import com.bufigol.universidad.excepciones.servicio.ResourceNotFoundException;
-import com.bufigol.universidad.interfaces.controladores.INT_HomeController;
+import com.bufigol.universidad.interfaces.controladores.rest.INT_HomeController;
 import com.bufigol.universidad.interfaces.servicio.INT_AlumnoServicio;
 import com.bufigol.universidad.interfaces.servicio.INT_MateriasServicio;
 import com.bufigol.universidad.interfaces.servicio.INT_UsuarioServicio;
@@ -36,26 +36,27 @@ public class HomeController implements INT_HomeController {
     public String showHomePage(Model model) {
         log.debug("Mostrando página de inicio");
         try {
+            // Obtener últimos 5 alumnos para mostrar en el dashboard
             Page<AlumnoResponseDTO> ultimosAlumnos = alumnoServicio.findAll(PageRequest.of(0, 5));
             model.addAttribute("ultimosAlumnos", ultimosAlumnos.getContent());
             model.addAttribute("paginaActual", "home");
 
             return "home";
         } catch (Exception e) {
-            handleError(model, "Error al cargar la página de inicio", e);
-            return "error";
+            return handleError(e, model);
         }
     }
 
+    @Override
     @GetMapping("/")
     public String index() {
         return "index";
     }
 
-    @Override
     @GetMapping("/login")
-    public String showLoginPage() {
+    public String showLoginPage(Model model) {
         log.debug("Mostrando página de login");
+        model.addAttribute("paginaActual", "login");
         return "login";
     }
 
@@ -89,22 +90,12 @@ public class HomeController implements INT_HomeController {
                 model.addAttribute("materias", alumno.getMaterias());
             }
 
-            // Verificar si hay mensaje de éxito en los parámetros
-            String successParam = (String) model.getAttribute("success");
-            if (successParam != null) {
-                model.addAttribute("successMessage", "Operación realizada con éxito");
-            }
-
             model.addAttribute("paginaActual", "perfil");
             return "perfil";
 
         } catch (ResourceNotFoundException e) {
             log.error("Error al cargar perfil: {}", e.getMessage());
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        } catch (Exception e) {
-            handleError(model, "Error inesperado al cargar el perfil", e);
-            return "error";
+            return handleError(e, model);
         }
     }
 
@@ -131,16 +122,50 @@ public class HomeController implements INT_HomeController {
             model.addAttribute("seccionActual", "materias");
 
             return "materias";
-        } catch (ResourceNotFoundException e) {
-            log.warn("No se encontraron materias en la página {}: {}", page, e.getMessage());
-            model.addAttribute("warning", e.getMessage());
-            return "materias";
         } catch (Exception e) {
-            handleError(model, "Error al cargar la página de materias", e);
-            return "error";
+            return handleError(e, model);
         }
     }
 
+    @Override
+    @GetMapping("/admin/dashboard")
+    public String showDashboardPage(Model model) {
+        try {
+            // Obtener datos de alumnos
+            Page<AlumnoResponseDTO> alumnosPage = alumnoServicio.findAll(PageRequest.of(0, 5));
+            long totalAlumnos = alumnosPage.getTotalElements();
+
+            // Obtener datos de materias
+            Page<MateriaResponseDTO> materiasPage = materiasServicio.findAll(PageRequest.of(0, 5));
+            long totalMaterias = materiasPage.getTotalElements();
+
+            // Calcular el promedio de materias por alumno
+            double promedioMaterias = totalAlumnos > 0 ?
+                    (double) totalMaterias / totalAlumnos : 0.0;
+
+            // Crear mapa de estadísticas
+            model.addAttribute("stats", new DashboardStats(
+                    totalAlumnos,
+                    totalMaterias,
+                    promedioMaterias
+            ));
+            model.addAttribute("ultimosAlumnos", alumnosPage.getContent());
+            model.addAttribute("ultimasMaterias", materiasPage.getContent());
+
+            return "admin/dashboard";
+        } catch (Exception e) {
+            return handleError(e, model);
+        }
+    }
+
+    @Override
+    @GetMapping("/error/403")
+    public String handleAccessDenied(Model model) {
+        model.addAttribute("error", "Acceso denegado: No tiene permisos para acceder a este recurso");
+        return "error";
+    }
+
+    // Manejadores de excepciones
     @ExceptionHandler(ResourceNotFoundException.class)
     public String handleResourceNotFoundException(
             ResourceNotFoundException ex,
@@ -170,19 +195,10 @@ public class HomeController implements INT_HomeController {
         return "login";
     }
 
-    @ExceptionHandler(Exception.class)
-    public String handleGenericException(
-            Exception ex,
-            Model model) {
-        log.error("Error no manejado: ", ex);
+    // Método de ayuda para manejar errores
+    private String handleError(Exception e, Model model) {
+        log.error("Error no manejado: ", e);
         model.addAttribute("error", "Ha ocurrido un error inesperado");
-        model.addAttribute("detalles", ex.getMessage());
-        return "error";
-    }
-
-    private void handleError(Model model, String message, Exception e) {
-        log.error(message, e);
-        model.addAttribute("error", message);
         model.addAttribute("detalles", e.getMessage());
         model.addAttribute("tipo", e.getClass().getSimpleName());
 
@@ -190,8 +206,11 @@ public class HomeController implements INT_HomeController {
             model.addAttribute("stackTrace", e.getStackTrace());
             model.addAttribute("causa", e.getCause() != null ? e.getCause().getMessage() : "No disponible");
         }
+
+        return "error";
     }
 
+    // Método de ayuda para determinar el entorno
     private boolean isDevelopmentEnvironment() {
         try {
             String activeProfile = System.getProperty("spring.profiles.active");
@@ -199,5 +218,14 @@ public class HomeController implements INT_HomeController {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    // Clase interna para estadísticas del dashboard
+    @lombok.Data
+    @lombok.AllArgsConstructor
+    private static class DashboardStats {
+        private long totalAlumnos;
+        private long totalMaterias;
+        private double promedioMateriasXAlumno;
     }
 }

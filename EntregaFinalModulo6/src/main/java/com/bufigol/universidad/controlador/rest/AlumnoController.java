@@ -1,8 +1,8 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.modelo.AlumnoRequestDTO;
 import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
-import com.bufigol.universidad.interfaces.controladores.INT_AlumnoController;
+import com.bufigol.universidad.interfaces.controladores.rest.INT_AlumnoController;
 import com.bufigol.universidad.interfaces.servicio.INT_AlumnoServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

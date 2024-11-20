@@ -1,4 +1,4 @@
-package com.bufigol.universidad.interfaces.controladores;
+package com.bufigol.universidad.interfaces.controladores.rest;
 
 import com.bufigol.universidad.dtos.modelo.ProfileUpdateDTO;
 import com.bufigol.universidad.dtos.modelo.UsuarioResponseDTO;
