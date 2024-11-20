@@ -57,11 +57,9 @@ public class UserProfileController implements INT_UserProfileController {
             Usuario usuario = usuarioServicio.findByUsername(principal.getName())
                     .orElseThrow(() -> new ResourceNotFoundException("Usuario", "username", principal.getName()));
 
-            // Actualizar datos básicos del usuario
             usuario.setName(updateDTO.getName());
             usuario.setEmail(updateDTO.getEmail());
 
-            // Si el usuario es también un alumno, actualizar la dirección
             if (updateDTO.getDireccion() != null) {
                 Optional<AlumnoResponseDTO> alumnoOpt = alumnoServicio.findByRut(principal.getName());
                 if (alumnoOpt.isPresent()) {
