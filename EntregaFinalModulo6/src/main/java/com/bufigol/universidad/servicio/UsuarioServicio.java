@@ -144,6 +144,26 @@ public class UsuarioServicio implements INT_UsuarioServicio {
             throw new RuntimeException("Error al cargar usuario", e);
         }
     }
+    @Override
+    @Transactional
+    public Usuario save(Usuario usuario) {
+        Assert.notNull(usuario, "El usuario no puede ser nulo");
+        log.debug("Guardando usuario: {}", usuario.getUsername());
 
+        try {
+            // Si es una actualización y el email ha cambiado, verificar que no exista
+            if (usuario.getId() != null && usuario.getEmail() != null) {
+                Optional<Usuario> existingUser = findByEmail(usuario.getEmail());
+                if (existingUser.isPresent() && !existingUser.get().getId().equals(usuario.getId())) {
+                    throw new DuplicateResourceException("Usuario", "email", usuario.getEmail());
+                }
+            }
+
+            return userRepository.save(usuario);
+        } catch (Exception e) {
+            log.error("Error al guardar usuario: {}", e.getMessage());
+            throw new RuntimeException("Error al guardar el usuario", e);
+        }
+    }
 
 }

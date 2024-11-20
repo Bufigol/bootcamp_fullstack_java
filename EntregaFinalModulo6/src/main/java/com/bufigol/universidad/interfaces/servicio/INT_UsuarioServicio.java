@@ -1,11 +1,10 @@
 package com.bufigol.universidad.interfaces.servicio;
 
 import com.bufigol.universidad.modelo.Usuario;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import java.util.Optional;
 
 public interface INT_UsuarioServicio extends UserDetailsService {
@@ -14,4 +13,5 @@ public interface INT_UsuarioServicio extends UserDetailsService {
     Optional<Usuario> findByEmail(String email);
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
+    Usuario save(Usuario usuario);  // Añadido este método
 }
