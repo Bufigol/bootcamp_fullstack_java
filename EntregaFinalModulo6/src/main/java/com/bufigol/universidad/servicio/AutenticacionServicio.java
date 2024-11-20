@@ -41,7 +41,7 @@ public class AutenticacionServicio implements INT_AutenticacionServicio {
     private final UsuarioServicio usuarioServicio;
 
     @Override
-    public TokenResponseDTO signin(LoginRequestDTO loginRequest) {
+    public TokenResponseDTO logIn(LoginRequestDTO loginRequest) {
         log.debug("Iniciando proceso de autenticación para usuario: {}", loginRequest.getUsername());
 
         try {
@@ -105,13 +105,13 @@ public class AutenticacionServicio implements INT_AutenticacionServicio {
             usuarioServicio.signup(usuario);
             log.info("Usuario registrado exitosamente: {}", usuario.getUsername());
 
-            // Crear nuevo objeto LoginRequestDTO para el signin
+            // Crear nuevo objeto LoginRequestDTO para el logIn
             LoginRequestDTO loginRequest = new LoginRequestDTO(
                     signupRequest.getUsername(),
                     signupRequest.getPassword()
             );
 
-            return signin(loginRequest);
+            return logIn(loginRequest);
 
         } catch (DuplicateResourceException | IllegalArgumentException e) {
             log.error("Error de validación durante el registro: {}", e.getMessage());

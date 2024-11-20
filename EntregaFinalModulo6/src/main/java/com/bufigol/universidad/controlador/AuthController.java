@@ -20,10 +20,10 @@ public class AuthController implements INT_AuthController {
     private final INT_AutenticacionServicio autenticacionServicio;
 
     @Override
-    @PostMapping("/signin")
+    @PostMapping("/logIn")
     public ResponseEntity<TokenResponseDTO> authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequest) {
         log.debug("Solicitud de autenticación para usuario: {}", loginRequest.getUsername());
-        TokenResponseDTO tokenResponse = autenticacionServicio.signin(loginRequest);
+        TokenResponseDTO tokenResponse = autenticacionServicio.logIn(loginRequest);
         return ResponseEntity.ok(tokenResponse);
     }
 

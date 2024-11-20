@@ -84,7 +84,7 @@ public class ConstantesSeguridad {
     public static final String ADMIN_ROOT_PATH = "/api/admin/**";
     public static final String PUBLIC_ROOT_PATH = "/api/public/**";
     public static final String SIGN_UP_URL = "/api/auth/signup";
-    public static final String SIGN_IN_URL = "/api/auth/signin";
+    public static final String SIGN_IN_URL = "/api/auth/logIn";
 
     // URLs públicas permitidas
     public static final String[] PUBLIC_URLS = {

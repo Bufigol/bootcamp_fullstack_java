@@ -31,7 +31,7 @@ public class ApiAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public ApiAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenProvider tokenProvider) {
         this.authenticationManager = authenticationManager;
         this.tokenProvider = tokenProvider;
-        setFilterProcessesUrl("/api/auth/signin");
+        setFilterProcessesUrl("/api/auth/logIn");
 
         // Configurar handlers específicos para API
         setAuthenticationSuccessHandler((request, response, authentication) -> {
