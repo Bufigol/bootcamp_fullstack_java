@@ -113,10 +113,10 @@ public class HomeController implements INT_HomeController {
     }
 
     @Override
-    @GetMapping("/materias")
+    @GetMapping("admin/materias")
     public String showMateriasPage(Model model, @RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "10") int size) {
-        return "materias";
+        return "admin/materias";
     }
 
     @Override
@@ -143,11 +143,20 @@ public class HomeController implements INT_HomeController {
     }
 
 
-    @GetMapping("/alumnos")
+    @GetMapping("admin/alumnos")
     public String showAlumnosPage(Model model) {
-        return "alumnos";
+        try {
+            Page<AlumnoResponseDTO> alumnosPage = alumnoServicio.findAll(PageRequest.of(0, 10));
+            model.addAttribute("alumnos", alumnosPage);
+            model.addAttribute("currentPage", alumnosPage.getNumber());
+            model.addAttribute("totalPages", alumnosPage.getTotalPages());
+            return "admin/alumnos";
+        } catch (Exception e) {
+            log.error("Error al cargar alumnos: {}", e.getMessage());
+            model.addAttribute("error", "Error al cargar la lista de alumnos");
+            return "error";
+        }
     }
-
     private boolean isAuthenticated() {
         return SecurityContextHolder.getContext().getAuthentication() != null &&
                 SecurityContextHolder.getContext().getAuthentication().isAuthenticated() &&
