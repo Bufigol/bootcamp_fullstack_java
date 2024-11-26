@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -106,10 +107,27 @@ public class HomeController implements INT_HomeController {
         }
     }
 
-    @Override
     @GetMapping("/perfil")
     public String showPerfilPage(Model model, Principal principal) {
-        return "perfil";
+        try {
+            // Obtener el usuario actual
+            Optional<Usuario> usuario = usuarioServicio.findByUsername(principal.getName());
+            if (usuario.isPresent()) {
+                model.addAttribute("usuario", usuario.get());
+                // Si el usuario es también alumno, obtener sus datos de alumno
+                Optional<AlumnoResponseDTO> alumno = alumnoServicio.findByRut(principal.getName());
+                alumno.ifPresent(a -> model.addAttribute("alumno", a));
+            } else {
+                model.addAttribute("errorMessage", "No se encontró la información del usuario");
+                return "error";
+            }
+
+            return "perfil";
+        } catch (Exception e) {
+            log.error("Error al cargar el perfil: {}", e.getMessage());
+            model.addAttribute("errorMessage", "Error al cargar el perfil");
+            return "error";
+        }
     }
 
     @Override
