@@ -152,17 +152,17 @@ public class AlumnoServicio implements INT_AlumnoServicio {
     @Override
     @Transactional(readOnly = true)
     public Page<AlumnoResponseDTO> findAll(Pageable pageable) {
-        Assert.notNull(pageable, "El objeto Pageable no puede ser nulo");
-        log.debug("Obteniendo página {} de alumnos", pageable.getPageNumber());
-
+        log.debug("Buscando página {} de alumnos con tamaño {}",
+                pageable.getPageNumber(), pageable.getPageSize());
         try {
-            return alumnoRepository.findAll(pageable)
-                    .map(alumnoMapper::toDto);
+            Page<Alumno> alumnosPage = alumnoRepository.findAll(pageable);
+            return alumnosPage.map(alumnoMapper::toDto);
         } catch (Exception e) {
             log.error("Error al obtener la página de alumnos: {}", e.getMessage());
             throw new RuntimeException("Error al obtener la página de alumnos", e);
         }
     }
+
 
     @Override
     @Transactional(readOnly = true)

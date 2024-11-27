@@ -1,35 +1,208 @@
+/* Estilos generales del contenedor */
 .materias-table {
-    background: rgba(43, 62, 80, 0.95);
+    background: linear-gradient(160deg, rgba(26, 42, 58, 0.98) 0%, rgba(44, 62, 80, 0.98) 100%);
     border-radius: 1rem;
     margin-bottom: 2rem;
     border: 1px solid rgba(91, 192, 222, 0.3);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
 }
 
-.materias-table th {
+/* Sección de búsqueda */
+.search-section {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    color: #5bc0de;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    background: rgba(27, 38, 49, 0.95) !important;
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    color: #e0e0e0 !important;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: rgba(27, 38, 49, 0.98) !important;
+    border-color: #5bc0de;
+    box-shadow: 0 0 0 0.25rem rgba(91, 192, 222, 0.25);
+}
+
+.form-control::placeholder {
+    color: rgba(224, 224, 224, 0.5);
+}
+
+/* Botón de búsqueda */
+.btn-search {
+    background: rgba(91, 192, 222, 0.1);
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    color: #5bc0de;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-search:hover {
+    background: rgba(91, 192, 222, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(91, 192, 222, 0.2);
+}
+
+/* Tabla responsive */
+.table-responsive {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+/* Tabla base */
+.table {
+    margin-bottom: 0;
+    width: 100%;
+    background: transparent;
+}
+
+/* Encabezados de tabla */
+.table thead th {
+    background: rgba(27, 38, 49, 0.95);
     color: #5bc0de;
     font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 1.2rem 1rem;
     border-bottom: 2px solid rgba(91, 192, 222, 0.3);
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
-.materias-table td {
+/* Celdas del cuerpo */
+.table tbody td {
     color: #e0e0e0;
+    padding: 1rem;
     border-bottom: 1px solid rgba(91, 192, 222, 0.1);
+    vertical-align: middle;
+    transition: all 0.2s ease;
 }
 
-.action-button {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
+/* Filas de la tabla */
+.table tbody tr {
     transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background: rgba(91, 192, 222, 0.08);
+    transform: translateY(-1px);
+}
+
+/* Última fila */
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Columna RUT */
+.table td:first-child {
+    font-family: monospace;
+    color: #5bc0de;
+    font-weight: 500;
+}
+
+/* Badge de materias */
+.badge.bg-info {
+    background: rgba(91, 192, 222, 0.15) !important;
+    color: #5bc0de;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 2rem;
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    transition: all 0.2s ease;
+}
+
+.badge.bg-info:hover {
+    background: rgba(91, 192, 222, 0.25) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(91, 192, 222, 0.2);
+    cursor: pointer;
+}
+
+/* Botones de acción */
+.action-button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    background: transparent;
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    margin: 0 0.2rem;
+}
+
+.action-button i {
+    font-size: 0.9rem;
+}
+
+.action-button.btn-info {
+    color: #5bc0de;
+}
+
+.action-button.btn-danger {
+    color: #dc3545;
+    border-color: rgba(220, 53, 69, 0.3);
 }
 
 .action-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(91, 192, 222, 0.3);
 }
 
+.action-button.btn-info:hover {
+    background: rgba(91, 192, 222, 0.1);
+    box-shadow: 0 4px 12px rgba(91, 192, 222, 0.2);
+}
+
+.action-button.btn-danger:hover {
+    background: rgba(220, 53, 69, 0.1);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+}
+
+/* Paginación */
+.pagination {
+    margin-top: 1.5rem;
+    gap: 0.3rem;
+}
+
+.pagination .page-link {
+    background: rgba(27, 38, 49, 0.95);
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    color: #5bc0de;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background: rgba(91, 192, 222, 0.15);
+    border-color: #5bc0de;
+    transform: translateY(-2px);
+}
+
+.pagination .active .page-link {
+    background: #5bc0de;
+    border-color: #5bc0de;
+    color: #1a2a3a;
+}
+
+/* Modal y Overlay */
 #modalContainer {
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     position: fixed;
     top: 0;
     left: 0;
@@ -38,10 +211,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 1050;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
+    transition: all 0.3s ease;
 }
 
 #modalContainer.show {
@@ -49,30 +222,64 @@
     visibility: visible;
 }
 
-#alumnoModal {
-    background-color: #2c3e50;
-    border: 1px solid rgba(91, 192, 222, 0.3);
-    border-radius: 1rem;
-    padding: 2rem;
-    max-width: 600px;
-    width: 100%;
-}
-
-.invalid-feedback {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-}
-
+/* Loading Spinner */
 #loadingSpinner {
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1060;
+}
+
+/* Modal de eliminación */
+.modal-content {
+    background: linear-gradient(160deg, rgba(26, 42, 58, 0.98) 0%, rgba(44, 62, 80, 0.98) 100%);
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    border-radius: 1rem;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(91, 192, 222, 0.3);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(91, 192, 222, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .materias-table {
+        padding: 1rem;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .action-button {
+        width: 30px;
+        height: 30px;
+    }
+
+    .badge.bg-info {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .form-control {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .btn-search {
+        padding: 0.6rem 1rem;
+    }
 }

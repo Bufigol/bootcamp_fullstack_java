@@ -1,38 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="ES-es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <div th:replace="~{fragments/header :: header}"></div>
-  <link rel="stylesheet" th:href="@{/css/index.css}">
-  <link rel="stylesheet" th:href="@{/css/alumnos.css}">
-  <title>Gestion de Alumnos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Alumnos - Universidad Futuro</title>
+
+  <!-- Hojas de estilo CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+  <!-- CSS personalizado -->
+  <link th:href="@{/css/header.css}" rel="stylesheet">
+  <link th:href="@{/css/footer.css}" rel="stylesheet">
+  <link th:href="@{/css/alumnos.css}" rel="stylesheet">
 </head>
 <body>
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
 <div class="container my-5" role="main">
+  <!-- Alertas -->
   <div th:replace="~{fragments/header :: alerts}"></div>
 
-  <!-- Header Section -->
+  <!-- Encabezado y botón nuevo alumno -->
   <div class="row mb-4 align-items-center">
     <div class="col">
       <h2 class="text-info">Gestión de Alumnos</h2>
     </div>
     <div class="col-auto" sec:authorize="hasRole('ROLE_ADMIN')">
-      <button id="btnNuevoAlumno" class="btn btn-info">
-        <i class="bi bi-plus-circle me-2"></i>Nuevo Alumno
+      <button class="btn btn-info" id="btnNuevoAlumno">
+        <i class="bi bi-person-plus-fill me-2"></i>Nuevo Alumno
       </button>
     </div>
   </div>
 
-  <!-- Search Section -->
+  <!-- Filtros de búsqueda -->
   <div class="materias-table p-4 mb-4">
-    <form id="searchForm" class="row g-3">
+    <form id="searchForm" class="row g-3" th:action="@{/admin/alumnos/search}" method="GET">
       <div class="col-md-4">
-        <label for="searchRut" class="form-label">RUT</label>
-        <input type="text" class="form-control" id="searchRut" name="rut">
+        <label for="rut" class="form-label">RUT</label>
+        <input type="text" class="form-control" id="rut" name="rut"
+               th:value="${param.rut}" placeholder="Ingrese RUT">
       </div>
       <div class="col-md-4">
-        <label for="searchNombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="searchNombre" name="nombre">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre"
+               th:value="${param.nombre}" placeholder="Ingrese nombre">
       </div>
       <div class="col-md-4 d-flex align-items-end">
         <button type="submit" class="btn btn-info w-100">
@@ -42,45 +58,53 @@
     </form>
   </div>
 
-  <!-- Table Section -->
+  <!-- Tabla de alumnos -->
   <div class="materias-table p-4">
     <div class="table-responsive">
-      <table class="table">
+      <table class="table table-hover align-middle">
         <thead>
         <tr>
           <th>RUT</th>
           <th>Nombre</th>
           <th>Dirección</th>
-          <th>Materias</th>
+          <th class="text-center">Materias</th>
           <th>Fecha Registro</th>
-          <th>Acciones</th>
+          <th class="text-center">Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${#lists.isEmpty(alumnos.content)}">
-          <td colspan="6" class="text-center">No hay alumnos registrados</td>
-        </tr>
-        <tr th:each="alumno : ${alumnos.content}">
-          <td th:text="${alumno.rut}">12.345.678-9</td>
-          <td th:text="${alumno.nombre}">Nombre Alumno</td>
-          <td th:text="${alumno.direccion}">Dirección</td>
-          <td>
-                                <span class="badge bg-info"
-                                      th:text="${alumno.materias.size()}"
-                                      th:onclick="'javascript:verMaterias(\'' + ${alumno.id} + '\')'"
-                                      style="cursor: pointer;"
-                                      title="Click para ver materias">0</span>
+        <tr th:if="${alumnos == null || alumnos.empty}">
+          <td colspan="6" class="text-center py-4">
+            No hay alumnos registrados
           </td>
-          <td th:text="${#temporals.format(alumno.createdAt, 'dd/MM/yyyy')}">01/01/2024</td>
-          <td>
+        </tr>
+        <tr th:each="alumno : ${alumnos?.content}">
+          <td th:text="${alumno.rut}"></td>
+          <td th:text="${alumno.nombre}"></td>
+          <td th:text="${alumno.direccion}"></td>
+          <td class="text-center">
+                                <span class="badge bg-info"
+                                      th:text="${alumno.materias != null ? alumno.materias.size() : '0'}"
+                                      style="cursor: pointer;"
+                                      th:onclick="'verMaterias(\'' + ${alumno.id} + '\')'"
+                                      data-bs-toggle="tooltip"
+                                      title="Click para ver materias">
+                                </span>
+          </td>
+          <td th:text="${#temporals.format(alumno.createdAt, 'dd/MM/yyyy')}"></td>
+          <td class="text-center">
             <div class="btn-group">
-              <button class="btn btn-sm btn-info"
-                      th:onclick="'javascript:editarAlumno(\'' + ${alumno.id} + '\')'">
-                <i class="bi bi-pencil"></i>
+              <button class="btn btn-sm btn-info action-button"
+                      th:onclick="'editarAlumno(\'' + ${alumno.id} + '\')'"
+                      data-bs-toggle="tooltip"
+                      title="Editar">
+                <i class="bi bi-pencil-fill"></i>
               </button>
-              <button class="btn btn-sm btn-danger"
-                      th:onclick="'javascript:confirmarEliminar(\'' + ${alumno.id} + '\')'">
-                <i class="bi bi-trash"></i>
+              <button class="btn btn-sm btn-danger action-button"
+                      th:onclick="'eliminarAlumno(\'' + ${alumno.id} + '\')'"
+                      data-bs-toggle="tooltip"
+                      title="Eliminar">
+                <i class="bi bi-trash-fill"></i>
               </button>
             </div>
           </td>
@@ -89,11 +113,14 @@
       </table>
     </div>
 
-    <!-- Pagination -->
-    <nav th:if="${alumnos.totalPages > 1}" aria-label="Paginación" class="mt-4">
+    <!-- Paginación -->
+    <nav th:if="${alumnos != null && alumnos.totalPages > 1}"
+         aria-label="Navegación de páginas"
+         class="mt-4">
       <ul class="pagination justify-content-center">
         <li class="page-item" th:classappend="${alumnos.first} ? 'disabled'">
-          <a class="page-link" th:href="@{/admin/alumnos(page=${alumnos.number - 1})}">
+          <a class="page-link"
+             th:href="@{/admin/alumnos(page=${alumnos.number - 1})}">
             <i class="bi bi-chevron-left"></i>
           </a>
         </li>
@@ -102,10 +129,12 @@
             th:classappend="${pageNumber == alumnos.number} ? 'active'">
           <a class="page-link"
              th:href="@{/admin/alumnos(page=${pageNumber})}"
-             th:text="${pageNumber + 1}">1</a>
+             th:text="${pageNumber + 1}">
+          </a>
         </li>
         <li class="page-item" th:classappend="${alumnos.last} ? 'disabled'">
-          <a class="page-link" th:href="@{/admin/alumnos(page=${alumnos.number + 1})}">
+          <a class="page-link"
+             th:href="@{/admin/alumnos(page=${alumnos.number + 1})}">
             <i class="bi bi-chevron-right"></i>
           </a>
         </li>
@@ -113,20 +142,20 @@
     </nav>
   </div>
 
-  <!-- Modal Container -->
+  <!-- Contenedor para modales dinámicos -->
   <div id="modalContainer"></div>
 
-  <!-- Delete Confirmation Modal -->
+  <!-- Modal de confirmación de eliminación -->
   <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title text-info">Confirmar Eliminación</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>¿Está seguro que desea eliminar este alumno?</p>
-          <p class="text-danger">Esta acción no se puede deshacer.</p>
+          <p class="text-muted">Esta acción no se puede deshacer.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -139,7 +168,7 @@
     </div>
   </div>
 
-  <!-- Loading Spinner -->
+  <!-- Spinner de carga -->
   <div id="loadingSpinner" class="spinner-overlay d-none">
     <div class="spinner-border text-info" role="status">
       <span class="visually-hidden">Cargando...</span>
@@ -147,7 +176,12 @@
   </div>
 </div>
 
+<!-- Footer -->
 <div th:replace="~{fragments/footer :: footer}"></div>
-<th:block th:replace="~{fragments/scripts :: scripts}"/>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/utils.js}"></script>
+<script th:src="@{/js/alumnos.js}"></script>
 </body>
 </html>

@@ -33,17 +33,21 @@ public class VistaAlumnoController implements INT_VistaAlumnoController {
     private final INT_AlumnoServicio alumnoServicio;
     private final INT_MateriasServicio materiasServicio;
 
-    @Override
-    public String showAlumnosPage(int page, int size, Model model) {
-        log.debug("Mostrando página {} de alumnos", page);
+    @GetMapping("/admin/alumnos")
+    public String showAlumnosPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Model model) {
+        log.debug("Iniciando carga de página de alumnos. Page: {}, Size: {}", page, size);
         try {
             Page<AlumnoResponseDTO> alumnosPage = alumnoServicio.findAll(PageRequest.of(page, size));
+            log.debug("Alumnos cargados: {}", alumnosPage.getTotalElements());
             model.addAttribute("alumnos", alumnosPage);
             model.addAttribute("currentPage", alumnosPage.getNumber());
             model.addAttribute("totalPages", alumnosPage.getTotalPages());
             return "alumnos/alumnos";
         } catch (Exception e) {
-            log.error("Error al cargar la página de alumnos: {}", e.getMessage());
+            log.error("Error al cargar la página de alumnos: {}", e.getMessage(), e);
             model.addAttribute("error", "Error al cargar la lista de alumnos");
             return "error";
         }
