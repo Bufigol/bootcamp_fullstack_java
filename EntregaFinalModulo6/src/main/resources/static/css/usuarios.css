@@ -1,0 +1,32 @@
+.role-badge {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.65rem;
+    margin: 0.1rem;
+    border-radius: 1rem;
+}
+
+.role-badge.admin {
+    background-color: #dc3545;
+    color: white;
+}
+
+.role-badge.user {
+    background-color: #0dcaf0;
+    color: white;
+}
+
+.user-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.status-active {
+    background-color: #198754;
+}
+
+.status-inactive {
+    background-color: #dc3545;
+}

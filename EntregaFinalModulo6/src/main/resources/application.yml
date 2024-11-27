@@ -1,4 +1,5 @@
 spring:
+
   datasource:
     url: jdbc:postgresql://localhost:5433/universidad_db
     username: postgres
@@ -12,6 +13,8 @@ spring:
       ddl-auto: update
     show-sql: true
   security:
+    filter:
+      order: 10
     user:
       name: admin
       password: admin123

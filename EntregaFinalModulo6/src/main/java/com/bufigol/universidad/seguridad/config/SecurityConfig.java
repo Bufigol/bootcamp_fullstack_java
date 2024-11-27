@@ -2,10 +2,14 @@ package com.bufigol.universidad.seguridad.config;
 
 import com.bufigol.universidad.seguridad.jwt.JwtAuthenticationFilter;
 import com.bufigol.universidad.seguridad.jwt.JwtTokenProvider;
+import com.bufigol.universidad.servicio.UsuarioServicio;
+import com.bufigol.universidad.utils.CustomPasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,31 +32,67 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtTokenProvider tokenProvider;
-    private final AuthenticationConfiguration authConfiguration;
+    private final UsuarioServicio usuarioServicio;
+    private final CustomPasswordEncoder customPasswordEncoder;
+    public static final String[] STATIC_RESOURCES = {
+            "/css/**",
+            "/js/**",
+            "/img/**",
+            "/webjars/**"
+    };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                        session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PUBLIC_URLS).permitAll()
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(
-                        new JwtAuthenticationFilter(tokenProvider),
-                        UsernamePasswordAuthenticationFilter.class
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/auth/login")
+                        .defaultSuccessUrl("/home")
+                        .failureUrl("/login?error")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .deleteCookies("JSESSIONID", "JWT")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .permitAll()
+                )
+                .exceptionHandling(exceptions -> exceptions
+                        .authenticationEntryPoint((request, response, exc) -> {
+                            if (request.getRequestURI().startsWith("/api/")) {
+                                response.sendError(HttpStatus.UNAUTHORIZED.value(),
+                                        "No autorizado");
+                            } else {
+                                response.sendRedirect("/login");
+                            }
+                        })
                 )
                 .build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authConfiguration) throws Exception {
         return authConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(usuarioServicio);
+        authProvider.setPasswordEncoder(customPasswordEncoder);
+        return authProvider;
     }
 
     @Bean

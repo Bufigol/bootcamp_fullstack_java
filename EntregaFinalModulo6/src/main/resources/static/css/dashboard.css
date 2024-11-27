@@ -1,0 +1,79 @@
+.stats-card {
+    background: rgba(43, 62, 80, 0.95);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(91, 192, 222, 0.2);
+}
+
+.stats-icon {
+    font-size: 2.5rem;
+    color: #5bc0de;
+    opacity: 0.8;
+}
+
+.stats-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #5bc0de;
+    margin-bottom: 0.5rem;
+}
+
+.activity-feed {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.activity-item {
+    background: rgba(43, 62, 80, 0.5);
+    border-left: 4px solid #5bc0de;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.quick-actions .btn {
+    margin-bottom: 1rem;
+    text-align: left;
+    padding: 1rem;
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    background: rgba(43, 62, 80, 0.95);
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.quick-actions .btn:hover {
+    background: rgba(91, 192, 222, 0.2);
+    transform: translateX(5px);
+}
+
+.chart-container {
+    min-height: 300px;
+}
+
+/* Scrollbar personalizado para activity-feed */
+.activity-feed::-webkit-scrollbar {
+    width: 8px;
+}
+
+.activity-feed::-webkit-scrollbar-track {
+    background: rgba(43, 62, 80, 0.3);
+    border-radius: 4px;
+}
+
+.activity-feed::-webkit-scrollbar-thumb {
+    background: rgba(91, 192, 222, 0.5);
+    border-radius: 4px;
+}
+
+.activity-feed::-webkit-scrollbar-thumb:hover {
+    background: rgba(91, 192, 222, 0.7);
+}

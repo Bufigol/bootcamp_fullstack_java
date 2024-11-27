@@ -1,0 +1,94 @@
+.materias-table {
+    background: rgba(43, 62, 80, 0.95);
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.materias-table th {
+    color: #5bc0de;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(91, 192, 222, 0.3);
+}
+
+.materias-table td {
+    color: #e0e0e0;
+    border-bottom: 1px solid rgba(91, 192, 222, 0.1);
+}
+
+.action-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(91, 192, 222, 0.3);
+}
+
+.filters-section {
+    background: rgba(43, 62, 80, 0.95);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(91, 192, 222, 0.3);
+}
+
+.modal-content {
+    background: linear-gradient(160deg, rgba(26, 42, 58, 0.95) 0%, rgba(44, 62, 80, 0.95) 100%);
+    border: 1px solid rgba(91, 192, 222, 0.3);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(91, 192, 222, 0.3);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(91, 192, 222, 0.3);
+}
+
+.form-control, .form-select {
+    background-color: rgba(43, 62, 80, 0.8) !important;
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    color: #e0e0e0 !important;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(43, 62, 80, 0.9) !important;
+    border-color: #5bc0de;
+    box-shadow: 0 0 0 0.25rem rgba(91, 192, 222, 0.25);
+}
+
+.pagination .page-link {
+    background-color: rgba(43, 62, 80, 0.8);
+    border-color: rgba(91, 192, 222, 0.3);
+    color: #5bc0de;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(91, 192, 222, 0.2);
+    border-color: #5bc0de;
+    color: #fff;
+}
+
+.pagination .active .page-link {
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+    color: #1a2a3a;
+}
+
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}

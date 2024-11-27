@@ -1,9 +1,11 @@
 package com.bufigol.universidad.seguridad.jwt;
 
-import com.bufigol.universidad.excepciones.seguridad.JwtExpiredTokenException;
+
 import com.bufigol.universidad.excepciones.seguridad.JwtInvalidTokenException;
+import com.bufigol.universidad.excepciones.seguridad.JwtExpiredTokenException;
 import com.bufigol.universidad.seguridad.config.JwtProperties;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,15 +15,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.security.Key;
+
 import static com.bufigol.universidad.seguridad.constantes.ConstantesSeguridad.*;
 
 @Slf4j
@@ -30,55 +31,46 @@ import static com.bufigol.universidad.seguridad.constantes.ConstantesSeguridad.*
 public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
-    private Key secretKey;
+    private SecretKey secretKey;
 
     @PostConstruct
     protected void init() {
-        this.secretKey = jwtProperties.getSecretKey();
+        this.secretKey = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
     }
 
     public String createToken(String username, List<String> roles) {
-        Claims claims = Jwts.claims().setSubject(username);
-        claims.put(CLAIM_ROLES, roles);
-
         Date now = new Date();
         Date validity = new Date(now.getTime() + jwtProperties.getExpiration());
 
         return Jwts.builder()
-                .setClaims(claims)
+                .setSubject(username)
+                .claim(CLAIM_ROLES, roles)
                 .setIssuedAt(now)
                 .setExpiration(validity)
-                .setIssuer(jwtProperties.getIssuer())
-                .setAudience(jwtProperties.getAudience())
-                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .signWith(secretKey)
                 .compact();
     }
 
     public Authentication getAuthentication(String token) {
-        Claims claims = getClaims(token);
+       Claims claims = getClaims(token);
         List<SimpleGrantedAuthority> authorities = getRolesFromClaims(claims);
 
-        UserDetails userDetails = User.builder()
-                .username(getUsername(token))
-                .password("")
-                .authorities(authorities)
-                .build();
+        User principal = new User(
+                getUsername(token),
+                "",
+                authorities
+        );
 
-        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
+        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
     public String getUsername(String token) {
-        return getClaimFromToken(token, Claims::getSubject);
-    }
-
-    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = getClaims(token);
-        return claimsResolver.apply(claims);
+        return getClaims(token).getSubject();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()
+            Jwts.parser()
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token);
@@ -95,6 +87,7 @@ public class JwtTokenProvider {
         } catch (UnsupportedJwtException e) {
             log.error("Token JWT no soportado: {}", e.getMessage());
             throw new JwtInvalidTokenException(token, "Token no soportado");
+
         } catch (IllegalArgumentException e) {
             log.error("JWT claims string está vacío: {}", e.getMessage());
             throw new JwtInvalidTokenException(token, "Claims vacíos");
@@ -109,9 +102,13 @@ public class JwtTokenProvider {
         return null;
     }
 
+    public Date getExpirationDateFromToken(String token) {
+        return getClaims(token).getExpiration();
+    }
+
     private Claims getClaims(String token) {
         try {
-            return Jwts.parserBuilder()
+            return Jwts.parser()
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token)
@@ -125,18 +122,9 @@ public class JwtTokenProvider {
 
     @SuppressWarnings("unchecked")
     private List<SimpleGrantedAuthority> getRolesFromClaims(Claims claims) {
-        List<String> roles = (List<String>) claims.get(CLAIM_ROLES);
+        List<String> roles = claims.get(CLAIM_ROLES, List.class);
         return roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-    }
-
-    public Date getExpirationDateFromToken(String token) {
-        return getClaimFromToken(token, Claims::getExpiration);
-    }
-
-    public boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
     }
 }
