@@ -1,8 +1,8 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.modelo.MateriaRequestDTO;
 import com.bufigol.universidad.dtos.modelo.MateriaResponseDTO;
-import com.bufigol.universidad.interfaces.controladores.INT_MateriaController;
+import com.bufigol.universidad.interfaces.controladores.rest.INT_MateriaController;
 import com.bufigol.universidad.interfaces.servicio.INT_MateriasServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

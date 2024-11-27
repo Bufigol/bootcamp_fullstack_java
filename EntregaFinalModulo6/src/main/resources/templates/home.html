@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Calificaciones</title>
+
+    <!-- Fragmento de header común -->
+    <th:block th:replace="~{fragments/header :: head}"/>
+
+    <!-- CSS específico para el dashboard -->
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+<!-- Navegación -->
+<th:block th:replace="~{fragments/header :: header}"/>
+
+<!-- Contenido principal -->
+<main class="container my-5" role="main">
+    <!-- Alerta de bienvenida -->
+    <div class="alert alert-info bg-info bg-opacity-10 border-start border-info border-4 mb-4"
+         role="alert">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-person-circle me-2"></i>
+            <strong>Bienvenido/a</strong>
+            <span class="ms-1 text-info" sec:authentication="name"></span>
+        </div>
+    </div>
+
+    <!-- Tarjetas de estadísticas -->
+    <div class="row g-4 mb-4">
+        <!-- Total Alumnos -->
+        <div class="col-md-4">
+            <div class="stats-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title text-info">
+                                <i class="bi bi-people-fill me-2"></i>Total Alumnos
+                            </h5>
+                            <h2 class="display-4 text-info" th:text="${stats.totalAlumnos}">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Materias -->
+        <div class="col-md-4">
+            <div class="stats-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title text-info">
+                                <i class="bi bi-book-fill me-2"></i>Total Materias
+                            </h5>
+                            <h2 class="display-4 text-info" th:text="${stats.totalMaterias}">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promedio Materias/Alumno -->
+        <div class="col-md-4">
+            <div class="stats-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title text-info">
+                                <i class="bi bi-graph-up me-2"></i>Promedio Materias/Alumno
+                            </h5>
+                            <h2 class="display-4 text-info"
+                                th:text="${#numbers.formatDecimal(stats.promedioMateriasXAlumno, 1, 1)}">0.0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listas de Últimos Registros -->
+    <div class="row">
+        <!-- Últimos Alumnos -->
+        <div class="col-md-6 mb-4">
+            <div class="stats-card h-100">
+                <div class="card-header bg-info bg-opacity-10">
+                    <h5 class="card-title text-info mb-0">
+                        <i class="bi bi-people me-2"></i>Últimos Alumnos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Mensaje cuando no hay alumnos -->
+                    <div class="text-center py-4" th:if="${#lists.isEmpty(ultimosAlumnos)}">
+                        <i class="bi bi-inbox-fill fs-1 text-info opacity-50"></i>
+                        <p class="mt-2">No hay alumnos registrados</p>
+                    </div>
+
+                    <!-- Lista de alumnos -->
+                    <div class="list-group list-group-flush" th:unless="${#lists.isEmpty(ultimosAlumnos)}">
+                        <div class="list-group-item bg-transparent border-info border-opacity-25"
+                             th:each="alumno : ${ultimosAlumnos}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 text-info" th:text="${alumno.nombre}">Nombre Alumno</h6>
+                                    <small class="text-muted" th:text="${alumno.rut}">RUT</small>
+                                </div>
+                                <span class="badge bg-info rounded-pill"
+                                      th:text="${#sets.size(alumno.materias)}"
+                                      title="Materias asignadas">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Últimas Materias -->
+        <div class="col-md-6 mb-4">
+            <div class="stats-card h-100">
+                <div class="card-header bg-info bg-opacity-10">
+                    <h5 class="card-title text-info mb-0">
+                        <i class="bi bi-journal-text me-2"></i>Últimas Materias
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Mensaje cuando no hay materias -->
+                    <div class="text-center py-4" th:if="${#lists.isEmpty(ultimasMaterias)}">
+                        <i class="bi bi-inbox-fill fs-1 text-info opacity-50"></i>
+                        <p class="mt-2">No hay materias registradas</p>
+                    </div>
+
+                    <!-- Tabla de materias -->
+                    <div class="table-responsive" th:unless="${#lists.isEmpty(ultimasMaterias)}">
+                        <table class="table table-dark table-hover">
+                            <thead>
+                            <tr>
+                                <th>Materia</th>
+                                <th>Alumno</th>
+                                <th>Fecha</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="materia : ${ultimasMaterias}">
+                                <td th:text="${materia.nombre}">Nombre Materia</td>
+                                <td th:text="${materia.alumnoNombre}">Nombre Alumno</td>
+                                <td th:text="${#temporals.format(materia.createdAt, 'dd/MM/yyyy')}">
+                                    01/01/2024
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<th:block th:replace="~{fragments/footer :: footer}"/>
+<th:block th:replace="~{fragments/scripts :: scripts}"/>
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>

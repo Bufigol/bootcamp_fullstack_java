@@ -1,0 +1,214 @@
+/* login.css */
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    color: #e0e0e0;
+    background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 1.5rem;
+    margin: 2rem auto;
+}
+
+/* Card principal */
+.card {
+    background: linear-gradient(160deg, rgba(26, 42, 58, 0.95) 0%, rgba(44, 62, 80, 0.95) 100%);
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    animation: slideUp 0.5s ease-out;
+}
+
+.card-header {
+    background: rgba(91, 192, 222, 0.1);
+    border-bottom: 1px solid rgba(91, 192, 222, 0.3);
+    padding: 1.5rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.card-header h4 {
+    color: #5bc0de;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Campos del formulario */
+.form-label {
+    color: #e0e0e0;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    background-color: rgba(43, 62, 80, 0.8) !important;
+    border: 1px solid rgba(91, 192, 222, 0.3);
+    color: #e0e0e0 !important;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+}
+
+.form-control:hover {
+    border-color: rgba(91, 192, 222, 0.5);
+}
+
+.form-control:focus {
+    background-color: rgba(43, 62, 80, 0.9) !important;
+    border-color: #5bc0de;
+    box-shadow: 0 0 0 0.25rem rgba(91, 192, 222, 0.25);
+    color: #ffffff !important;
+}
+
+.form-control::placeholder {
+    color: rgba(224, 224, 224, 0.5);
+}
+
+/* Alertas */
+.alert {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #ff8d8d;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.alert-success {
+    background: rgba(25, 135, 84, 0.1);
+    border-color: rgba(25, 135, 84, 0.3);
+    color: #28a745;
+}
+
+.alert-info {
+    background: rgba(91, 192, 222, 0.1);
+    border-color: rgba(91, 192, 222, 0.3);
+    color: #5bc0de;
+}
+
+/* Botones */
+.btn-login {
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+    color: #1a2a3a;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-login:hover {
+    background-color: #31b0d5;
+    border-color: #31b0d5;
+    box-shadow: 0 0 15px rgba(91, 192, 222, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.btn-login:disabled {
+    background-color: rgba(91, 192, 222, 0.5);
+    border-color: rgba(91, 192, 222, 0.3);
+    cursor: not-allowed;
+}
+
+/* Enlaces */
+.text-info {
+    color: #5bc0de !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.text-info:hover {
+    color: #31b0d5 !important;
+    text-shadow: 0 0 10px rgba(91, 192, 222, 0.5);
+}
+
+/* Spinner */
+.spinner-border {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.5rem;
+    border-width: 0.15em;
+}
+
+/* Animaciones */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 576px) {
+    .login-container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .card-header {
+        padding: 1.25rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .btn-login {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Estilos para temas oscuros del sistema */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
+    }
+
+    .card {
+        background: linear-gradient(160deg, rgba(26, 42, 58, 0.95) 0%, rgba(44, 62, 80, 0.95) 100%);
+    }
+}

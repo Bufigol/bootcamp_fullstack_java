@@ -6,7 +6,7 @@ import com.bufigol.universidad.dtos.autenticacion.TokenResponseDTO;
 
 public interface INT_AutenticacionServicio {
 
-    TokenResponseDTO signin(LoginRequestDTO loginRequest);
+    TokenResponseDTO logIn(LoginRequestDTO loginRequest);
     TokenResponseDTO signup(SignupRequestDTO signupRequest);
     boolean validateToken(String token);
     String getUsernameFromToken(String token);

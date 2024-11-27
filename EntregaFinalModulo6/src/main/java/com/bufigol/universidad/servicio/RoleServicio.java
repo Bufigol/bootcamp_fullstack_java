@@ -65,23 +65,20 @@ public class RoleServicio implements INT_RoleServicio {
     @Override
     @Transactional(readOnly = true)
     public Optional<Set<Role>> validateAndGetRoles(Set<String> roleNames) {
-        Assert.notNull(roleNames, "El conjunto de nombres de roles no puede ser nulo");
-        log.debug("Validando roles: {}", roleNames);
-
         try {
             Set<Role> validatedRoles = new HashSet<>();
             for (String roleName : roleNames) {
+                log.debug("Validando rol: {}", roleName);
                 Optional<Role> roleOpt = findByName(roleName);
                 if (roleOpt.isEmpty()) {
-                    log.warn("Rol no encontrado: {}", roleName);
+                    log.warn("Rol {} no encontrado en la base de datos", roleName);
                     return Optional.empty();
                 }
                 validatedRoles.add(roleOpt.get());
             }
             return Optional.of(validatedRoles);
-
         } catch (Exception e) {
-            log.error("Error al validar roles: {}", e.getMessage());
+            log.error("Error validando roles:", e);
             return Optional.empty();
         }
     }

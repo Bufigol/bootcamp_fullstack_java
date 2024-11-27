@@ -1,9 +1,9 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.autenticacion.LoginRequestDTO;
 import com.bufigol.universidad.dtos.autenticacion.SignupRequestDTO;
 import com.bufigol.universidad.dtos.autenticacion.TokenResponseDTO;
-import com.bufigol.universidad.interfaces.controladores.INT_AuthController;
+import com.bufigol.universidad.interfaces.controladores.rest.INT_AuthController;
 import com.bufigol.universidad.interfaces.servicio.INT_AutenticacionServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +20,10 @@ public class AuthController implements INT_AuthController {
     private final INT_AutenticacionServicio autenticacionServicio;
 
     @Override
-    @PostMapping("/signin")
+    @PostMapping("/logIn")
     public ResponseEntity<TokenResponseDTO> authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequest) {
         log.debug("Solicitud de autenticación para usuario: {}", loginRequest.getUsername());
-        TokenResponseDTO tokenResponse = autenticacionServicio.signin(loginRequest);
+        TokenResponseDTO tokenResponse = autenticacionServicio.logIn(loginRequest);
         return ResponseEntity.ok(tokenResponse);
     }
 

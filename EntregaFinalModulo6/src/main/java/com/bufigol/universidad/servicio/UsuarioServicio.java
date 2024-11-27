@@ -37,19 +37,18 @@ public class UsuarioServicio implements INT_UsuarioServicio {
 
         log.debug("Registrando nuevo usuario: {}", usuario.getUsername());
 
-        // Verificar si el username ya existe
         if (existsByUsername(usuario.getUsername())) {
             throw new DuplicateResourceException("Usuario", "username", usuario.getUsername());
         }
 
-        // Verificar si el email ya existe
         if (existsByEmail(usuario.getEmail())) {
             throw new DuplicateResourceException("Usuario", "email", usuario.getEmail());
         }
 
         try {
             // Encriptar la contraseña usando nuestro CustomPasswordEncoder
-            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+            String encodedPassword = passwordEncoder.encode(usuario.getPassword());
+            usuario.setPassword(encodedPassword);
 
             Usuario savedUser = userRepository.save(usuario);
             log.info("Usuario registrado exitosamente con ID: {}", savedUser.getId());
@@ -119,6 +118,7 @@ public class UsuarioServicio implements INT_UsuarioServicio {
         }
     }
 
+
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -144,6 +144,26 @@ public class UsuarioServicio implements INT_UsuarioServicio {
             throw new RuntimeException("Error al cargar usuario", e);
         }
     }
+    @Override
+    @Transactional
+    public Usuario save(Usuario usuario) {
+        Assert.notNull(usuario, "El usuario no puede ser nulo");
+        log.debug("Guardando usuario: {}", usuario.getUsername());
 
+        try {
+            // Si es una actualización y el email ha cambiado, verificar que no exista
+            if (usuario.getId() != null && usuario.getEmail() != null) {
+                Optional<Usuario> existingUser = findByEmail(usuario.getEmail());
+                if (existingUser.isPresent() && !existingUser.get().getId().equals(usuario.getId())) {
+                    throw new DuplicateResourceException("Usuario", "email", usuario.getEmail());
+                }
+            }
+
+            return userRepository.save(usuario);
+        } catch (Exception e) {
+            log.error("Error al guardar usuario: {}", e.getMessage());
+            throw new RuntimeException("Error al guardar el usuario", e);
+        }
+    }
 
 }

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Sistema de Calificaciones</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}"/>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/registro.css}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Alertas -->
+<div th:replace="~{fragments/header :: alerts}"></div>
+
+<!-- Contenido principal -->
+<main class="flex-shrink-0">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card bg-dark bg-opacity-50 border border-info border-opacity-25">
+                    <div class="card-header bg-info bg-opacity-10 border-bottom border-info border-opacity-25">
+                        <h2 class="text-center text-info mb-0">Registro de Usuario</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="registroForm" class="needs-validation" novalidate>
+                            <!-- Nombre completo -->
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label text-light">Nombre Completo</label>
+                                <input type="text" class="form-control bg-dark bg-opacity-50 text-light border-info border-opacity-25"
+                                       id="nombre" name="nombre" required
+                                       pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
+                                       minlength="3" maxlength="100">
+                                <div class="invalid-feedback text-warning">
+                                    El nombre debe contener solo letras y espacios.
+                                </div>
+                            </div>
+
+                            <!-- Nombre de usuario -->
+                            <div class="mb-3">
+                                <label for="username" class="form-label text-light">Nombre de Usuario</label>
+                                <input type="text" class="form-control bg-dark bg-opacity-50 text-light border-info border-opacity-25"
+                                       id="username" name="username" required
+                                       pattern="^[a-zA-Z0-9._-]{3,50}$"
+                                       minlength="3" maxlength="50">
+                                <div class="invalid-feedback text-warning">
+                                    El nombre de usuario debe tener entre 3 y 50 caracteres alfanuméricos.
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label text-light">Correo Electrónico</label>
+                                <input type="email" class="form-control bg-dark bg-opacity-50 text-light border-info border-opacity-25"
+                                       id="email" name="email" required maxlength="100">
+                                <div class="invalid-feedback text-warning">
+                                    Por favor, ingrese un correo electrónico válido.
+                                </div>
+                            </div>
+
+                            <!-- Contraseña -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label text-light">Contraseña</label>
+                                <input type="password" class="form-control bg-dark bg-opacity-50 text-light border-info border-opacity-25"
+                                       id="password" name="password" required
+                                       pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?:{}|<>])(?=\S+$).{6,100}$"
+                                       minlength="6" maxlength="100">
+                                <div class="password-strength"></div>
+                                <div class="invalid-feedback text-warning">
+                                    La contraseña debe tener al menos 6 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales.
+                                </div>
+                            </div>
+
+                            <!-- Confirmar Contraseña -->
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label text-light">Confirmar Contraseña</label>
+                                <input type="password" class="form-control bg-dark bg-opacity-50 text-light border-info border-opacity-25"
+                                       id="confirmPassword" name="confirmPassword" required>
+                                <div class="invalid-feedback text-warning">
+                                    Las contraseñas no coinciden.
+                                </div>
+                            </div>
+
+                            <!-- Botón de registro -->
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-info" id="submitButton">
+                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    <span class="button-text">Registrarse</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Enlace a login -->
+                        <div class="text-center mt-3">
+                            <p class="text-light">
+                                ¿Ya tienes una cuenta?
+                                <a th:href="@{/login}" class="text-info text-decoration-none">Inicia Sesión</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer :: footer}" class="mt-auto"></footer>
+
+<!-- Scripts -->
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/utils.js}"></script>
+<script th:src="@{/js/registro.js}"></script>
+</body>
+</html>

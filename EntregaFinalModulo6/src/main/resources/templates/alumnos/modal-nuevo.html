@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="formularioAlumno" class="modal fade" id="alumnoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info" id="alumnoModalLabel">Nuevo Alumno</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="alumnoForm" th:object="${alumnoRequest}"
+                      th:action="@{/admin/alumnos}" method="POST"
+                      class="needs-validation" novalidate>
+
+                    <!-- Mensajes de error globales -->
+                    <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}">
+                        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Error global</p>
+                    </div>
+
+                    <!-- Campo RUT -->
+                    <div class="mb-3">
+                        <label for="rut" class="form-label">RUT</label>
+                        <input type="text" class="form-control" id="rut"
+                               th:field="*{rut}" required
+                               placeholder="Ej: 12.345.678-9">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('rut')}"
+                             th:errors="*{rut}">RUT inválido</div>
+                    </div>
+
+                    <!-- Campo Nombre -->
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre"
+                               th:field="*{nombre}" required
+                               minlength="3" maxlength="100"
+                               placeholder="Nombre completo">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}"
+                             th:errors="*{nombre}">Nombre inválido</div>
+                    </div>
+
+                    <!-- Campo Dirección -->
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccion"
+                               th:field="*{direccion}"
+                               placeholder="Dirección (opcional)">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-info" id="saveAlumno">
+                            <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+                            <span class="button-text">Guardar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

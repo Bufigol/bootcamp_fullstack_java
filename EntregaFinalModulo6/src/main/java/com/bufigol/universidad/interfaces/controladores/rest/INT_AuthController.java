@@ -1,4 +1,4 @@
-package com.bufigol.universidad.interfaces.controladores;
+package com.bufigol.universidad.interfaces.controladores.rest;
 
 import com.bufigol.universidad.dtos.autenticacion.LoginRequestDTO;
 import com.bufigol.universidad.dtos.autenticacion.SignupRequestDTO;
@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 public interface INT_AuthController {
-    @PostMapping("/signin")
+    @PostMapping("/logIn")
     ResponseEntity<TokenResponseDTO> authenticateUser(@Valid @RequestBody LoginRequestDTO loginRequest);
 
     @PostMapping("/signup")

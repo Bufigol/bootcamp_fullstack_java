@@ -1,9 +1,10 @@
-package com.bufigol.universidad.controlador;
+package com.bufigol.universidad.controlador.rest;
 
 import com.bufigol.universidad.dtos.mappers.UsuarioMapper;
 import com.bufigol.universidad.dtos.modelo.AlumnoResponseDTO;
+import com.bufigol.universidad.dtos.modelo.MateriaResponseDTO;
 import com.bufigol.universidad.dtos.modelo.UsuarioResponseDTO;
-import com.bufigol.universidad.interfaces.controladores.INT_AdminController;
+import com.bufigol.universidad.interfaces.controladores.rest.INT_AdminController;
 import com.bufigol.universidad.interfaces.servicio.INT_AlumnoServicio;
 import com.bufigol.universidad.interfaces.servicio.INT_MateriasServicio;
 import com.bufigol.universidad.interfaces.servicio.INT_RoleServicio;
@@ -14,9 +15,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -152,4 +155,38 @@ public class AdminController implements INT_AdminController {
             return ResponseEntity.internalServerError().build();
         }
     }
+    @GetMapping("/admin/dashboard")
+    public String showDashboard(Model model) {
+        try {
+            // Obtener datos de alumnos
+            Page<AlumnoResponseDTO> alumnosPage = alumnoServicio.findAll(PageRequest.of(0, 5));
+            long totalAlumnos = alumnosPage.getTotalElements();
+
+            // Obtener datos de materias
+            Page<MateriaResponseDTO> materiasPage = materiasServicio.findAll(PageRequest.of(0, 5));
+            long totalMaterias = materiasPage.getTotalElements();
+
+            // Calcular el promedio de materias por alumno
+            double promedioMaterias = totalAlumnos > 0 ?
+                    (double) totalMaterias / totalAlumnos : 0.0;
+
+            // Crear mapa de estadísticas
+            Map<String, Object> stats = new HashMap<>();
+            stats.put("totalAlumnos", totalAlumnos);
+            stats.put("totalMaterias", totalMaterias);
+            stats.put("promedioMateriasXAlumno", promedioMaterias);
+
+            // Añadir datos al modelo
+            model.addAttribute("stats", stats);
+            model.addAttribute("ultimosAlumnos", alumnosPage.getContent());
+            model.addAttribute("ultimasMaterias", materiasPage.getContent());
+
+            return "admin/dashboard";
+        } catch (Exception e) {
+            log.error("Error al cargar el dashboard: {}", e.getMessage());
+            model.addAttribute("error", "Error al cargar el dashboard");
+            return "error";
+        }
+    }
+
 }
