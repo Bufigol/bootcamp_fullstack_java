@@ -165,20 +165,7 @@ public class HomeController implements INT_HomeController {
     }
 
 
-    @GetMapping("admin/alumnos")
-    public String showAlumnosPage(Model model) {
-        try {
-            Page<AlumnoResponseDTO> alumnosPage = alumnoServicio.findAll(PageRequest.of(0, 10));
-            model.addAttribute("alumnos", alumnosPage);
-            model.addAttribute("currentPage", alumnosPage.getNumber());
-            model.addAttribute("totalPages", alumnosPage.getTotalPages());
-            return "admin/alumnos";
-        } catch (Exception e) {
-            log.error("Error al cargar alumnos: {}", e.getMessage());
-            model.addAttribute("error", "Error al cargar la lista de alumnos");
-            return "error";
-        }
-    }
+
     private boolean isAuthenticated() {
         return SecurityContextHolder.getContext().getAuthentication() != null &&
                 SecurityContextHolder.getContext().getAuthentication().isAuthenticated() &&

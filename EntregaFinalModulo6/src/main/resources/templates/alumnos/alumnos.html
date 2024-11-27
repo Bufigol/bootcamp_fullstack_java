@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="ES-es">
+<head>
+  <div th:replace="~{fragments/header :: header}"></div>
+  <link rel="stylesheet" th:href="@{/css/index.css}">
+  <link rel="stylesheet" th:href="@{/css/alumnos.css}">
+  <title>Gestion de Alumnos</title>
+</head>
+<body>
+<div class="container my-5" role="main">
+  <div th:replace="~{fragments/header :: alerts}"></div>
+
+  <!-- Header Section -->
+  <div class="row mb-4 align-items-center">
+    <div class="col">
+      <h2 class="text-info">Gestión de Alumnos</h2>
+    </div>
+    <div class="col-auto" sec:authorize="hasRole('ROLE_ADMIN')">
+      <button id="btnNuevoAlumno" class="btn btn-info">
+        <i class="bi bi-plus-circle me-2"></i>Nuevo Alumno
+      </button>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="materias-table p-4 mb-4">
+    <form id="searchForm" class="row g-3">
+      <div class="col-md-4">
+        <label for="searchRut" class="form-label">RUT</label>
+        <input type="text" class="form-control" id="searchRut" name="rut">
+      </div>
+      <div class="col-md-4">
+        <label for="searchNombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="searchNombre" name="nombre">
+      </div>
+      <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-info w-100">
+          <i class="bi bi-search me-2"></i>Buscar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Table Section -->
+  <div class="materias-table p-4">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>RUT</th>
+          <th>Nombre</th>
+          <th>Dirección</th>
+          <th>Materias</th>
+          <th>Fecha Registro</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(alumnos.content)}">
+          <td colspan="6" class="text-center">No hay alumnos registrados</td>
+        </tr>
+        <tr th:each="alumno : ${alumnos.content}">
+          <td th:text="${alumno.rut}">12.345.678-9</td>
+          <td th:text="${alumno.nombre}">Nombre Alumno</td>
+          <td th:text="${alumno.direccion}">Dirección</td>
+          <td>
+                                <span class="badge bg-info"
+                                      th:text="${alumno.materias.size()}"
+                                      th:onclick="'javascript:verMaterias(\'' + ${alumno.id} + '\')'"
+                                      style="cursor: pointer;"
+                                      title="Click para ver materias">0</span>
+          </td>
+          <td th:text="${#temporals.format(alumno.createdAt, 'dd/MM/yyyy')}">01/01/2024</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-info"
+                      th:onclick="'javascript:editarAlumno(\'' + ${alumno.id} + '\')'">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-sm btn-danger"
+                      th:onclick="'javascript:confirmarEliminar(\'' + ${alumno.id} + '\')'">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav th:if="${alumnos.totalPages > 1}" aria-label="Paginación" class="mt-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${alumnos.first} ? 'disabled'">
+          <a class="page-link" th:href="@{/admin/alumnos(page=${alumnos.number - 1})}">
+            <i class="bi bi-chevron-left"></i>
+          </a>
+        </li>
+        <li class="page-item"
+            th:each="pageNumber : ${#numbers.sequence(0, alumnos.totalPages - 1)}"
+            th:classappend="${pageNumber == alumnos.number} ? 'active'">
+          <a class="page-link"
+             th:href="@{/admin/alumnos(page=${pageNumber})}"
+             th:text="${pageNumber + 1}">1</a>
+        </li>
+        <li class="page-item" th:classappend="${alumnos.last} ? 'disabled'">
+          <a class="page-link" th:href="@{/admin/alumnos(page=${alumnos.number + 1})}">
+            <i class="bi bi-chevron-right"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Modal Container -->
+  <div id="modalContainer"></div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-info">Confirmar Eliminación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Está seguro que desea eliminar este alumno?</p>
+          <p class="text-danger">Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmDelete">
+            <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+            <span class="button-text">Eliminar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div id="loadingSpinner" class="spinner-overlay d-none">
+    <div class="spinner-border text-info" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<th:block th:replace="~{fragments/scripts :: scripts}"/>
+</body>
+</html>
