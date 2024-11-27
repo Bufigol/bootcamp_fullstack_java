@@ -7,6 +7,7 @@ import com.bufigol.universidad.interfaces.servicio.INT_AlumnoServicio;
 import com.bufigol.universidad.interfaces.servicio.INT_MateriasServicio;
 import com.bufigol.universidad.interfaces.servicio.INT_UsuarioServicio;
 import com.bufigol.universidad.modelo.Usuario;
+import com.bufigol.universidad.utils.Comprobadores;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -106,10 +108,30 @@ public class HomeController implements INT_HomeController {
         }
     }
 
-    @Override
     @GetMapping("/perfil")
     public String showPerfilPage(Model model, Principal principal) {
-        return "perfil";
+        try {
+            // Obtener el usuario actual
+            Optional<Usuario> usuario = usuarioServicio.findByUsername(principal.getName());
+            if (usuario.isPresent()) {
+                model.addAttribute("usuario", usuario.get());
+
+                // Solo intentar obtener datos de alumno si el username tiene formato de RUT
+                if (Comprobadores.isValidRUT(principal.getName())) {
+                    Optional<AlumnoResponseDTO> alumno = alumnoServicio.findByRut(principal.getName());
+                    alumno.ifPresent(a -> model.addAttribute("alumno", a));
+                }
+
+                return "perfil";
+            } else {
+                model.addAttribute("errorMessage", "No se encontró la información del usuario");
+                return "error";
+            }
+        } catch (Exception e) {
+            log.error("Error al cargar el perfil: {}", e.getMessage());
+            model.addAttribute("errorMessage", "Error al cargar el perfil");
+            return "error";
+        }
     }
 
     @Override
